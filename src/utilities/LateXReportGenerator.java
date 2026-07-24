@@ -140,6 +140,7 @@ public class LateXReportGenerator {
 			FileWriter fw = new FileWriter(file);
 			fw.write("{\n");
 			fw.write("  \"initialState\": I, \n");
+			fw.write("  \"finalState\": O, \n");
 			fw.write("  \"transitions\": [");
 			boolean flag=false;
 			DecimalFormat df = new DecimalFormat("0.000");
@@ -188,6 +189,7 @@ public class LateXReportGenerator {
 			
 					fw.write("{\n");
 			fw.write("  \"initialState\": I,\n");
+			fw.write("  \"finalState\": O,\n");
 			fw.write("  \"nodes\": [");
 			boolean flag=false;
 			for(String state:fpta.states)
@@ -283,8 +285,11 @@ public class LateXReportGenerator {
 				{
 					if(fpta.getTransitionFunction().containsKey(state+symbol))
 					{
+						try {
 						String target= fpta.getTransitionFunction().get(state+symbol);
+						
 						double frequency = fpta.getTransitionFrequencies().get(state).get(symbol).get(target);
+						
 						String source =state;
 						String destination =target;
 						if(state.compareTo("")==0)
@@ -302,7 +307,10 @@ public class LateXReportGenerator {
 							
 						}
 						fw.write("  {\"from\":"+source+",\"to\":"+destination+",\"label\":\""+symbol+"\",\"frequency\":"+frequency+"}");
-						
+						}catch(Exception e)
+						{
+							
+						}
 					}
 				}	
 			}

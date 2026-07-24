@@ -42,7 +42,7 @@ public class PerformanceEstimator {
     public HashMap<String,Double> calculatePerformanceMetrics(FPTA model, HashMap<String, Double> eventLog,int actionSize) {
 
     	performanceMetric.put("Entropic Relevance", entropicRelevanceCalculator.calculateEntropic(model, eventLog, actionSize));
-    	entropicRelevanceCalculator.calculateEntropic(model, eventLog, actionSize);
+    //	performanceMetric.put("Entropic Relevance",0.1);
     	performanceMetric.put("Size",(double)performanceAnalyser.calculateSize(model));
     	return performanceMetric;
     }

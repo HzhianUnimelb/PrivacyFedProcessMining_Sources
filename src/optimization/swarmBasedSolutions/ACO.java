@@ -21,8 +21,8 @@ public class ACO extends Optimization {
     private Ant[] ants;
     private double[][] pheromoneMatrix; // Pheromone levels for each dimension
 
-    public ACO(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int frontierListSize,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter, lower, upper, frontierListSize,time,seconds, actions, eventLog,actionSize,optModel,sizeLimit);
+    public ACO(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int frontierListSize,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter, lower, upper, frontierListSize,time,seconds, actions, eventLog,actionSize,optModel,sizeLimit,cof);
         this.maxIter = maxIter;
         ants = new Ant[populationSize];
         pheromoneMatrix = new double[3][2]; // Assuming 3 dimensions and 2 objectives

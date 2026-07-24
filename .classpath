@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/openxes-2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/commons-math3-3.6.1 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/mxgraphx-core-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/mxgraphx-swing-4.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/guava-23.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/jaxb-api-2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/spex-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/ortools-java-9.14.6206.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/jna-platform-5.17.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/jna-5.17.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/ortools-win32-x86-64-9.14.6206 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/hootanz/Downloads/eclipse/protobuf-java-4.32.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

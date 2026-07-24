@@ -1,12 +1,16 @@
 package performance;
 
+import java.text.DecimalFormat;
+import java.util.AbstractMap;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import model.FPTA;
 
@@ -101,11 +105,13 @@ public class PerformanceAnalyser {
 		HashMap<String, String> escapingTransition = new HashMap<String, String>();
 		for(String s:model.getTransitionFunction().keySet())
 		{
+			
 			escapingTransition.put(s, model.getTransitionFunction().get(s));
 		}
 		for(String s:eventLog.keySet())
 		{
-			String state="",state1="";
+			s+='O';
+			String state="I",state1="I";
 			for(char c:s.toCharArray())
 			{	
 				state1=state;
@@ -142,12 +148,14 @@ public class PerformanceAnalyser {
 	    int result = 0;
 	    Queue<String> queue = new ArrayDeque<>();
 	    Set<String> visited = new HashSet<>();
-	    queue.offer("");  // Start from the initial state
+	    if(model.states.contains(""))
+	    	queue.offer("");  // Start from the initial state
+	    else
+	    	queue.offer("I"); 
 
 	    while (!queue.isEmpty()) {
 	        String curr = queue.poll();
 	        if (!visited.add(curr)) continue; // Already visited
-
 	        result++;
 	        for (String symbol : model.alphabet) {
 	            String key = curr + symbol;
@@ -163,73 +171,227 @@ public class PerformanceAnalyser {
 	    return result;
 	}
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    public static double calculateAnonymity(FPTA model, HashMap<String, Double> eventLog) {
+    public static double calculateShannonEntropy(FPTA model,HashMap<String,String> states,HashMap<String, Double> eventlog,double totalFre) {
     	double result=0;
-    	Set<String> endStates= new HashSet<String>();
-    	for(String trace:eventLog.keySet())
+    	model.calculateTransitionPercentage(model);
+    	HashMap<String,List<String>>paths= new HashMap<String,List<String>>();
+    	for(String path:states.keySet())
     	{
-    		String temp = returnLastState(model,trace);
-    		if(temp!=null)
+    		
+    		if(model.getFinalFrequency(states.get(path))>0)
     		{
-    			if(!endStates.contains(temp))    			
-    				endStates.add(temp);
+    			List<String> newPaths= new ArrayList<String>();
+    			countPaths(model,"",states.get(path),15,newPaths);
+    			paths.put(path,newPaths);
     		}
     	}
-    	double temp=0;
-    	for(String state:endStates)
+    	HashMap<String,Double>ent= new HashMap<String,Double>();
+    	double entrop=0;
+    	double si;
+double total=0;
+    	for(String s:paths.keySet())
     	{
-    		double i = countPaths(model,state,"",30);
-    		System.out.println(state+"--->"+i);
-    		temp+=i;
+    		
+    		List <String> tp = paths.get(s);
+    		 si= tp.size();
+    		 if(si!=0)
+    		entrop+=(1.0-(1.0/si));
+    		total+=eventlog.get(s);
+    		
+    		//System.out.println((paths.get(s)).size()+" "+s+" "+entrop+" "+(1-(1/paths.get(s).size())));
+
+    	/*	List<Double> probab = new ArrayList<Double>();
+    		for(String s1:paths.get(s))
+    		{
+    			probab.add(calculatePathProbability(model,s1));
+    			total+=probab.get(probab.size()-1);
+    		}
+    		List<Double> normprobab = new ArrayList<Double>();
+    	
+    		for(int i = 0;i<probab.size();i++)
+    		{
+    			
+    			normprobab.add(probab.get(i)/total);
+    		}
+
+    		//	entrop+=(-1*(normprobab.get(i)*Math.log(normprobab.get(i)))/Math.log(2));
+    		entrop+=(1-(1/probab.size()));*/
     	}
-    	result=temp/endStates.size();
+    	
+    	return entrop/paths.size();
+    }
+	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+    public static double calculatePathProbability(FPTA model,String path) {
+    	double result=1;
+    	StringTokenizer st = new StringTokenizer(path,",");
+    	String curr="";
+    	while(st.hasMoreTokens())
+    	{
+    		String state=st.nextToken();
+    		char sym = state.charAt(state.indexOf("(")+1);
+    		if(state.indexOf("(")>=0)
+    		{
+    			String next=model.transitionFunction.get(curr+sym);
+        		result*=model.transitionPercentage.get(curr).get(sym+"").get(next);
+        		curr=next;
+    		}
+    		else
+    			result*=model.finalProbabilities.get(curr);
+    		
+    	}
+    	  DecimalFormat df = new DecimalFormat("0.0000000");
     	return result;
     }
 	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    public static int countPaths(FPTA model, String fromState, String toState, int maxLength) {
-        return countPathsHelper(model, fromState, toState, maxLength);
+    public static HashMap<String,String> getListofFinalState(FPTA model,HashMap<String, Double> eventLog,List<Double> freqList){
+    	HashMap<String,String> finalState= new HashMap<String, String>();
+    	for(String s:eventLog.keySet())
+    	{
+    		String state = "";
+    		boolean flag=false;
+    		for(char symbol:s.toCharArray())
+    		{
+    			String next=model.transitionFunction.get(state+symbol);
+    			if(next==null)
+    			{
+    				flag=true;
+    				break;
+    			}
+    			state=next;
+    		}
+    		if(!flag)
+    		{
+    			finalState.put(s, state);
+    			freqList.add(eventLog.get(s));
+    		}
+    	}
+    	return finalState;
     }
 	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    private static int countPathsHelper(FPTA model, String current, String target, int remainingLength) {
-        if (remainingLength < 0) return 0;
-        int count = 0;
-        //System.out.println(current+" "+remainingLength);
+    public static void countPaths(FPTA model, String fromState, String toState, int maxLength,List<String> path) {
+      //  countPathsHelper(model, fromState, toState, maxLength,paths,fromState);
+    	Map<String, List<String>> memo = new HashMap<>();
+
+    	List<String> paths = new ArrayList<>();
+    	countPathsHelper(model, fromState, toState, maxLength,
+    	                 paths, new StringBuilder(fromState));
+    	path.addAll(paths);
+    	//getPaths(model, fromState, toState, maxLength,paths);
+    }
+	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+ /*   private static void countPathsHelper(FPTA model, String current, String target, int remainingLength,List<String> paths,String currentpath) {
+      
+      
         if (current.equals(target)) {
-            // Count the empty path (length 0)
-            count++;
+        	paths.add(currentpath);			
+        	return;
         }
         if (remainingLength <= 0) {
-            return count;
+            return ;
         }
         for(String symbol:model.alphabet)
         {
-        	for(String state:model.states)
-        	{
-        		if(model.transitionFunction.containsKey(state+symbol))
+        		if(model.transitionFunction.containsKey(current+symbol))
         		{
-        			if(model.transitionFunction.get(state+symbol).compareTo(current)==0)
+        			String next = model.transitionFunction.get(current+symbol);
         			{
-        				if(remainingLength!=1 || state.compareTo(target)==0)
-        					count += countPathsHelper(model, state, target, remainingLength - 1);
+        				if(remainingLength>0)
+        				{
+        					countPathsHelper(model, next, target, (remainingLength - 1),paths,currentpath+"("+symbol+"),"+next);	
+        				}
         			}
         		}
-        	}
         }
-        return count;
+        return;
+    }*/
+    private static void countPathsHelper(
+            FPTA model,
+            String current,
+            String target,
+            int remainingLength,
+            List<String> paths,
+            StringBuilder currentPath)
+    {
+        if (current.equals(target))
+        {
+            paths.add(currentPath.toString());
+            return;
+        }
+
+        if (remainingLength <= 0)
+            return;
+
+        for (String symbol : model.alphabet)
+        {
+            String next = model.transitionFunction.get(current + symbol);
+
+            if (next != null)
+            {
+                int oldLength = currentPath.length();
+
+                currentPath.append("(")
+                           .append(symbol)
+                           .append("),")
+                           .append(next);
+
+                countPathsHelper(
+                        model,
+                        next,
+                        target,
+                        remainingLength - 1,
+                        paths,
+                        currentPath);
+
+                currentPath.setLength(oldLength); // backtrack
+            }
+        }
     }
 	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    public static String returnLastState(FPTA model,String trace) {
+    public static Map.Entry<String, Double> returnLastState(FPTA model,String trace) {
 		String state="";
+		String state1="";
+		double value=0;
+		AbstractMap.SimpleEntry text;
 		for(char c:trace.toCharArray())
 		{	
-			state = model.getTransitionFunction().get(state+c);			
+			state1 = model.getTransitionFunction().get(state+c);			
 			if (state == null || !model.states.contains(state))
 			{
-				return null;
+				value =0;
+				state=null;
+				return new AbstractMap.SimpleEntry<>(state, value);
 			}
+		
 		}
-    	return state;
+    	return new AbstractMap.SimpleEntry<>(state, value);
+
     }
+	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+    public static int calculateDFvMModelSize(FPTA model)
+	{
+		   int result = 0;
+		    Queue<String> queue = new ArrayDeque<>();
+		    Set<String> visited = new HashSet<>();
+		    queue.offer("I");  // Start from the initial state
+
+		    while (!queue.isEmpty()) {
+		        String curr = queue.poll();
+		        if (!visited.add(curr)) continue; // Already visited
+
+		        result++;
+		        for (String symbol : model.alphabet) {
+		            String key = curr + symbol;
+		            if (model.transitionFunction.containsKey(key)) {
+		                String next = model.transitionFunction.get(key);
+		                result++;
+		                if (!visited.contains(next)) {
+		                    queue.offer(next);
+		                }
+		            }
+		        }
+		    }
+		    return result;
+	}
 	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
 	public static int calculateModelSize(FPTA model)

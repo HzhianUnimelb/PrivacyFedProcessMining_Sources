@@ -100,17 +100,19 @@ public class EntropicRelevanceCalculator {
     public double calculateEntropicRelevance(DFFA dpfa,HashMap<String, Double> eventLog) {
     	double result = 0.0;
     	int num=0;
+    	
     	for(String event : eventLog.keySet())
     	{
     		double a = 1;
     		a = a * calculateProbablity(dpfa,event);
-    	
+    		
+    		
     		//System.out.println(a+" "+event);
     		if( a == 0)
     		{    			
     			if(backGroundType==BackGroundType.U)
     			{		
-    				result +=(CalculateBackgroundUniform(event,actionSize+1)*eventLog.get(event));	
+    				result +=(CalculateBackgroundUniform(event,actionSize+1)*eventLog.get(event));
     			}
     			else if(backGroundType==BackGroundType.Z)
     				
@@ -131,15 +133,17 @@ public class EntropicRelevanceCalculator {
     			result+=calculateCost(eventLog.get(event))*(double)eventLog.get(event);
     		//	if( calculateCost(a)*eventLog.get(event)>1000)
     		}
+    		
     	}
+    	
     	result = result/(double)totalevent;
     	result += costofCoding;
-    	
     	if(backGroundType==BackGroundType.Z)
     	{
     		result+=preludeZ;
     	}
     	//System.out.println("DFFA-->result"+result+" totalevent("+totalevent+" costofCoding("+costofCoding+" preludeZ("+preludeZ);
+    
     	return result;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/ 
@@ -266,7 +270,6 @@ public class EntropicRelevanceCalculator {
     		}
     		catch(Exception e)
     		{
-    			dpfa.transitionFunction.remove(prev_state+c);
     			return 0;
     		}
     	}
@@ -380,6 +383,7 @@ public class EntropicRelevanceCalculator {
 
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/ 
     public void calculateCostOfCoding() {
+    	
     	if(overlaProbablity == 0 || overlaProbablity == 1 )
     		costofCoding = 0;
     	else

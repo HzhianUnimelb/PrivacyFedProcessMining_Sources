@@ -45,7 +45,19 @@ public class Model {
 	    public void setTransitionFrequencies(Map<String, Map<String, Map<String, Double>>> transitionFrequencies)
 	    {
 	    	this.transitionFrequencies = new HashMap<>();
-	    	this.transitionFrequencies.putAll(transitionFrequencies);
+	    	for(String s :transitionFrequencies.keySet())
+	    	{
+	    	  	Map<String,Map<String,Double>> tmp = transitionFrequencies.get(s);
+	    	  	for(String x1 : tmp.keySet())
+	    	  	{
+	    	  		Map<String,Double> y1 =tmp.get(x1);
+	    	  		for(String z1:y1.keySet())
+	    	  		{
+	    	  			setTransitionFrequency(s, x1, z1, y1.get(z1));
+	    	  		}
+	    	  	}
+	    	}
+	    	//this.transitionFrequencies.putAll(transitionFrequencies);
 	    }
 
 	    public void setTransitionPercentage(Map<String, Map<String, Map<String, Double>>> transitionPercentage)

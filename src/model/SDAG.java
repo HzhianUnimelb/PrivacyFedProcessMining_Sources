@@ -1,10 +1,12 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import utilities.CoefficientMatrix;
 
@@ -16,8 +18,211 @@ public class SDAG extends Model {
 		
 	}
 	  /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+	public static FPTA FDFFAtoSDAG(FPTA dffa)
+	{
+		FPTA sdag = new FPTA();
+        DecimalFormat df = new DecimalFormat("#.###");
+        sdag.alphabet = new HashSet<>();
+		sdag.states = new HashSet<>();
+		sdag.setInitialFrequency("I", dffa.getInitialFrequencies().get("I"));
+		dffa.calculateTransitionPercentage(dffa);
+		
+		sdag.setFinalFrequency("I", dffa.getFinalFrequency("I"));
+		sdag.setFinalProbability("I", dffa.getFinalProbability("I"));
+		 HashMap<String,Integer> counter = new HashMap<String,Integer>();
+		    HashMap<String, Map<String, String>> list = new HashMap<>();
+		    List<String> visited = new ArrayList<String>();
+	        List<String> underprocess = new ArrayList<String>();
+	        for(String symbol: dffa.alphabet)
+	    	{
+	        	for(String state:dffa.states)
+	        	{
+	        		if(dffa.transitionFunction.containsKey(state+symbol))
+	        		{
+	        			String nextState = dffa.transitionFunction.get(state+symbol);
+	        			
+	        			int i =counter.get(symbol)!=null?counter.get(symbol):0;
+						i++;
+						String alias=symbol+i;    					
+//	      					list
+//	                          .computeIfAbsent(symbol, k -> new HashMap<>())
+//	                          .put(alias, x);
+						String aliasState=state;
+						
+						counter.put(symbol, i);
+	        			list
+	                    .computeIfAbsent(symbol, k -> new HashMap<>())
+	                    .put(alias, aliasState+">"+nextState);
+	            		counter.put(alias, 0);
+	            		sdag.states.add(alias);
+	            		sdag.alphabet.add(symbol);
+	            		if(dffa.getFinalFrequency(nextState)!=0)
+	        			{
+	            			list
+	                        .computeIfAbsent("O", k -> new HashMap<>())
+	                        .put(alias, aliasState+">O");
+	            			
+	            			double x = dffa.getFinalProbability(nextState);
+	            			sdag.setTransitionPercentage(alias, "O", "O", Double.parseDouble(df.format(x)));
+	        			}
+	        		}
+	        	}
+	    	}
+	   /*     for(String symbol:list.keySet())
+	        {
+	        	Map<String, String> links = list.get(symbol); 
+	        	System.out.println(symbol+"--->");
+	        	for(String s:links.keySet())
+	        	{
+	        		System.out.print(links.get(s)+" "+s);
+	        	}
+	        	System.out.println();
+	        	
+	        }*/
+	        for(String symbol:list.keySet())
+	        {
+	        	Map<String, String> links = list.get(symbol);	
+	        	for(String s:links.keySet())
+	        	{
+	        		
+	        		String source= links.get(s);
+
+	        		for(String sym:list.keySet())
+	        		{
+	        			Map<String, String> links1 = list.get(sym);
+	        			for(String s1:links1.keySet())
+	        			{
+	        				StringTokenizer st = new StringTokenizer(links.get(s),">");
+	        				String src =  st.nextToken();
+	        				String dest = st.hasMoreTokens()!=false?st.nextToken():"null";
+	        				if(links.get(s).compareTo(links1.get(s1))!=0 ||s.compareTo(s1)!=0 ||src.compareTo(dest)==0)
+	        				{
+	        					String target=links1.get(s1);
+	        					int sourceIndex=source.indexOf(">");
+	        					int targetIndex=target.indexOf(">");
+	        					if(source.substring(sourceIndex+1).compareTo(target.substring(0, targetIndex))==0 && target.substring(targetIndex+1).compareTo("O")!=0)
+	        					{
+	        						sdag.setTransitionFunction(s,sym,s1);
+	        //						System.out.println(target.substring(0,targetIndex+1)+"---"+target.substring(targetIndex+2));
+	        						double x =0;
+	        						try {
+	        						x = dffa.transitionFrequencies.get(target.substring(0,targetIndex)).get(sym).get(target.substring(targetIndex+1));
+	        						}catch(Exception e)
+	        						{
+	        							
+	        						}
+	        						double px = dffa.transitionPercentage.get(target.substring(0,targetIndex)).get(sym).get(target.substring(targetIndex+1));
+	        						sdag.setTransitionFrequency(s, sym, s1, -1);
+	        						sdag.setTransitionPercentage(s, sym, s1, Double.parseDouble(df.format(px)));
+	        					}
+	        				}
+	        			}
+	        		}
+	        	}
+	        	
+	        }
+	        for(String symbol:list.keySet())
+	        {
+	        	Map<String, String> links = list.get(symbol);	
+	    		
+	    			
+	        	for(String s:links.keySet())
+	        	{
+	        	
+	        		String target=links.get(s);
+	        		
+	        		if(target.charAt(0)=='I' && symbol.compareTo("O")!=0)
+	        		{
+	        			
+	        			String source= links.get(symbol);
+	        	
+	        			sdag.setTransitionFunction("I",symbol+"",s);
+	        			
+	        			String next = dffa.transitionFunction.get(symbol);
+	        		//	System.out.println(next+" "+symbol);
+	        			sdag.setTransitionFrequency("I",symbol+"",s, -1);
+	        			sdag.setTransitionPercentage("I",symbol+"",s, dffa.transitionPercentage.get("I").get(symbol).get(next));
+	        			/*if(target.compareTo("I>")==0)
+	        			{
+	        				for(String symbol1:list.keySet())
+	        				{
+	        					Map<String, String> links1 = list.get(symbol1);	
+	        					for(String s1:links1.keySet())
+	            	        	{
+	            					String t1=links1.get(s1);
+	            					if(t1.charAt(0)=='I' && symbol1.compareTo("O")!=0)
+	            					{
+	            						
+	            						sdag.setTransitionFunction(s,symbol+"",s1);
+	            	        			sdag.setTransitionFrequency(s,symbol+"",s1, -1);
+	            	        			sdag.setTransitionPercentage(s,symbol+"",s1, dffa.transitionPercentage.get("").get(symbol).get(next));
+	            	        			System.out.println(s+" --- "+s1+" --- "+symbol);
+	            						System.out.println(symbol+" "+ s1+" "+t1+" "+symbol1);
+	            					}
+	            	        		
+	            	        	}
+	        				}
+	        			        
+	        				
+	        				System.out.println("---------------");
+	        			}*/
+	        			
+	        			break;
+	        		}
+	        	}
+	        }
+	        
+	     
+	        for(String state:sdag.states)
+	        {
+	        	//System.out.println("********************************************\n"+state);
+	        	for(String symbol:sdag.alphabet)
+	        	{
+	        		if(sdag.transitionFunction.containsKey(state+symbol))
+	        		{
+	        			String target = sdag.transitionFunction.get(state+symbol);
+	        		//	System.out.println(state+" "+symbol+"--->"+target+ " freq("+sdag.transitionFrequencies.get(state).get(symbol).get(target));
+	        		}
+	        	}
+	        }
+	        List<String> x =sdag.extractEquations(sdag);
+	    
+	      
+	    //    for(String s:x)
+	    //    	System.out.println(s);
+	        try {
+	        Map<String,Double> y = CoefficientMatrix.findSDAGCoefficient(x);
+	        
+	        sdag.updateTransitionFrequency(sdag,y);
+	        }catch(Exception e)
+	        {
+	        	
+	        }
+	      
+	    
+	    //    for(String s:y.keySet())
+	    //    	System.out.println(s+"--->"+y.get(s));
+	      
+	    //    sdag.showDFG(sdag, "");
+
+        return sdag;
+	}
+	  /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public static FPTA DFFAtoSDAG(FPTA dffa)
 	{
+		for(String state:dffa.states)
+			for(String sym:dffa.alphabet)
+				if(dffa.transitionFunction.get(state+sym)!=null)
+				{
+					String next= dffa.transitionFunction.get(state+sym);
+					try {
+						double x = dffa.transitionFrequencies.get(state).get(sym).get(next);
+					}catch(Exception e)
+					{
+						dffa.transitionFunction.remove(state+sym);
+					}
+				}
+		dffa.rebalancePercentages(dffa);
 		FPTA sdag = new FPTA();
 		sdag.alphabet = new HashSet<>();
 		sdag.states = new HashSet<>();
@@ -26,7 +231,6 @@ public class SDAG extends Model {
 		sdag.alphabet.add("O");
 		sdag.setInitialFrequency("I", dffa.getInitialFrequencies().get(""));
 		dffa.calculateTransitionPercentage(dffa);
-		
 		sdag.setFinalFrequency("I", dffa.getFinalFrequency(""));
 		sdag.setFinalProbability("I", dffa.getFinalProbability(""));
 		
@@ -101,11 +305,17 @@ public class SDAG extends Model {
         					{
         						sdag.setTransitionFunction(s,sym,s1);
         //						System.out.println(target.substring(0,targetIndex+1)+"---"+target.substring(targetIndex+2));
-
+        					
         						double x = dffa.transitionFrequencies.get(target.substring(0,targetIndex)).get(sym).get(target.substring(targetIndex+1));
         						double px = dffa.transitionPercentage.get(target.substring(0,targetIndex)).get(sym).get(target.substring(targetIndex+1));
         						sdag.setTransitionFrequency(s, sym, s1, -1);
         						sdag.setTransitionPercentage(s, sym, s1, px);
+        						if(target.substring(0,targetIndex).compareTo(target.substring(targetIndex+1))==0)
+        						{
+        							sdag.setTransitionFunction(s1,sym,s1);
+            						sdag.setTransitionFrequency(s1, sym, s1, -1);
+        							sdag.setTransitionPercentage(s1, sym, s1, px);
+        						}
         					}
         				}
         			}
@@ -127,7 +337,7 @@ public class SDAG extends Model {
         		//	System.out.println(next+" "+symbol);
         			sdag.setTransitionFrequency("I",symbol+"",s, -1);
         			sdag.setTransitionPercentage("I",symbol+"",s, dffa.transitionPercentage.get("").get(symbol).get(next));
-
+        			
         			break;
         		}
         	}
@@ -158,16 +368,35 @@ public class SDAG extends Model {
         		}
         	}
         }
+        for(String sym:sdag.alphabet)
+        	for(String state:sdag.states)
+        	{
+        		if(sdag.transitionFunction.get(state+"O")!=null)
+        		{
+        			double x = 0 ;
+        			for(String sym2:sdag.alphabet)
+        			{
+        				String next=sdag.transitionFunction.get(state+sym2);
+        				if(next!=null && sym2.compareTo("O")!=0)
+        				{
+        					
+        					x+=sdag.transitionPercentage.get(state).get(sym2).get(next);
+        				}
+        			}
+        			sdag.setTransitionPercentage(state, "O", "O", 1-x);
+        		}
+        	}
         List<String> x =sdag.extractEquations(sdag);
-    //    for(String s:x)
-    //    	System.out.println(s);
+      //for(String s:x)
+       // 	System.out.println(s);
         Map<String,Double> y = CoefficientMatrix.findSDAGCoefficient(x);
     //    for(String s:y.keySet())
     //    	System.out.println(s+"--->"+y.get(s));
         sdag.updateTransitionFrequency(sdag,y);
-    //    sdag.showDFG(sdag, "");
+     
 		return sdag;
 	}
+
 	  /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 		public static void updateFrequencis(DFFA dffa) {
 			List<String>states = new ArrayList<String>();
@@ -205,7 +434,6 @@ public class SDAG extends Model {
 			visited.add("O");
 			if(visited.size()<dffa.states.size())
 			{
-				System.out.println("Error"+visited.size()+" "+dffa.states.size());
 				dffa.showDFG(dffa, "");
 			}
 		}
@@ -376,7 +604,6 @@ public class SDAG extends Model {
        					}
        					if(s1.compareTo("notSet")==0 || alias.compareTo("notSet")==0 )
        					{
-       						System.out.println(curr+" "+s+" "+s1+" "+symbol+" "+alias+" "+v+" "+prev.get(s)+" "+tot+" "+(v*prev.get(s))/tot);
 
        					}
        					fpta1.setTransitionFunction(s1, symbol, alias);
@@ -395,13 +622,11 @@ public class SDAG extends Model {
         		fpta1.setFinalFrequency(s, x);
         	}
         	else {
-        		System.out.println(x+" "+fpta1.states.size());
         		for(String sym:fpta1.alphabet)
         			if(fpta1.transitionFunction.containsKey(s+sym))
         			{
         				String next=fpta1.transitionFunction.get(s+sym);
         				double nextFer=fpta1.getTransitionFrequencies().get(s).get(sym).get(next);
-        				System.out.println(s+" by "+sym+" to "+next+" with "+nextFer);
         			}
         		for(String sta :fpta1.states)
         			for(String sym:fpta1.alphabet)
@@ -410,10 +635,8 @@ public class SDAG extends Model {
         					if(fpta1.transitionFunction.get(sta+sym).compareTo(s)==0)
         					{
         						double fre=fpta1.transitionFrequencies.get(sta).get(sym).get(s);
-                				System.out.println(sta+" by "+sym+" to "+s+" with "+fre);
         					}
         				}
-        		System.out.println("*****************************************************");
         		//System.exit(0);
         	}
         }

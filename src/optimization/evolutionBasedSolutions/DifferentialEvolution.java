@@ -5,13 +5,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.IntStream;
 
+import nodes.Optimizer;
 import optimization.Frontier;
 import optimization.Optimization;
 import performance.EntropicRelevanceCalculator.BackGroundType;
@@ -19,25 +22,28 @@ import performance.EntropicRelevanceCalculator.BackGroundType;
 
 public class DifferentialEvolution extends Optimization{
     private double mutationFactor; // Mutation factor (F)
+    private Set<double[]> history;
     private double crossoverRate; // Crossover rate (CR)
     private CandidateSolution[] population; // Population of candidate solutions
     private BackGroundType bkgt;
-    public DifferentialEvolution(int id,int maxIter,String fileDirectory, int populationSize, double mutationFactor, double crossoverRate,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int minute,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,minute,actions,eventLog,actionSize,optModel,sizeLimit);
+    public DifferentialEvolution(int id,int maxIter,String fileDirectory, int populationSize, double mutationFactor, double crossoverRate,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int minute,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,minute,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.mutationFactor = mutationFactor;
         this.crossoverRate = crossoverRate;
         this.population = new CandidateSolution[populationSize]; // Initialize population
         this.bkgt= bkgt;
         initializePopulation();
+        history = new HashSet<>();
     }
  
-    public DifferentialEvolution(int id, int maxIter,String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int minute,List<Frontier>f,double mutationFactor, double crossoverRate,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
+    public DifferentialEvolution(int id, int maxIter,String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int minute,List<Frontier>f,double mutationFactor, double crossoverRate,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
        
-    	super(id, populationSize,fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,minute,actions,eventLog,actionSize,optModel,sizeLimit);
+    	super(id, populationSize,fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,minute,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.mutationFactor = mutationFactor;
         this.crossoverRate = crossoverRate;
         this.population = new CandidateSolution[populationSize]; // Initialize population
         this.bkgt = bkgt;
+   
         IntStream.range(0, f.size()).parallel().forEach(i -> {
         	
         	population[i] = new CandidateSolution(id, actions.size(), getEventLog(),f.get(i).getSolution(),bkgt);
@@ -62,9 +68,11 @@ public class DifferentialEvolution extends Optimization{
               }    
       });
         }
+        System.out.println("after Init2");
     }
 
 public void initializePopulation() {
+	//Optimizer.extractEntireFPTA(eventLog);
     IntStream.range(0, populationSize).parallel().forEach(i -> {
         population[i] = new CandidateSolution(id, actions.size(), eventLog, LOWER_, UPPER_, bkgt);
         optimizationFunction(population[i]);
@@ -83,6 +91,7 @@ public void initializePopulation() {
     	SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss:SSS");
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         List<Future<Void>> futures = new ArrayList<>();
+
         for (int iteration = 0; iteration < maxIter&&!isExpired(); iteration++) {
             futures.clear(); // Clear the list for the new iteration
             System.out.println("Client "+id+"th -- iteration "+(iteration+1)+"th started at "+ sdf.format(new Date()));
@@ -92,6 +101,18 @@ public void initializePopulation() {
                 futures.add(executor.submit(() -> {
                     // Mutation and Crossover
                     CandidateSolution trial = mutateAndCrossover(index);
+                    boolean xxx=false;
+                    for(double[] bb:history)
+                    	if(bb[0]==trial.solution[0] &&bb[1]==trial.solution[1]&& bb[2]==trial.solution[2])
+                    	{
+                    		trial.solution = randomSolution();
+                    		xxx=true;
+                    	//	System.out.println(history.size());
+                    		break;
+                    	}
+                   
+                    if(!xxx)
+                    	history.add(trial.solution);
                     double trialFitness[] = optimizationFunction(trial);
                     
 

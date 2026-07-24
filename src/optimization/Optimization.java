@@ -39,7 +39,7 @@ public abstract class Optimization {
     public String optModel;
     public int sizeLimit ;
     public int actionSize;
-    
+    public double cof;
     
     public boolean isExpired() {
     	boolean flag = false;
@@ -57,7 +57,7 @@ public abstract class Optimization {
     	
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-    public Optimization(int id,int size,int maxIter,double lower,double uppder, int Frontier_List_Size,String fileDirectory,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,String optModel,int sizeLimit) {
+    public Optimization(int id,int size,int maxIter,double lower,double uppder, int Frontier_List_Size,String fileDirectory,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,String optModel,int sizeLimit,double cof) {
     	dimensions = 3;
     	executionTime = System.nanoTime();
     	currentIter = 0;
@@ -78,9 +78,10 @@ public abstract class Optimization {
         this.Frontier_List_Size=Frontier_List_Size;
         this.optModel = optModel;
         this.actionSize=actionSize;
+        this.cof=cof;
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-    public Optimization(int id,int size,String fileDirectory,int maxIter,double lower,double upper,int Frontier_List_Size,LocalDateTime bTime,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,String optModel, int sizeLimit) {
+    public Optimization(int id,int size,String fileDirectory,int maxIter,double lower,double upper,int Frontier_List_Size,LocalDateTime bTime,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,String optModel, int sizeLimit,double cof) {
     	dimensions = 3;
     	executionTime = System.nanoTime();
     	currentIter = 0;
@@ -105,7 +106,7 @@ public abstract class Optimization {
         this.optModel = optModel;
         this.time = bTime.plusSeconds(seconds); 
         this.actionSize=actionSize;
-
+        this.cof=cof;
 	}
     public Optimization(double alpha, int id2, String algorithmName) {
 		// TODO Auto-generated constructor stub
@@ -114,28 +115,44 @@ public abstract class Optimization {
 	public abstract void run();
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/	
 	public double[] optimizationFunction(BasicObject obj) { 
-		FPTA fpta = obj.getEdgeNode().runModel(obj.solution[0],obj.solution[1]*5,obj.solution[2],"ALEEGIA");
-		
+		FPTA fpta = obj.getEdgeNode().runModel(obj.solution[0],obj.solution[1],obj.solution[2],"ALEEGIA",obj.getEdgeNode().getActionList());
+		//FPTA fpta = obj.getEdgeNode().runModelDFvM(obj.solution[0],obj.solution[1]*5,obj.solution[2]);
 		//fpta.show(fpta, "after run");
 		
+		double metric1 =0;
+		double metric2 = 0;
+		if(fpta == null)
+		{
+			metric1 = 10000;
+    		metric2 = 10000;
+    		double [] value= {metric1,metric2};
+            double result[] = {metric1,metric2};
+            obj.setMetrics(value);  
+          	
+            // System.out.println("pos("+obj.solution[0]+","+obj.solution[1]+") fit("+fit+")");
+      
+            return result;
+		}
     	HashMap<String,Double> matric = obj.getEdgeNode().getPerformanceEstimator().calculatePerformanceMetrics(fpta, obj.getEdgeNode().getEventLog(), obj.getEdgeNode().getActionList());
     	
-    	double metric1 = matric.get("Entropic Relevance");///obj.getEdgeNode().getPerformanceEstimator().getUnpperBoundEntropicRelevance();  // Example metric 1
-    	double metric2 = matric.get("Size");///obj.getEdgeNode().getPerformanceEstimator().getUpperBoundSize();  // Example metric 2
-
+    	metric1 = matric.get("Entropic Relevance");///obj.getEdgeNode().getPerformanceEstimator().getUnpperBoundEntropicRelevance();  // Example metric 1
+    	metric2 = matric.get("Size");///obj.getEdgeNode().getPerformanceEstimator().getUpperBoundSize();  // Example metric 2
+    	
     	if(optModel.compareTo("SDAG")==0)
     	{
-  
+    		double x = metric1;
+    		double x1 = metric2;
     		FPTA dDFG = SDAG.DFFAtoSDAG(fpta);  	
     		dDFG.calculateTransitionPercentage(dDFG);
     		HashMap<String,Double> SDAGFitness= obj.getEdgeNode().getPerformanceEstimator().calculatePerformanceDFGMetrics(dDFG, obj.getEdgeNode().getEventLog(),obj.getEdgeNode().getActionList());   
     		metric1 = SDAGFitness.get("Entropic Relevance");
     		metric2 = SDAGFitness.get("Size");
-
+    	
+    		//System.out.println(x+" "+x1+") ("+metric1+" "+metric2);
     	}
     	else if(optModel.compareTo("DFG")==0)
     	{
-    		System.out.println("-3");
+    		
     		FPTA dDFG = SDAG.DFFAtoSDAG(fpta);
     		dDFG.calculateTransitionPercentage(dDFG);
     		FPTA ff = DFFA.getDFG(dDFG);
@@ -143,19 +160,20 @@ public abstract class Optimization {
     		HashMap<String,Double> DFGFitness= obj.getEdgeNode().getPerformanceEstimator().calculatePerformanceDFGMetrics(ff, obj.getEdgeNode().getEventLog(),obj.getEdgeNode().getActionList());
     		metric1 = DFGFitness.get("Entropic Relevance");
     		metric2 = DFGFitness.get("Size");
-    		System.out.println("3");
+    		
     	}
-    	if(sizeLimit<metric2)
+    	if(sizeLimit<metric2 || metric2<1)
     	{
     		
     		metric1 = 10000;
     		metric2 = 10000;	
     	}
     	
+    	
         double [] value= {metric1,metric2};
         double result[] = {metric1,metric2};
         obj.setMetrics(value);  
-      	
+   
         // System.out.println("pos("+obj.solution[0]+","+obj.solution[1]+") fit("+fit+")");
         return result; // Adjust this as needed for your optimization goal
 	}
@@ -256,8 +274,8 @@ public abstract class Optimization {
     	double value=0;
     	for(int i =0;i<frontier.size();i++)
     		value+=returnNicheFitness(index,i);
-    	
-    	return  (1/Math.log(frontier.get(index).getFitness()[0])+1/Math.log(frontier.get(index).getFitness()[1]))/value;
+
+    	return  (30*0.5/frontier.get(index).getFitness()[0]+0.5/frontier.get(index).getFitness()[1])/value;
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     public double calculatesharefitness(Frontier f) {
@@ -315,16 +333,14 @@ public abstract class Optimization {
 
     public synchronized void addFrontier(Frontier newMem) {
     	frontier.add(newMem);
-   /* 	System.out.println("before cleaning");
-    	for(Frontier f:frontier)
-    		if(f!=null)
-    			System.out.println(f.getFitness()[0]+" "+f.getFitness()[1]);*/
+    /*	System.out.println("before cleaning");*/
+    	
     	clearDominatedPoints();
     	
-    	/*System.out.println("after cleaning");
-    	for(Frontier f:frontier)
-    		if(f!=null)
-    			System.out.println("**"+f.getFitness()[0]+" "+f.getFitness()[1]);*/
+    	/*System.out.println("after cleaning");*/
+    	//for(Frontier f:frontier)
+    	//	if(f!=null)
+    		//	System.out.println("**"+f.getFitness()[0]+" "+f.getFitness()[1]);
     	/*{
     		if(frontier.size()<Frontier_List_Size)
     		{
@@ -385,19 +401,18 @@ public abstract class Optimization {
     	
     	for(int i=0;i<frontier.size();i++)
     	{
-			System.out.println(frontier.get(i).getFitness()[0]+" "+frontier.get(i).getFitness()[1]);
-    		//frontier.get(i).getFpta().show(frontier.get(i).getFpta(), "1111");
-    		if(bestValue<((1/Math.log(frontier.get(i).getFitness()[0])+1/Math.log(frontier.get(i).getFitness()[1]))))
+    		if(bestValue<cof/frontier.get(i).getFitness()[0]+((1-cof)/frontier.get(i).getFitness()[1]))
     		{
-    			bestValue= (1/Math.log(frontier.get(i).getFitness()[0])+1/Math.log(frontier.get(i).getFitness()[1]));
+    			bestValue= cof/frontier.get(i).getFitness()[0]+((1-cof)/frontier.get(i).getFitness()[1]);
     			index = i;
-    			System.out.println(frontier.get(i).getFitness()[0]+" "+frontier.get(i).getFitness()[1]);
     		}
     	}
     	if(index>=0)
+    	{
     		bestFrontier = frontier.get(index);
-		System.out.println(bestFrontier.getFitness()[0]+" "+bestFrontier.getFitness()[1]);
-
+    		bestMetric= frontier.get(index).getFitness();
+    	}
+    	
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     public void deleteDominated() {

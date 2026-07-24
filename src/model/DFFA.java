@@ -10,7 +10,12 @@ import javax.swing.JFrame;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
+import performance.EntropicRelevanceCalculator;
+import performance.EntropicRelevanceCalculator.BackGroundType;
+import performance.PerformanceAnalyser;
+import performance.PerformanceEstimator;
 import utilities.CoefficientMatrix;
+import utilities.SubgraphSolver;
 
 public class DFFA extends Model{
    
@@ -45,6 +50,25 @@ public class DFFA extends Model{
     			}
     		}
     	}
+    	return result;
+    }
+    
+    public double calculateOutcommingArcs(DFFA dffa1,String state) {
+    	long result=0;
+    	for(String a: dffa1.alphabet)
+    	{
+    			if(dffa1.getTransitionFunction().get(state + a)!=null)
+    			{	
+    				double x=0;
+    				if(dffa1.getTransitionFrequencies().get(state).get(a).get(dffa1.getTransitionFunction().get(state + a))==null)
+    					dffa1.setTransitionFrequency(state, a, dffa1.getTransitionFunction().get(state + a), 0);
+    				else
+    					x = dffa1.getTransitionFrequencies().get(state).get(a).get(dffa1.getTransitionFunction().get(state + a));
+    				result +=x;
+    				
+    			}
+    	}
+    	result+=dffa1.finalFrequencies.get(state)!=null?dffa1.finalFrequencies.get(state):0;
     	return result;
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -264,44 +288,19 @@ public class DFFA extends Model{
 
         for (String state : sortedStates) {
             String vertexName = (state.isEmpty() ? "I" : state);
-            if (dffa.getInitialFrequencies().containsKey(state)) {
-                vertexName = "IP(" + dffa.getInitialFrequencies().get(state) + "):" + vertexName;
-            }
-           
-            if (state.length() == 0) {
-                Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
-      
-                vertices.put(state, vertex);
-            } else  {
-                String prefix = state.substring(0, state.length() - 1);
-                Object prefixVertex = vertices.get(prefix);
-                if(prefixVertex==null)
-                	prefixVertex = vertices.get("");
-                	
-                	int prefixVertexWidth = (int) graph.getCellGeometry(prefixVertex).getWidth();
-                	int prefixVertexHeight = (int) graph.getCellGeometry(prefixVertex).getHeight();
-                	int currentVertexWidth = Math.max(vertexWidth, vertexName.length() * 10);
-                	int currentVertexHeight = vertexHeight;             
-                	Object vertex = graph.insertVertex(parent, null, vertexName, (int) graph.getCellGeometry(prefixVertex).getX() + (prefixVertexWidth + horizontalGap), (int) graph.getCellGeometry(prefixVertex).getY() + (prefixVertexHeight + verticalGap), currentVertexWidth, currentVertexHeight);
-                    vertices.put(state, vertex);      
-                
-            }
+            Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
+            vertices.put(state, vertex);
         }
-
         for (String fromState : dffa.getStates()) {
 
             for (String symbol : dffa.getAlphabet()) {   
                 String nextState = dffa.getTransitionFunction().get(fromState + symbol);
                 if (nextState != null) {
                     String fromVertexName = (fromState.isEmpty() ? "I" : fromState) ;
-                    if (dffa.getInitialFrequencies().containsKey(fromState)) {
-                        fromVertexName = "IP(" + dffa.getInitialFrequencies().get(fromState) + "):" + fromVertexName;
-                    }
+                 
                     String toVertexName = (nextState.isEmpty() ? "I" : nextState) ;
-                    if (dffa.getInitialFrequencies().containsKey(nextState)) {
-                        toVertexName = "IP(" + dffa.getInitialFrequencies().get(nextState) + "):" + toVertexName;
-                    }
-                    String edgeName = symbol + ":" + dffa.transitionPercentage.get(fromState).get(symbol).get(nextState);
+                 
+                    String edgeName = symbol + ":" + dffa.transitionFrequencies.get(fromState).get(symbol).get(nextState);
                     Object fromVertex = getVertex(graph, parent, fromVertexName);
                     Object toVertex = getVertex(graph, parent, toVertexName);
                     graph.insertEdge(parent, null, edgeName, fromVertex, toVertex);
@@ -346,30 +345,25 @@ public class DFFA extends Model{
         int verticalGap = 20;
 
         Map<String, Object> vertices = new HashMap<>();
-
+        DecimalFormat df = new DecimalFormat("#.###");
         for (String state : sortedStates) {
-            String vertexName = (state.isEmpty() ? "I" : state) + "";
-            if (dffa.getInitialFrequencies().containsKey(state)) {
-                vertexName = "IP(" + dffa.getInitialFrequencies().get(state) + "):" + vertexName;
-            }
-           
-            	Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
+            String vertexName = state;
+            Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
         }
 
         for (String fromState : dffa.getStates()) {
 
             for (String symbol : dffa.getAlphabet()) {   
+            	
                 String nextState = dffa.getTransitionFunction().get(fromState + symbol);
                 if (nextState != null) {
-                    String fromVertexName = (fromState.isEmpty() ? "I" : fromState) + "";
-                    if (dffa.getInitialFrequencies().containsKey(fromState)) {
-                        fromVertexName = "IP(" + dffa.getInitialFrequencies().get(fromState) + "):" + fromVertexName;
-                    }
-                    String toVertexName = (nextState.isEmpty() ? "I" : nextState)+"";
-                    if (dffa.getInitialFrequencies().containsKey(nextState)) {
-                        toVertexName = "IP(" + dffa.getInitialFrequencies().get(nextState) + "):" + toVertexName;
-                    }
-                    String edgeName = dffa.transitionPercentage.get(fromState).get(symbol).get(nextState)+" / "+dffa.getTransitionFrequencies().get(fromState).get(symbol).get(nextState);
+                    String fromVertexName = fromState;
+                   
+                 
+                  
+                    String toVertexName = nextState;
+                 
+                    String edgeName = df.format(dffa.transitionFrequencies.get(fromState).get(symbol).get(nextState));
                     Object fromVertex = getVertex(graph, parent, fromVertexName);
                     Object toVertex = getVertex(graph, parent, toVertexName);
                     graph.insertEdge(parent, null, edgeName, fromVertex, toVertex);
@@ -412,49 +406,26 @@ public class DFFA extends Model{
         int vertexHeight = 20;
         int horizontalGap = 20;
         int verticalGap = 20;
-
         Map<String, Object> vertices = new HashMap<>();
-
+   
         for (String state : sortedStates) {
-            String vertexName = (state.isEmpty() ? "I" : state) + "";
-            if (dffa.getInitialFrequencies().containsKey(state)) {
-                vertexName = "IP(" + dffa.getInitialFrequencies().get(state) + "):" + vertexName;
-            }
-           
-            if (state.length() == 0) {
-                Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
-      
-                vertices.put(state, vertex);
-            } else  {
-                String prefix = state.substring(0, state.length() - 1);
-                Object prefixVertex = vertices.get(prefix);
-                if(prefixVertex==null)
-                	prefixVertex = vertices.get("");
-                	
-                	int prefixVertexWidth = (int) graph.getCellGeometry(prefixVertex).getWidth();
-                	int prefixVertexHeight = (int) graph.getCellGeometry(prefixVertex).getHeight();
-                	int currentVertexWidth = Math.max(vertexWidth, vertexName.length() * 10);
-                	int currentVertexHeight = vertexHeight;             
-                	Object vertex = graph.insertVertex(parent, null, vertexName, (int) graph.getCellGeometry(prefixVertex).getX() + (prefixVertexWidth + horizontalGap), (int) graph.getCellGeometry(prefixVertex).getY() + (prefixVertexHeight + verticalGap), currentVertexWidth, currentVertexHeight);
-                    vertices.put(state, vertex);      
-                
-            }
+            String vertexName = state;
+            Object vertex = graph.insertVertex(parent, null, vertexName, x, y, vertexWidth, vertexHeight);
         }
-
+  
         for (String fromState : dffa.getStates()) {
 
             for (String symbol : dffa.getAlphabet()) {   
+            	
                 String nextState = dffa.getTransitionFunction().get(fromState + symbol);
                 if (nextState != null) {
-                    String fromVertexName = (fromState.isEmpty() ? "I" : fromState) + "";
-                    if (dffa.getInitialFrequencies().containsKey(fromState)) {
-                        fromVertexName = "IP(" + dffa.getInitialFrequencies().get(fromState) + "):" + fromVertexName;
-                    }
-                    String toVertexName = (nextState.isEmpty() ? "I" : nextState)+"";
-                    if (dffa.getInitialFrequencies().containsKey(nextState)) {
-                        toVertexName = "IP(" + dffa.getInitialFrequencies().get(nextState) + "):" + toVertexName;
-                    }
-                    String edgeName = ""+dffa.transitionPercentage.get(fromState).get(symbol).get(nextState);
+                    String fromVertexName = fromState;
+                   
+                 
+                  
+                    String toVertexName = nextState;
+                 
+                    String edgeName = df.format(dffa.transitionPercentage.get(fromState).get(symbol).get(nextState));
                     Object fromVertex = getVertex(graph, parent, fromVertexName);
                     Object toVertex = getVertex(graph, parent, toVertexName);
                     graph.insertEdge(parent, null, edgeName, fromVertex, toVertex);
@@ -469,6 +440,7 @@ public class DFFA extends Model{
         frame.add(graphComponent);
         frame.setSize(800, 600);
         frame.setVisible(true);
+    
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     private static Object getVertex(mxGraph graph, Object parent, String vertexName) {
@@ -623,11 +595,21 @@ public class DFFA extends Model{
     	for(String symbol:dffa.alphabet)
     	{
     		String nextState = dffa.getTransitionFunction().get(state+symbol);
-    
-    		if(nextState!=null)
+    		double x0 =0;
+    		try {
+    			x0 = dffa.transitionPercentage.get(state).get(symbol).get(nextState)!=null?dffa.transitionPercentage.get(state).get(symbol).get(nextState):0;
+    			}catch(Exception e)
+    			{
+
+
+    			}
+    		if(nextState!=null && x0==0)
+    			dffa.getTransitionFunction().remove(state+symbol);
+    		if(nextState!=null&&x0>=0)
     		{
-    			double x0 = dffa.transitionPercentage.get(state).get(symbol).get(nextState);
-				if(!dfg.states.contains(symbol)&& x0>0.0)
+    			
+    			
+    			if(!dfg.states.contains(symbol)&& x0>0.0)
     			{
 					dfg.states.add(symbol);
     				dfg.alphabet.add(symbol);
@@ -670,7 +652,12 @@ public class DFFA extends Model{
 				{
 					if(x0>0)
 					{
-						double in = dffa.getTransitionFrequencies().get(state).get(symbol).get(nextState);
+						double in = 0;
+						try {
+							in = dffa.getTransitionFrequencies().get(state).get(symbol).get(nextState);
+						}catch(Exception e)
+						{
+						}
 						if(dfg.transitionFunction.get(state+symbol)!=null)
 						{
 							double trans= dfg.getTransitionFrequencies().get(state).get(symbol).get(symbol);
@@ -833,7 +820,6 @@ public class DFFA extends Model{
     				outSymbol.put(symbol, nextState);
     				try{	Symbolcof.put(symbol, fpta.transitionPercentage.get(state).get(symbol).get(nextState)!=null?fpta.transitionPercentage.get(state).get(symbol).get(nextState):0);
     				total += fpta.transitionPercentage.get(state).get(symbol).get(nextState);
-
     				}catch(Exception e)
     				{
     					
@@ -844,6 +830,7 @@ public class DFFA extends Model{
     		{
     			for(String s:outSymbol.keySet())
     			{
+    				
     				fpta.setTransitionPercentage(state, s ,  outSymbol.get(s), Symbolcof.get(s)/total);
     			}
     		}
@@ -852,6 +839,7 @@ public class DFFA extends Model{
     
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     public List<String> extractEquations(DFFA dffa){
+    
     	List<String> result = new ArrayList<String>();
     	for(String state : dffa.states)
     	{
@@ -860,24 +848,35 @@ public class DFFA extends Model{
 			Map<String,Double> arcEquation=  new HashMap<>();
     		for(String symbol:dffa.alphabet)
     		{
-    			
+    		
     			String nextState=dffa.getTransitionFunction().get(state+symbol);
+    		
     			if(nextState!=null)
     			{
+    		
     				if(rightSide.compareTo("")!=0)
     					rightSide+="+";
     				String firstAlias = state.compareTo("")!=0?state:"I";
     				String secndAlias = nextState.compareTo("")!=0?nextState:"I";
     				rightSide+="f("+firstAlias+","+secndAlias+")";
+    				try {
     				arcEquation.put("f("+firstAlias+","+secndAlias+")",dffa.transitionPercentage.get(state).get(symbol).get(nextState));
+    				}catch(Exception e)
+    				{
+    					System.out.println(state+" "+symbol+" "+nextState);
+    					System.exit(0);
+    				}
+    				//System.out.println(arcEquation.get("f("+firstAlias+","+secndAlias+")"));
+    		
     			}
+    			
     			for(String prevState:dffa.states)
     			{
     					if(dffa.transitionFunction.get(prevState+symbol)!=null && dffa.transitionFunction.get(prevState+symbol).compareTo(state)==0)
     					{
+    						
     						if(leftSide.compareTo("")!=0)
     	    					leftSide+="+";
-    						
     	    				String firstAlias = prevState.compareTo("")!=0?prevState:"I";
     	    				String secondAlias = state.compareTo("")!=0?state:"I";
     	    				leftSide+="f("+firstAlias+","+secondAlias+")";
@@ -889,20 +888,29 @@ public class DFFA extends Model{
     		
     		if(rightSide.compareTo("")!=0)
 			{
+    			
     			if(state.compareTo("")==0)
     				leftSide=""+dffa.getInitialFrequencies().get("");
+    			
     			if(leftSide.compareTo("")!=0)
     				result.add(leftSide+"="+rightSide);
+    			
 			}
+    		
     		for(String s: arcEquation.keySet())
 			{
+    			
 				StringTokenizer st = new StringTokenizer(leftSide,"+");
+			
 				String s1="";
 				while(st.hasMoreTokens())
 				{
+					
 					if(s1.compareTo("")!=0)
 						s1+="+";
+					
 					String temp = st.nextToken();
+					
 					if(temp.charAt(0)!='f')
 					{
 						s1+=arcEquation.get(s)*Double.parseDouble(temp);
@@ -919,6 +927,7 @@ public class DFFA extends Model{
     	{
     		if(dffa.transitionFunction.get(state+"O")!=null)
     		{
+    		
     			String alias=state;
     			if(state.compareTo("")==0)
     				alias="I";
@@ -927,10 +936,13 @@ public class DFFA extends Model{
     			leftSide+="f("+state+",O)";
     		}
     	}
+  
     	for(String alp:dffa.alphabet)
     		if(dffa.transitionFunction.containsKey("I"+alp))
     		{
-    			String s="f(I,"+dffa.transitionFunction.get("I"+alp)+")="+dffa.transitionPercentage.get("I").get(alp).get(dffa.transitionFunction.get("I"+alp))*dffa.getInitialFrequencies().get("I");
+    			String var1 = dffa.transitionFunction.get("I"+alp);
+    			double value=dffa.getInitialFrequencies().get("I");
+    			String s="f(I,"+var1+")="+dffa.transitionPercentage.get("I").get(alp).get(var1)*value;
     			result.add(s);
     		}
     	//	s=s.substring(0,s.length()-1);
@@ -1032,7 +1044,26 @@ public class DFFA extends Model{
     }
   	
     
+    /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+    public void clearModel(DFFA dffa) {
+    	List<String> remo = new ArrayList<String>();
+    	for(String state : dffa.states)
+    	{ 	
+			double out=calculateOutcommingArcs(dffa, state);
+			
+			for(String symbol:dffa.alphabet)
+    		{
+    			if(out==0)
+    			{
+    				dffa.transitionFunction.remove(dffa.transitionFunction.get(state+symbol));
+    				dffa.finalFrequencies.remove(state);
+    				remo.add(state);
+    			}
+    		}
+    	}
     
+    	dffa.states.removeAll(remo);
+    }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     public void calculateTransitionPercentage(DFFA dffa)
     {
@@ -1050,8 +1081,7 @@ public class DFFA extends Model{
     				dffa.transitionFunction.remove(dffa.transitionFunction.get(state+symbol));
     				dffa.transitionFrequencies.get(state).get(symbol).remove(outsymbol.get(symbol));
     			}
-    			else
-    			
+    			else    			
     			dffa.setTransitionPercentage(state, symbol, outsymbol.get(symbol),Double.parseDouble(df.format((double)outList.get(symbol)/(double)out)));
     		}
 
@@ -1070,8 +1100,39 @@ public class DFFA extends Model{
 
     }
    
+  
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+    public void calculateTransitionPercentage1(DFFA dffa)
+    {
+    	DecimalFormat df = new DecimalFormat("0.000");
+    	for(String state : dffa.states)
+    	{
+			Map<String,Double> outList = new HashMap<String, Double>();
+			Map<String,String> outsymbol = new HashMap<String, String>();
+			double out=calculateOutcommingArcs(dffa, state, outList,outsymbol);
+			//out +=dffa.getFinalFrequency(state);
+			
+    		for(String symbol:outList.keySet())
+    		{
+    			if(out==0)
+    			{
+    				dffa.transitionFunction.remove(dffa.transitionFunction.get(state+symbol));
+    				dffa.transitionFrequencies.get(state).get(symbol).remove(outsymbol.get(symbol));
+    			}
+    			else
+    			
+    			dffa.setTransitionPercentage(state, symbol, outsymbol.get(symbol),Double.parseDouble(df.format((double)outList.get(symbol)/(double)out)));
+    		}
+
+    		dffa.setFinalProbability(state, dffa.getFinalFrequency(state)/out);
+
+    		
+    	}
+    }
+    /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
     public static FPTA getDFG(FPTA dffa) {
+    	
     	for(String state:dffa.states)
     		for(String symbol:dffa.alphabet)
     			if(dffa.transitionFunction.containsKey(state+symbol))
@@ -1079,13 +1140,19 @@ public class DFFA extends Model{
     				String next = dffa.transitionFunction.get(state+symbol);
     				try {
     					double x = dffa.transitionFrequencies.get(state).get(symbol).get(next);
+    					if(x<0.1)
+    					{
+    						dffa.transitionFunction.remove(state+symbol);
+    						dffa.transitionFrequencies.get(state).get(symbol).remove(next);
+    					}
     				}catch(Exception e)
     				{
     					dffa.transitionFunction.remove(state+symbol);
     				}
     				
     			}
-    	dffa.calculateTransitionPercentage(dffa);
+    	
+    	dffa.calculateTransitionPercentage1(dffa);
     	FPTA DFG = new FPTA();
         DFG.alphabet = new HashSet<>();
         DFG.states = new HashSet<>();
@@ -1097,12 +1164,16 @@ public class DFFA extends Model{
         DFG.setInitialFrequency("I", dffa.getInitialFrequencies().get("I"));
         
         DFG.convertDFFAtoDFG(dffa,"I", DFG, visitedStates);
-
+      
         DFG.rebalancePercentages(DFG);
-
         List<String> x =DFG.extractEquations(DFG);
+        try {
         Map<String,Double> y = CoefficientMatrix.findSDAGCoefficient(x);
-        DFG.updateTransitionFrequency(DFG,y);
+        DFG.updateTransitionFrequency(DFG,y);}
+        catch(Exception e)
+        {
+        	
+        }
         return DFG;
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -1152,7 +1223,10 @@ public class DFFA extends Model{
     		for(String sym:dffa1.alphabet)
     			if(dffa1.transitionFunction.containsKey(s+sym))
     			{
+    				
     				String next = dffa1.transitionFunction.get(s+sym);
+    			//	if(state.compareTo("AEFCBDGHJJMCBDDDBCCDBCBD")==0 && state.compareTo(next)==0)
+    				//	System.out.println(s+" "+sym+"-->"+state);
     				if(next.compareTo(state)==0)
     					result++;
     			}
@@ -1204,7 +1278,7 @@ public class DFFA extends Model{
     	dffa2.states.add("O");
     	dffa2.alphabet.add("O");
     	dffa2.setFinalFrequency("O", 0L);
-    	dffa2.setInitialFrequency("I", dffa1.getInitialFrequencies().get(""));
+    	dffa2.setInitialFrequency("I", dffa1.getInitialFrequencies().get("")!=null?dffa1.getInitialFrequencies().get(""):dffa1.getInitialFrequencies().get("I"));
     	for(String state:dffa1.states)
     	{
     		double finalFreq = dffa1.getFinalProbability(state);
@@ -1215,7 +1289,7 @@ public class DFFA extends Model{
     			dffa2.setTransitionPercentage(state, "O", "O", finalFreq);
     		}	
     	}
-    	dffa2.setFinalProbability("O",  dffa1.getInitialFrequencies().get(""));
+    	dffa2.setFinalProbability("O",  dffa1.getInitialFrequencies().get("")!=null?dffa1.getInitialFrequencies().get(""):dffa1.getInitialFrequencies().get("I"));
     	return dffa2;
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -1254,35 +1328,383 @@ public class DFFA extends Model{
     		//if(state.compareTo("I")==0)
     		//	state="I";
     	//	System.out.println("before change"+state+" "+nextState+" "+fpta.transitionFunction.get(state+nextState.charAt(0)));
-    		fpta.setTransitionFrequency(state, nextState.charAt(0)+"", nextState,Double.parseDouble(String.format("%.3f",frequency)));
+    
+    	/*	if(fpta.states.contains("")&&state.compareTo("I")==0)
+    		{ 
+    			if(nextState.compareTo("O")==0)
+    			{
+    				fpta.setFinalFrequency("", frequency);
+    			}
+    			else	
+    			fpta.setTransitionFrequency("", nextState.charAt(0)+"", nextState,Double.parseDouble(String.format("%.3f",frequency)));
+
+    		}
+    		else*/
+    			fpta.setTransitionFrequency(state, nextState.charAt(0)+"", nextState,Double.parseDouble(String.format("%.3f",frequency)));
     	}
     
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 
-    public void updateTransitionFrequency1(DFFA fpta,Map<String,Double> funcList) {
+    public FPTA updateTransitionFrequency1(DFFA fpta,Map<String,Double> funcList) {
+    	
+    	FPTA res = new FPTA();
+    	/*try {
+    	if(fpta.initialFrequencies.get("")!=0)
+    		res.setInitialFrequency("I", fpta.getInitialFrequencies().get(""));
+    	}
+    	catch(Exception e)
+    	{
+    		
+    	}
+    	try {
+    	if(fpta.initialFrequencies.get("I")!=0)
+    		res.setInitialFrequency("I", fpta.getInitialFrequencies().get("I"));
+    	}
+    	catch(Exception e)
+    	{
+		
+    	}*/
+    	if(fpta.initialFrequencies.get("")!=0)
+    		res.setInitialFrequency("", fpta.getInitialFrequencies().get(""));
+    	
     	for(String s:funcList.keySet())
     	{
-    		if(!s.contains(",O"))
-    		{
-    			//System.out.println(s);
+    		
+    		
+    		
+    		if(s.charAt(0)==',')
+			{
+				s="I"+s;
+			}
+    		if(s.charAt(s.length()-1)==',')
+    			s=s+"I";
     			StringTokenizer st= new StringTokenizer(s,",");
     			String state=st.nextToken();
+    			
     			String symbol = st.nextToken();
     			String nextState=st.nextToken();
+    			
     			double frequency=funcList.get(s);
+    			if(state.compareTo("I")==0)
+    				state="";
+    			if(nextState.compareTo("I")==0)
+    				nextState="";
+    			if(!res.states.contains(state))
+    			{
+    				
+    				res.states.add(state);
+    				res.setFinalFrequency(state, 0.0);
+    			
+    			}
+    			if(!res.states.contains(nextState)&&nextState.compareTo("O")!=0)
+    			{
+    				res.states.add(nextState);
+    				res.setFinalFrequency(nextState, 0.0);
+    			}
+    			if(!res.alphabet.contains(symbol)&&symbol.compareTo("O")!=0)
+    				res.alphabet.add(symbol);
     			//if(state.compareTo("I")==0)
     		//	state="I";
     	//	System.out.println("before change"+state+" "+nextState+" "+fpta.transitionFunction.get(state+nextState.charAt(0)));
-    			fpta.setTransitionFrequency(state, symbol, nextState,Double.parseDouble(String.format("%.3f",frequency)));
-    		}
+    			if(nextState.compareTo("O")!=0)
+    			{
+    				res.setTransitionFunction(state, symbol, nextState);
+    				res.setTransitionFrequency(state, symbol, nextState,Double.parseDouble(String.format("%.3f",frequency)));
+    			}
+    			else
+    			{
+    				res.setFinalFrequency(state,Double.parseDouble(String.format("%.3f",frequency)));
+
+    			}
+    			//System.out.println(state+" -->"+symbol+"--> "+nextState+fpta.transitionFrequencies.get(state).get(symbol).get(nextState));
     	}
-    
+    	return res;
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
     public static void main(String[] args) {
-  /*  	FPTA fpta = new FPTA();
-  /*  	fpta.alphabet = new HashSet<>();
+    	HashMap<String, Double> log = new HashMap<String,Double>() ;
+    	log.put("a", 8.0);
+    	log.put("ab", 2.0);
+    	log.put("bb", 5.0);
+		log.put("b", 3.0);
+		log.put("ba",2.0);
+
+	/*	ALERGIA alergia = new ALERGIA(0.7,11,log,log,2);
+		FPTA fpta = alergia.run();
+		fpta.show(fpta, "ss");*/
+		FPTA fpta1 = new FPTA();
+    	fpta1.alphabet = new HashSet<String>();
+    	fpta1.alphabet.add("a");
+    	fpta1.alphabet.add("b");
+    	fpta1.states = new HashSet<String>();
+    	fpta1.states.add("");
+    	fpta1.states.add("p1");
+    	fpta1.states.add("p2");
+    	fpta1.states.add("p3");
+    	fpta1.finalFrequencies = new HashMap<String, Double>();
+    	fpta1.initialFrequencies = new HashMap<String, Double>();
+    	fpta1.setInitialFrequency("", 20);
+    	fpta1.setFinalFrequency("", 0);
+    	fpta1.setFinalFrequency("p1", 8);
+    	fpta1.setFinalFrequency("p2", 7);
+    	fpta1.setFinalFrequency("p3", 5);
+    	fpta1.setTransitionFunction("", "a", "p1");
+    	fpta1.setTransitionFrequency("", "a", "p1", 10);
+    	fpta1.setTransitionFunction("", "b", "p2");
+     	fpta1.setTransitionFrequency("", "b", "p2", 10);
+    	fpta1.setTransitionFunction("p1", "b", "p2");
+     	fpta1.setTransitionFrequency("p1", "b", "p2", 2);
+    	fpta1.setTransitionFunction("p2", "a", "p1");
+     	fpta1.setTransitionFrequency("p2", "a", "p1", 2);
+    	fpta1.setTransitionFunction("p2", "b", "p3");
+     	fpta1.setTransitionFrequency("p2", "b", "p3", 5);
+     	fpta1.setTransitionFunction("p2", "a", "p2");
+     	fpta1.setTransitionFrequency("p2", "a", "p2", 2);
+     	fpta1.show(fpta1, "fpta1");
+     	FPTA sdag = SDAG.DFFAtoSDAG(fpta1);
+     	FPTA dfg = DFFA.getDFG(sdag);
+     	dfg.showDFG(dfg, "DFG");
+    	PerformanceEstimator PE1 = new PerformanceEstimator(BackGroundType.U);
+	 	HashMap<String,Double> pe1 =PE1.calculatePerformanceDFGMetrics(sdag, log,2);
+	 	System.out.println(pe1);
+    	PerformanceEstimator PE2 = new PerformanceEstimator(BackGroundType.U);
+	 	HashMap<String,Double> pe2 =PE2.calculatePerformanceDFGMetrics(dfg, log,2);
+	 	System.out.println(pe2);
+
+    	PerformanceEstimator PE3 = new PerformanceEstimator(BackGroundType.U);
+	 	HashMap<String,Double> pe3 =PE3.calculatePerformanceMetrics(fpta1, log,2);
+	 	System.out.println(pe3);
+	 	/* 	HashMap<String, Double> log2 = new HashMap<String,Double>() ;
+    	log2.put("a", 4.0);
+		log2.put("aa", 4.0);
+		log2.put("aab",2.0);
+		log2.put("b",10.0);
+		
+  /*   	
+     	FPTA fpta2 = new FPTA();
+    	fpta2.alphabet = new HashSet<String>();
+    	fpta2.alphabet.add("a");
+    	fpta2.alphabet.add("b");
+    	fpta2.states = new HashSet<String>();
+    	fpta2.states.add("");
+    	fpta2.states.add("q1");
+    	fpta2.states.add("q2");
+    	fpta2.states.add("q3");
+    	fpta2.finalFrequencies = new HashMap<String, Double>();
+    	fpta2.initialFrequencies = new HashMap<String, Double>();
+    	fpta2.setInitialFrequency("", 20);
+    	fpta2.setFinalFrequency("", 0);
+    	fpta2.setFinalFrequency("q1", 6);
+    	fpta2.setFinalFrequency("q2", 10);
+    	fpta2.setFinalFrequency("q3", 4);
+    	fpta2.setTransitionFunction("", "a", "q1");
+    	fpta2.setTransitionFrequency("", "a", "q1", 10);
+    	fpta2.setTransitionFunction("", "b", "q2");
+     	fpta2.setTransitionFrequency("", "b", "q2", 10);
+    	fpta2.setTransitionFunction("q1", "a", "q3");
+     	fpta2.setTransitionFrequency("q1", "a", "q3", 6);
+    	fpta2.setTransitionFunction("q3", "b", "q1");
+     	fpta2.setTransitionFrequency("q3", "b", "q1", 2);
+   	FPTA mergedDffa = fpta1;
+	ALERGIA alergia = new ALERGIA(mergedDffa);	
+	alergia.setAlpha(0.1);
+	alergia.setFilterring(30);	
+	alergia.mergeThirdModel(mergedDffa,fpta2);
+	fpta2.show(fpta2, "model2");
+	mergedDffa.show(mergedDffa, "merged");
+	List<String> nodes = ALERGIA.listNonCycle(mergedDffa);
+	HashMap<String, Double> x = new HashMap<String, Double>();
+	double defaultER =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(mergedDffa, log, 2);
+	double defaultER1 =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(mergedDffa, log2, 2);
+System.out.println(defaultER+" "+defaultER1);
+	HashMap<String,Double> o =extractNodeEffects(mergedDffa,log,2);
+	   
+	   
+	   // System.out.println("merged "+i);    	    		
+     	
+     	 HashMap<Integer, Double> clientEr = new HashMap<Integer, Double>();
+	     HashMap<Integer, HashMap<String, Double>> clientErEffects = new HashMap<Integer, HashMap<String,Double>>();
+	     clientErEffects.put(0 ,extractNodeEffects(mergedDffa,log,2));
+	     clientEr.put(0, defaultER);
+		 
+	     clientErEffects.put(1 ,extractNodeEffects(mergedDffa,log2,2));
+	// 	FPTA sdag = SDAG.DFFAtoSDAG(mergedDffa);
+	//     PerformanceEstimator PE1 = new PerformanceEstimator(BackGroundType.U);
+//	 	HashMap<String,Double> pe1 =PE1.calculatePerformanceDFGMetrics(sdag, log,2);
+	 //    PerformanceEstimator PE2 = new PerformanceEstimator(BackGroundType.U);
+	 //	HashMap<String,Double> pe2 =PE2.calculatePerformanceDFGMetrics(sdag, log2,2);
+	//   System.out.println("Client 1-->"+pe1.get("Size"));
+	 ///    System.out.println("Client 1-->"+pe1.get("Entropic Relevance"));
+	 //    System.out.println("Client 2-->"+pe2.get("Size"));
+	 //    System.out.println("Client 2-->"+pe2.get("Entropic Relevance"));
+	    
+	 //    sdag.showDFG(sdag, "sdag");
+//	     clientEr.put(1, defaultER1);
+//	     System.out.println(clientEr);
+//			Set<String> prunedList = SubgraphSolver.solvePruneOptimization(mergedDffa,clientErEffects,clientEr,0.1);
+	//		for(String pnode:prunedList)
+	//			mergedDffa.deleteState(mergedDffa, pnode);
+			
+//		 sdag = SDAG.DFFAtoSDAG(mergedDffa);
+		//pe1 =PE1.calculatePerformanceDFGMetrics(sdag, log,2);
+		//pe2 =PE2.calculatePerformanceDFGMetrics(sdag, log2,2);
+	   // sdag.showDFG(sdag, "sdagafter");
+		 //    System.out.println("Client 1-->"+pe1.get("Size"));
+		  //   System.out.println("Client 1-->"+pe1.get("Entropic Relevance"));
+		  //   System.out.println("Client 2-->"+pe2.get("Size"));
+		 //    System.out.println("Client 2-->"+pe2.get("Entropic Relevance"));
+	     // fpta.show(fpta, "fpta");
+		// fpta1.show(fpta1, "ALERG");
+		// FPTA sdag = SDAG.DFFAtoSDAG(fpta1);
+	//	 sdag.showDFG(sdag, "sdag");
+	//	 FPTA dfg = DFFA.getDFG(sdag);
+	//	 dfg.showDFG(dfg, "dfg");
+	/*	HashMap<String, Double> log1 = new HashMap<String,Double>() ;
+    	log1.put("a", 40.0);
+		log1.put("aa", 50.0);
+		log1.put("aab",10.0);
+		log1.put("b",100.0);*
+		
+    	
+    /*	log.put("aaba", 10.0);
+    	log.put("aabab", 10.0);
+    	log.put("aabaa", 10.0);
+    	log.put("aabb", 10.0);
+    	log.put("aabbc", 10.0);
+    	log.put("aabbcc", 10.0);
+    	log.put("aabbcb", 1.0);
+    	log.put("aa", 10.0);
+    	log.put("a", 10.0);*/
+    /*	FPTA fpta1 = new FPTA();
+    	fpta1.alphabet = new HashSet<String>();
+    	fpta1.alphabet.add("a");
+    	fpta1.alphabet.add("b");
+    	fpta1.states = new HashSet<String>();
+    	fpta1.states.add("");
+    	fpta1.states.add("p1");
+    	fpta1.states.add("p2");
+    	fpta1.states.add("p3");
+    	fpta1.states.add("q3");
+    	fpta1.states.add("q'3");
+    	fpta1.states.add("q'1");
+    	fpta1.states.add("q''1");
+    	fpta1.finalFrequencies = new HashMap<String, Double>();
+    	fpta1.initialFrequencies = new HashMap<String, Double>();
+    	fpta1.setInitialFrequency("", 40);
+    	fpta1.setFinalFrequency("", 0);
+    	fpta1.setFinalFrequency("p1", 15);
+    	fpta1.setFinalFrequency("p2", 15);
+    	fpta1.setFinalFrequency("p3", 5);
+    	fpta1.setFinalFrequency("q3", 3.66);
+    	fpta1.setFinalFrequency("q'1", 0.67);
+    	fpta1.setFinalFrequency("q'3", 0.44);
+    	fpta1.setFinalFrequency("q''1", 0.23);
+    	fpta1.transitionFunction = new HashMap<String, String>();
+    	fpta1.transitionFrequencies = new HashMap<String, Map<String,Map<String,Double>>>();   	
+    	fpta1.setTransitionFunction("", "a", "p1");
+    	fpta1.setTransitionFrequency("", "a", "p1", 20);
+    	fpta1.setTransitionFunction("", "b", "p2");
+     	fpta1.setTransitionFrequency("", "b", "p2", 20);
+    	fpta1.setTransitionFunction("p2", "b", "p3");
+     	fpta1.setTransitionFrequency("p2", "b", "p3", 5);
+    	fpta1.setTransitionFunction("p2", "a", "p1");
+    	fpta1.setTransitionFrequency("p2", "a", "p1", 2);
+    	fpta1.setTransitionFunction("p1", "b", "p2");
+    	fpta1.setTransitionFrequency("p1", "b", "p2", 2);
+    	fpta1.setTransitionFunction("p1", "a", "q3");
+    	fpta1.setTransitionFrequency("p1", "a", "q3", 5);
+    	fpta1.setTransitionFunction("q3", "b", "q'1");
+    	fpta1.setTransitionFrequency("q3", "b", "q'1",1.34);
+    	fpta1.setTransitionFunction("q'1", "a", "q'3");
+    	fpta1.setTransitionFrequency("q'1", "a", "q'3", 0.67);
+    	fpta1.setTransitionFunction("q'3", "b", "q''1");
+    	fpta1.setTransitionFrequency("q'3", "b", "q''1", 0.23);
+    	List<String> nodes = ALERGIA.listNonCycle(fpta1);
+    	EntropicRelevanceCalculator er = new EntropicRelevanceCalculator(BackGroundType.Z);
+    	double defaultER1 =new EntropicRelevanceCalculator(BackGroundType.Z).calculateEntropic(fpta1, log, 2);
+    	double defaultER2 =new EntropicRelevanceCalculator(BackGroundType.Z).calculateEntropic(fpta1, log1, 2);
+    	fpta1.show(fpta1, defaultER1+"----"+defaultER2);
+    	HashMap<String, Double> x = new HashMap<String, Double>();
+    	
+      	for(String node : nodes)
+      	{
+      		//fpta.states.remove(node);
+      		FPTA copy = fpta1.cloneFPTA();   		
+      		copy.deleteState(copy, node);
+      		System.out.println("----------remove "+node);
+      		double dx1 = new EntropicRelevanceCalculator(BackGroundType.Z).calculateEntropic(copy, log, 2);
+      		System.out.println(dx1+" "+defaultER1+" "+node);
+      		x.put(node, dx1-defaultER1);	
+      	
+      		//fpta.states.add(node);
+      	}
+      	System.out.println("*********************************");
+      	HashMap<Integer, HashMap<String, Double>> clientErEffects = new HashMap<Integer, HashMap<String,Double>>();
+      	clientErEffects.put(1, x);
+    	HashMap<Integer, Double> clientEr = new HashMap<Integer, Double>();
+    	clientEr.put(1, defaultER1);
+    	x = new HashMap<String, Double>();
+    	
+      	for(String node : nodes)
+      	{
+      		//fpta.states.remove(node);
+      		FPTA copy = fpta1.cloneFPTA();   		
+      		copy.deleteState(copy, node);
+      		System.out.println("----------remove "+node);
+      		double dx1 = new EntropicRelevanceCalculator(BackGroundType.Z).calculateEntropic(copy, log1, 2);
+      		System.out.println(dx1+" "+defaultER2+" "+node);
+      		x.put(node, dx1-defaultER2);	
+      		
+      		//fpta.states.add(node);
+      	}
+      	clientErEffects.put(2, x);
+    	clientEr.put(2, defaultER2);
+    	FPTA dDFG = SDAG.DFFAtoDDFG(fpta1);
+    	dDFG.show(dDFG, "SDAG");
+    	Set<String> prunedList = SubgraphSolver.solvePruneOptimization(fpta1,clientErEffects,clientEr,0.2);
+    	for(String pnode:prunedList)
+    		fpta1.deleteState(fpta1, pnode);
+    	//defaultER1 =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta1, log, 2);
+    	//defaultER2 =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta1, log1, 2);
+
+    	fpta1.show(fpta1, defaultER1+"--after pruning--"+defaultER2);
+   
+    	/*FPTA fpta = new ALERGIA(0.8, 11,log).run(); 
+    	List<String> nodes = ALERGIA.listNonCycle(fpta);
+    	EntropicRelevanceCalculator er = new EntropicRelevanceCalculator(BackGroundType.U);
+      	double defaultER =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta, log, 3);
+      	HashMap<Integer, HashMap<String, Double>> clientErEffects = new HashMap<Integer, HashMap<String,Double>>();
+    	HashMap<String, Double> x = new HashMap<String, Double>();
+    	
+      	for(String node : nodes)
+      	{
+      		//fpta.states.remove(node);
+      		FPTA copy = fpta.cloneFPTA();   		
+      		copy.deleteState(copy, node);
+      		double dx1 = new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(copy, log, 3);
+       
+      		x.put(node, dx1-defaultER);	
+      		System.out.println(node+" "+dx1+" "+defaultER);
+      		//fpta.states.add(node);
+      	}
+      	clientErEffects.put(1, x);
+    	HashMap<Integer, Double> clientEr = new HashMap<Integer, Double>();
+    	clientEr.put(1, defaultER);
+    	System.out.println(x);
+    	double tau = 2;
+    	System.out.println(defaultER* tau);
+    	fpta.show(fpta, "before pruning");
+    	Set<String> prunedList = SubgraphSolver.solvePruneOptimization(fpta,clientErEffects,clientEr,tau);
+    	for(String pnode:prunedList)
+    		fpta.deleteState(fpta, pnode);
+    	fpta.show(fpta, "after pruning");
+    	double defaultER1 =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta, log, 3);
+    	System.out.println(defaultER+" "+defaultER1);
+    //	FPTA sdag = SDAG.DFFAtoDDFG(fpta); 
+    //	sdag.show(sdag, "SDAG");
+    	/*FPTA fpta = new FPTA();
+    	fpta.alphabet = new HashSet<>();
     	fpta.alphabet.add("a");
     	fpta.alphabet.add("b");
     	fpta.alphabet.add("c");
@@ -1316,7 +1738,7 @@ public class DFFA extends Model{
     	fpta.setTransitionFunction("n5", "c","n4");
     	fpta.setTransitionFrequency("n5", "c", "n4", 1187.4); 	
     	fpta.show(fpta, "first model");
-    	FPTA dffa2=FPTA.firstLevelConversion(fpta);
+   /* 	FPTA dffa2=FPTA.firstLevelConversion(fpta);
 
     	 dffa2.calculateTransitionPercentage(dffa2);
 
@@ -1462,5 +1884,22 @@ public class DFFA extends Model{
      // dffa2.rebalancing1(DFG,"", incomming,visitedList);
       DFG.showDFG(DFG,"DFG Model");*/
     }
+    public static HashMap<String, Double> extractNodeEffects(FPTA fpta,HashMap<String, Double>  eventLog,int actionSize){
+		List<String> nodes = ALERGIA.listNonCycle(fpta);
+		HashMap<String, Double> x = new HashMap<String, Double>();
+		double defaultER =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta, eventLog, actionSize);
+
+		for(String node : nodes)
+      	{
+      		//fpta.states.remove(node);
+      		FPTA copy = fpta.cloneFPTA();   		
+      		copy.deleteState(copy, node);
+      		double dx1 = new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(copy, eventLog, actionSize);
+      		x.put(node, dx1-defaultER);	
+      	//	System.out.println(node+" "+x);
+      		//fpta.states.add(node);
+      	}
+		return x;
+	}
     
 }

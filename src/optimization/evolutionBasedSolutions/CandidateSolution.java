@@ -12,7 +12,7 @@ public class CandidateSolution extends BasicObject{
         Random rand = new Random(System.currentTimeMillis());
         edgeNode = new Optimizer(id,actionSize, eventLog,bkgt);
         // Initialize genes randomly
-        solution[0] = rand.nextDouble(0.1, 0.99);
+        solution[0] = rand.nextDouble(0.000001, 0.99);
         solution[1] = rand.nextDouble(0.1, 1.0);
       
         double random = new Random().nextDouble();

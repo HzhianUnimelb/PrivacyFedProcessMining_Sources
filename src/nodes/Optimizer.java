@@ -1,9 +1,13 @@
 package nodes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import model.*;
 import optimization.DFvMOptimisation;
 import performance.EntropicRelevanceCalculator.BackGroundType;
+import performance.PerformanceAnalyser;
 import performance.PerformanceEstimator;
 import utilities.FrequencyBasedFiltering;
 import utilities.SubgraphSolver;
@@ -12,6 +16,7 @@ import utilities.SubgraphSolver;
 public class Optimizer {
 
 	private FPTA fixFPTA,currentFPTA;
+	public static FPTA entireFPTA;
 	private HashMap<String, Double>  eventLog;
 	private HashMap<String, Double>  filterEventLog;
 	private PerformanceEstimator performanceEstimator;
@@ -26,27 +31,57 @@ public class Optimizer {
 		return actionList;
 	}
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-	 public FPTA runModel(double alpha,double T0,double filteringThreshold,String algorithmName) {
+	 public FPTA runModel(double alpha,double T0,double filteringThreshold,String algorithmName,int actionSize) {
 		 FrequencyBasedFiltering filtering = new FrequencyBasedFiltering();
 		 filterEventLog = FrequencyBasedFiltering.filterEventLog(eventLog, filteringThreshold);		 
 		 fixFPTA = FPTA.constructFPTA(filterEventLog);
 		// fixFPTA.show(fixFPTA, "first model");
-         currentFPTA = new ALERGIA(alpha, T0,filterEventLog).run();     
+         currentFPTA = new ALERGIA(alpha, T0,filterEventLog,eventLog,actionSize).run();     
          return currentFPTA;
 	 }
+	    /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+
+	 public FPTA runModelDFvM(double alpha,double T0,double filteringThreshold) {
+		
+		int size_limit = (int)(filteringThreshold*PerformanceAnalyser.calculateModelSize(entireFPTA));
+		//HashMap<String, Double>  filterLog= DFvMOptimisation.extractFilteredLog(size_limit, eventLog);
+		//System.out.println(DFvMOptimisation.primaryDFvMSize+")"+filteringThreshold+") ("+size_limit+") ("+filterLog.size());
+		FPTA partialModel = SubgraphSolver.extractMaxFrequencySubtree(entireFPTA, size_limit);
+		List<String>rmlist=new ArrayList<String>();
+		HashMap<String, Double>  filterEventLog = new HashMap<String, Double>();
+		filterEventLog.putAll(eventLog);	 
+		for(String s:eventLog.keySet())
+		{
+			double i = FPTA.isTraceCovered(partialModel,s);
+			if(i==0)
+			{
+				rmlist.add(s);
+			}
+		}
+		for(String s:rmlist)
+			filterEventLog.remove(s);
+		if(filterEventLog.size() <1)
+	    	return null;
+		currentFPTA = new ALERGIA(alpha, T0,filterEventLog,eventLog,actionList).run();  
+	    return currentFPTA;
+	 }
+	 public static void extractEntireFPTA(HashMap<String, Double> eventLog) {
+		 System.out.println("extract entire model");
+		 
+		 entireFPTA = FPTA.constructFPTA(eventLog);
+		// entireFPTA.calculateTransitionPercentage(entireFPTA);
+		// System.out.println("end of entire model extracting");
+	 }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+	 
 	public Optimizer(int type,int size,HashMap<String, Double> eventLog,BackGroundType bkgt) {
 		super();
 		this.eventLog = eventLog;
         actionList = size;
 		fixFPTA = FPTA.constructFPTA(eventLog);
-		
-		FPTA x = new DFvMOptimisation().extractSignleModel(eventLog);
-		FPTA subG = SubgraphSolver.solvePFTAStructure(x,50000);
-		x.showDFvM(x, "x");
-		subG.showDFvM(subG, "subG");
-        performanceEstimator = new PerformanceEstimator(fixFPTA, eventLog, actionList,bkgt);
-        
+       performanceEstimator = new PerformanceEstimator(fixFPTA, eventLog, actionList,bkgt);
+		//	performanceEstimator = new PerformanceEstimator(entireFPTA, eventLog, actionList,bkgt);
+      //  fixFPTA.calculateTransitionPercentage(fixFPTA);
        
 	/*	else
 		{

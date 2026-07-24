@@ -1,9 +1,11 @@
 package utilities;
 
+import java.io.File;
 import java.sql.ClientInfoStatus;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,10 +18,13 @@ import java.util.regex.Pattern;
 import javax.crypto.Cipher;
 
 import model.ALERGIA;
+import model.DFFA;
 import model.FPTA;
+import model.SDAG;
 import nodes.ClientOptimiser;
 import performance.EntropicRelevanceCalculator.BackGroundType;
 import performance.PerformanceAnalyser;
+import performance.PerformanceEstimator;
 
 public class AggregatorServer {
 	private List<ClientOptimiser> clients;
@@ -29,7 +34,12 @@ public class AggregatorServer {
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public static void main(String[] args) {
 			// TODO Auto-generated method stub
+    	System.out.println("  ================================================================================\r\n");
+    	System.out.println("Sharing Pearls, Not Pebbles Privacy-Preserving Federated Stochastic Process Discovery via Partial Model Disclosure.\n");
+
 		AggregatorServer.executeFederatedStochasticProcessDiscovery(args);
+		System.out.println("Program terminated"+ new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()));
+
 	}
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public static void executeFederatedStochasticProcessDiscovery(String []args)
@@ -63,6 +73,12 @@ public class AggregatorServer {
 			parms.put("PARETO_LIST_SIZE", "100");
 		if(parms.get("Number of Nodes")==null)
 			parms.put("Number of Nodes", "1");	
+		if(parms.get("tau")==null)
+			parms.put("tau", "0.1");	
+		if(parms.get("epsilon")==null)
+			parms.put("epsilon", "1.0");
+		if(parms.get("cof")==null)
+			parms.put("cof", "0.5");
 		String fileDirectory = parms.get("LOG_DIRECTORY");   
 
 		HashMap<String,Double> Algorithms = new HashMap<String,Double>();
@@ -86,16 +102,63 @@ public class AggregatorServer {
     	int popSize = Integer.parseInt(parms.get("POPULATION"));
     	int timeLimit = Integer.parseInt(parms.get("TIME_LIMITATION"));	
     	int numberOfNodes = Integer.parseInt(parms.get("Number of Nodes"));	
-        LogParser.equallyDivideXesFile(fileDirectory,numberOfNodes);
-
+    	double epsilon = Double.parseDouble(parms.get("epsilon"));	
+      	double cof = 0.9999;/*Integer.parseInt(parms.get("cof"));	*/
+      	try {
+      		LogParser.equallyDivideXesFile(fileDirectory,numberOfNodes);
+      	}
+      	catch(Exception e)
+      	{
+      		System.out.println("Error: Cannot read the XES file");
+      	}
+      	
+      	LateXReportGen  latexGen = new LateXReportGen();
+	    File f = new File(parms.get("LOG_DIRECTORY"));
+	    List<Point1> points = new ArrayList<Point1>(); 
+	    HashMap<String, Double> algo = new HashMap<String, Double>();
 		for(String alg:Algorithms.keySet())
 		{		
 			System.out.println(alg+" started at "+ sdf.format(new Date()));
-			AggregatorServer aggregatorServer = new AggregatorServer(numberOfNodes,maxItr,popSize,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),timeLimit,bkgt,parms.get("Optimal Model"),sizeLimit);		
+			AggregatorServer aggregatorServer = new AggregatorServer(numberOfNodes,maxItr,popSize,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),timeLimit,bkgt,parms.get("Optimal Model"),sizeLimit,cof,points,epsilon);		
 		}
+		algo.put("P2FedGASPD", 1.0);
+		algo.put("FedGASPD", 2.0);
+
+		   List<Point1> DF = new ArrayList<Point1>(); 
+		    List<Point1> OPTFEDDF = new ArrayList<Point1>(); 
+		    List<Point1> FEDDF = new ArrayList<Point1>(); 
+		    for(Point1 p:points)
+		    {
+		    	if(p.name.compareTo("GASPD")==0)
+		    		addPoint(DF,p);
+		    	if(p.name.compareTo("P2FedGASPD")==0)
+		    		addPoint(OPTFEDDF,p);
+		    	if(p.name.compareTo("FedGASPD")==0)
+		    		addPoint(FEDDF,p);
+		    }
+			latexGen.addDFFAlist(OPTFEDDF);
+			latexGen.addDFFAlist(FEDDF);
+			latexGen.addDFFAlist(DF);
+			latexGen.generateReports(f.getName(),algo, parms);
     }
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-	public AggregatorServer(int numberOfNodes,int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit,int x) {
+
+	public static void addPoint(List<Point1>list,Point1 p) {
+		boolean flag=true;
+	    List<Point1> rm = new ArrayList<Point1>();
+	    for(Point1 p1:list)
+	    {
+	    	if(p1.er>=p.er && p1.size>=p.size)
+	    		rm.add(p1);
+	    	if(p.er>=p1.er && p.size>=p1.size)
+	    		flag=false;
+	    }
+	    list.remove(rm);
+	    if(flag)
+	    	list.add(p);
+	}
+	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+	public AggregatorServer(int numberOfNodes,int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit,int x,double cof,double epsilon) {
 		 HashMap<String, Character> globalActions = new 	HashMap<String, Character>();
 		 sdf = new SimpleDateFormat("hh:mm:ss:SSS");
 		 clients = new ArrayList<ClientOptimiser>();
@@ -103,31 +166,35 @@ public class AggregatorServer {
 	     logParser.extractEvent(globalActions);
 	     for(int i=0;i<numberOfNodes;i++)
 	     {
-	    	 clients.add(new ClientOptimiser(i, 0.1, globalActions, iteration, population, optName, ParetoFront, OPTFlag, lower, upper, Frontier_List_Size, symbol, time, seconds, bkgt, optModel, sizeLimit));
+	    	 clients.add(new ClientOptimiser(i, 0.1, globalActions, iteration, population, optName, ParetoFront, OPTFlag, lower, upper, Frontier_List_Size, symbol, time, seconds, bkgt, optModel, sizeLimit,cof,epsilon));
 	     }
+	     
 		compareFedGASPDvsPrivacyFedGASPD();
 	}
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-	public AggregatorServer(int numberOfNodes,int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit) {
-		 HashMap<String, Character> globalActions = new HashMap<String, Character>();
+	public AggregatorServer(int numberOfNodes,int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit,double cof,List<Point1> points,double epsilon) {
+
+		HashMap<String, Character> globalActions = new HashMap<String, Character>();
 		 sdf = new SimpleDateFormat("hh:mm:ss:SSS");
+			System.out.println(" Started at "+ sdf.format(new Date()));
 		 clients = new ArrayList<ClientOptimiser>();
 	     logParser = new LogParser(fileDirectory);
 	     logParser.extractEvent(globalActions);
 	     for(int i=0;i<numberOfNodes;i++)
 	     {
-	    	 clients.add(new ClientOptimiser(i, 0.1, globalActions, iteration, population, optName, ParetoFront, OPTFlag, lower, upper, Frontier_List_Size, symbol, time, seconds, bkgt, optModel, sizeLimit));
+	    	 clients.add(new ClientOptimiser(i, 0.1, globalActions, iteration, population, optName, ParetoFront, OPTFlag, lower, upper, Frontier_List_Size, symbol, time, seconds, bkgt, optModel, sizeLimit,cof,epsilon));
 	     }
 	     retriveOrginalModels();
+	
 	     FPTA aggFPTA=runAlgorithm();
-	     System.out.println("size before "+PerformanceAnalyser.calculateModelSize(aggFPTA));
 	     FPTA compFPTA= compressModels(aggFPTA);
-	     System.out.println("size end "+PerformanceAnalyser.calculateModelSize(compFPTA));
+	    // System.out.println("size end "+PerformanceAnalyser.calculateModelSize(compFPTA));
 
 	     DecimalFormat df = new DecimalFormat("0.000");
 	     double avgEr=0;
 	     double sharingSize=0;
 	     int activeClients=0;
+	     double avgPr=0;
 	     for(ClientOptimiser co:clients)
 	     {
 	    	 if(co.getState())
@@ -135,41 +202,73 @@ public class AggregatorServer {
 	    		 co.setGlobalModel(compFPTA);
 	    		 activeClients++;
 	    		 avgEr+=co.getGlobalModel().getCurrentFitness();
-	    		 System.out.println("Client "+ co.getClientId()+"  Gmodel Er(" +df.format(co.getGlobalModel().getCurrentFitness())+") size of global model("+co.getGlobalModel().getSize()+ ") Lmodel Er("+df.format(co.getOptimiser().getBestFrontier().getFitness()[0])+") Size of Submodel ("+co.getSubgraphSize()+")"+" threshold("+co.getThreshold()/co.getOptimiser().getBestFrontier().getFitness()[1]+"%)"+" orginal size("+co.getOptimiser().getBestFrontier().getFitness()[1]+" --- "+co.getOptimiser().getBestFrontier().getFitness()[1]+")");
 	    		 sharingSize+=co.getThreshold()/co.getOptimiser().getBestFrontier().getFitness()[1];
-				// System.out.println("anonymity-->"+co.calculateAnonymity(compFPTA));
-
+	    		 avgPr+=co.calculateAnonymity(co.getOptimiser().getSubFPTAModel());	
 	    	 }
 	    }
-	     System.out.println("avgER("+avgEr/activeClients+")"+" avg sharing("+sharingSize/clients.size()+")");
-	    getBaseLineAppaorch();
+	    points.add(new Point1(avgEr/activeClients,clients.get(0).getGlobalModel().getSize(),avgPr/activeClients,"P2FedGASPD","p"));	     
+	    LocalDateTime localDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+	    String dateTimeString = localDateTime.format(formatter);
+	    printModels(clients.get(0).getGlobalModel().getFpta(),"P2FedGASPD",dateTimeString);
+	    getBaseLineAppaorch(points,dateTimeString);
+	}
+	public void printModels(FPTA fpta,String solution,String dateTimeString) {
+		
+	    File theDir = new File(dateTimeString+"/"+solution+"/DFFA");
+	    theDir.mkdirs();
+	    theDir = new File(dateTimeString+"/"+solution+"/SDAG");
+	    theDir.mkdirs();
+	    theDir = new File(dateTimeString+"/"+solution+"/DFG");
+	    theDir.mkdirs();
+		LateXReportGenerator lateXReportGenerator = new LateXReportGenerator();
+		File fptaFile = new File(dateTimeString+"/"+solution+"/DFFA/DFFA.dot");
+		lateXReportGenerator.writeDFFAModel(fptaFile, fpta);
+		FPTA sdag = SDAG.DFFAtoSDAG(fpta);
+		File sdagFile = new File(dateTimeString+"/"+solution+"/SDAG/SDAG.dot");
+		lateXReportGenerator.writeSDAGModel(sdagFile, sdag);
+		FPTA dfg = DFFA.getDFG(sdag);
+		File dfgFile = new File(dateTimeString+"/"+solution+"/DFG/DFG.dot");
+		lateXReportGenerator.writeSDAGModel(dfgFile, dfg);
+	
 	}
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-	public void getBaseLineAppaorch() {
+	public void getBaseLineAppaorch(List<Point1> points,String dateTimeString) {
 		
 		List<FPTA> subgraphs= new ArrayList<FPTA>();
+		
 		for(ClientOptimiser co:clients)
-			 subgraphs.add(co.getOptimiser().getBestFrontier().getFpta());
+		{
+			co.getOptimiser().getBestFrontier().getFpta().clearModel(co.getOptimiser().getBestFrontier().getFpta());
+			FPTA temp = new FPTA();
+			co.getOptimiser().getBestFrontier().getFpta().copy(temp);
+			subgraphs.add(temp);
+		}
 		 FPTA aggFPTA = unionModels(subgraphs);
-		 FPTA comFPTA =  compressModels(aggFPTA);
+		 FPTA comFPTA =  /*compressModels(*/aggFPTA;
 	
 		 int index=0;
 		 double avgEr=0;
 		 int activeClient=0;
-		 
+		 double size =0 ;
+		aggFPTA.clearModel(aggFPTA);
+		double asize = PerformanceAnalyser.calculateModelSize(aggFPTA);
+		double avgPr=0;
 		for(ClientOptimiser co:clients)
 		{
-			HashMap<String,Double> res = co.evaluateAggregatedModel(comFPTA);
-			int size = PerformanceAnalyser.calculateModelSize(comFPTA);
-			// comFPTA.show(comFPTA,index+" after"+PerformanceAnalyser.calculateModelSize(comFPTA));
-			//System.out.println("anonymity--> merge all-->"+co.calculateAnonymity(comFPTA));
+			PerformanceEstimator pe = new PerformanceEstimator(BackGroundType.U);
+			HashMap<String,Double> res =pe.calculatePerformanceMetrics(co.getOptimiser().getBestFrontier().getFpta(), co.getEventLog(), activeClient);
+			 co.setGlobalModel(comFPTA);
+			 size = PerformanceAnalyser.calculateModelSize(co.getOptimiser().getBestFrontier().getFpta());
+			 size = PerformanceAnalyser.calculateModelSize(co.getOptimiser().getBestFrontier().getFpta());
 
-			activeClient++;
-				// aggFPTA.show(aggFPTA, ""+res.get("Size"));
-			System.out.println("Client "+(index++) +" Size ("+res.get("Size")+") Er("+res.get("Entropic Relevance")+")"+" real size( "+size+")");
-			avgEr+=res.get("Entropic Relevance");
+			 activeClient++;
+			 avgEr+=co.getGlobalModel().getCurrentFitness();
+			 avgPr+=co.calculateAnonymity(co.getOptimiser().getBestFrontier().getFpta());
 		}
-		System.out.println("ave Er without privacy("+avgEr/activeClient+")");
+	    printModels(clients.get(0).getGlobalModel().getFpta(),"FedGASPD",dateTimeString);
+
+	    points.add(new Point1(avgEr/activeClient,clients.get(0).getGlobalModel().getSize(),avgPr/activeClient, "FedGASPD","f"));	     
 		
 	}
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -177,23 +276,29 @@ public class AggregatorServer {
 	public FPTA runAlgorithm() {
 		 boolean flag=false;
 		 FPTA aggFPTA = null ;
+         System.out.println("Clients started extracting their submodels ... "+ sdf.format(new Date()));
+
 		 while(!flag)
 		 {
 			 retriveSubModels();
 			 List<FPTA> subgraphs= new ArrayList<FPTA>();
+			 
 			 for(ClientOptimiser co:clients)
-				 subgraphs.add(co.getOptimiser().getSubFPTAModel());
+			 {
+				 FPTA fpta = new FPTA();
+				 co.getOptimiser().getSubFPTAModel().copy(fpta);	
+				 subgraphs.add(fpta);
+			 }
+
 			 aggFPTA = unionModels(subgraphs);
 			// aggFPTA.show(aggFPTA, "");
 			 flag=true;
 			 for(ClientOptimiser co : clients)
-			 {
-				 
-				 co.setGlobalModel(aggFPTA);
+			 {			 
+				 co.setGlobalModel(aggFPTA);		
 				 if(!co.isDone())
 					 flag=false;
 			 }
-			 
 		 }
 		 return aggFPTA;
 	//	 System.out.println("before--->"+PerformanceAnalyser.calculateModelSize(aggFPTA));
@@ -214,7 +319,9 @@ public class AggregatorServer {
 		ALERGIA alergia = new ALERGIA(mergedDffa);	
 		alergia.setAlpha(0.1);
 		alergia.setFilterring(30);
-		List<String> list= ALERGIA.getSubRoots(mergedDffa,ALERGIA.listNonCycle1(mergedDffa));
+	
+		List<String> x =ALERGIA.listNonCycle1(mergedDffa);
+		List<String> list= ALERGIA.getSubRoots(mergedDffa,x);
 	//	for(String x:list)
 //		{
 //			System.out.println(list.size()+"-->subT-->"+x);
@@ -256,7 +363,7 @@ public class AggregatorServer {
          while (!executor.isTerminated()) {
 
          }
-         System.out.println("Clients extracted their models ... "+ sdf.format(new Date()));
+        // System.out.println("Clients extracted their models ... "+ sdf.format(new Date()));
       //   unionModels(nodes);
      }
 	 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -285,7 +392,6 @@ public class AggregatorServer {
 	  /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	 	public void retriveSubModels() {
 	 		ExecutorService executor = Executors.newFixedThreadPool(clients.size());
-	        System.out.println("Clients started extracting their submodels ... "+ sdf.format(new Date()));
 	        for (int i = 0; i < clients.size(); i++) {
 	              ClientOptimiser client = clients.get(i);
 	             executor.execute(new Runnable() {
@@ -299,7 +405,6 @@ public class AggregatorServer {
 	         while (!executor.isTerminated()) {
 
 	         }
-	         System.out.println("Clients extracted their models ... "+ sdf.format(new Date()));
 	 	}
 	  /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	  public void compareFedGASPDvsPrivacyFedGASPD() {
@@ -327,7 +432,7 @@ public class AggregatorServer {
 		  }
 		 
 		 
-		  for(double threshold=0.05;threshold<=0.951;threshold+=0.05)
+		  for(double threshold=0.05;threshold<=0.06;threshold+=0.05)
 		  {
 			  double avesubEr=0;
 			  subgraphs= new ArrayList<FPTA>();
@@ -342,12 +447,9 @@ public class AggregatorServer {
 				  HashMap<String,Double> res = co.evaluateAggregatedModel(comFPTA);
 				  avesubEr+=res.get("Entropic Relevance");
 				  avgPSize=res.get("Size");
-				 // System.out.println("anonymity-->"+co.calculateAnonymity(comFPTA));
 			  }			
 			  
-			  System.out.println(threshold+" Erg("+avgEr+") subEr("+avesubEr+")->"+((avesubEr-avgEr)/clients.size())+ "avg size "+avgSize+" pSize "+avgPSize);
 		  }
-		  System.out.println(1.0000000+" Erg("+avgEr+") subEr("+avglast+")->"+((avglast-avgEr)/clients.size()));
 
 		  
 	  }
@@ -416,6 +518,14 @@ public class AggregatorServer {
 	    		}
 	            else if("-non".equals(args[i]) && i + 1 < args.length) {
 	    			parameterizedInput.put("Number of Nodes", args[i+1]);
+	    			i++;
+	    		}
+	            else if("-epsilon".equals(args[i]) && i + 1 < args.length) {
+	    			parameterizedInput.put("epsilon", args[i+1]);
+	    			i++;
+	    		}
+	            else if("-cof".equals(args[i]) && i + 1 < args.length) {
+	    			parameterizedInput.put("cof", args[i+1]);
 	    			i++;
 	    		}
 	        }

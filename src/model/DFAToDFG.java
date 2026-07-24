@@ -31,7 +31,7 @@ class DFA {
             for (Map.Entry<Character, String> entry : transitionFunction.get(state).entrySet()) {
                 System.out.print("[" + entry.getKey() + " -> " + entry.getValue() + "] ");
             }
-            System.out.println();
+           
         }
     }
 }

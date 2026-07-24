@@ -3,9 +3,11 @@ package nodes;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import model.DFFA;
+import model.ALERGIA;
 import model.FPTA;
 import optimization.Optimization;
 import optimization.evolutionBasedSolutions.DifferentialEvolution;
@@ -45,7 +47,7 @@ public class ClientOptimiser {
 
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-	public ClientOptimiser(int clientId,double threshold,HashMap<String, Character> globalActions, int iteration,int population,String optName,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit) {
+	public ClientOptimiser(int clientId,double threshold,HashMap<String, Character> globalActions, int iteration,int population,String optName,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit,double cof,double epsilon) {
 		this.clientId = clientId;
 		this.bkgt = bkgt;
 		this.state=ClientState.Started;
@@ -59,29 +61,29 @@ public class ClientOptimiser {
         eventLog = logParser.extractEvent(localActions);
         this.threshold= 1;
 		if (optName.compareTo("PSO") == 0)
-			optimiser = new PSO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new PSO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("GEN") == 0)
-			optimiser = new Genetic(clientId, iteration, fileDirectory, population, 0.8, 0.0,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new Genetic(clientId, iteration, fileDirectory, population, 0.8, 0.0,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("BEE") == 0) 
-			optimiser = new ACB(clientId, iteration, fileDirectory, population, 5,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new ACB(clientId, iteration, fileDirectory, population, 5,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("DE") == 0)
-			optimiser = new DifferentialEvolution(clientId, iteration, fileDirectory, population, 0.5, 0.9,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new DifferentialEvolution(clientId, iteration, fileDirectory, population, 0.5, 0.9,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("GSA") == 0)
-			optimiser = new GravitationalSearch(clientId, iteration, fileDirectory, population, 100,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new GravitationalSearch(clientId, iteration, fileDirectory, population, 100,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("ACO") == 0)
-			optimiser = new ACO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new ACO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("CS") == 0)
-			optimiser = new CS(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new CS(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("WO") == 0)
-			optimiser = new  WO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new  WO(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("BLH") == 0)
-			optimiser = new  BlackHole(clientId, iteration, fileDirectory, population, 0.1,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new  BlackHole(clientId, iteration, fileDirectory, population, 0.1,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("SOS") == 0)
-			optimiser = new  SOS(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);
+			optimiser = new  SOS(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);
 		else if (optName.compareTo("FA") == 0)
-			optimiser = new  FA(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit);         
+			optimiser = new  FA(clientId, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,globalActions,eventLog,localActions.size(),bkgt,optModel,sizeLimit,cof);         
 		learningRate=0.5;
-		epsilon = 0.5;
+		this.epsilon = epsilon;
 		
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
@@ -90,7 +92,6 @@ public class ClientOptimiser {
 		PerformanceEstimator PE = new PerformanceEstimator(bkgt);	
 		HashMap<String,Double> pesub =PE.calculatePerformanceMetrics(optimiser.getBestFrontier().getFpta(),eventLog ,optimiser.actionSize);
 		orginalSize=pesub.get("Size");
-		System.out.println("orginalSize-->"+orginalSize);
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public HashMap<String,Double> evaluateAggregatedModel(FPTA model){
@@ -101,21 +102,54 @@ public class ClientOptimiser {
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public double calculateAnonymity(FPTA model) {
-		return PerformanceAnalyser.calculateAnonymity(model, eventLog);
+		List<Double> freqList = new ArrayList<Double>();
+		HashMap<String,String>finalStateList=PerformanceAnalyser.getListofFinalState(model,eventLog,freqList);
+		double totTraces = 0;
+		for(String s:eventLog.keySet())
+			totTraces+=eventLog.get(s);
+
+		return PerformanceAnalyser.calculateShannonEntropy(model,finalStateList,eventLog,totTraces);
 	}
+	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+	
 	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 
 	public FPTA extractSubModel() {
 	
 		if(state.compareTo(ClientState.Finished)!=0)
 		{
-			threshold++;
+			threshold+=5;
+			if(optimiser.getBestFrontier().getFitness()[1]<threshold)
+			{
+				threshold=(int) optimiser.getBestFrontier().getFitness()[1];
+				optimiser.setSubFPTAModel(optimiser.getBestFrontier().getFpta());
+				state=ClientState.Finished;
+			}
 			optimiser.setSubFPTAModel(SubgraphSolver.solveDFFAOptimization(optimiser.getBestFrontier().getFpta(),threshold));
 			PerformanceEstimator PE = new PerformanceEstimator(bkgt);	
 			HashMap<String,Double> pesub =PE.calculatePerformanceMetrics(optimiser.getSubFPTAModel(),eventLog ,optimiser.actionSize);
 			subgraphSize=pesub.get("Size");
 		}	
 		return optimiser.getSubFPTAModel();
+	}
+	/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+	public HashMap<String, Double> extractNodeEffects(FPTA fpta){
+		List<String> nodes = ALERGIA.listNonCycle(fpta);
+		HashMap<String, Double> x = new HashMap<String, Double>();
+		double defaultER =new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(fpta, eventLog, optimiser.actionSize);
+
+		for(String node : nodes)
+      	{
+      		//fpta.states.remove(node);
+      		FPTA copy = fpta.cloneFPTA();   		
+      		copy.deleteState(copy, node);
+      		double dx1 = new EntropicRelevanceCalculator(BackGroundType.U).calculateEntropic(copy, eventLog, optimiser.actionSize);
+      		x.put(node, dx1-defaultER);	
+      	//	System.out.println(node+" "+x);
+      		//fpta.states.add(node);
+      	}
+		x.put("DEFAULT", defaultER);	
+		return x;
 	}
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public FPTA extractSubModel(double threshold) {		
@@ -197,11 +231,17 @@ public class ClientOptimiser {
 	 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
 	public void setGlobalModel(FPTA fpta) {
 		this.globalModel.setFpta(fpta);
+	
 		PerformanceEstimator PE = new PerformanceEstimator(bkgt);	
+	
+
 		HashMap<String,Double> pesub =PE.calculatePerformanceMetrics(globalModel.getFpta(),eventLog ,optimiser.actionSize);
+	
+
 		globalModel.setCurrentFitness(pesub.get("Entropic Relevance"));
 		globalModel.setSize(pesub.get("Size"));
-		
+	
+
 		
 		if(state.compareTo(ClientState.Finished)!=0 && state.compareTo(ClientState.Invalid)!=0 )
 		{
@@ -218,7 +258,6 @@ public class ClientOptimiser {
 			//threshold+=0.1;
 	//		else
 	//			state = ClientState.Finished; 
-			
 			if(threshold>=optimiser.getBestFrontier().getFitness()[1])				
 				state = ClientState.Finished; 
 		//	else

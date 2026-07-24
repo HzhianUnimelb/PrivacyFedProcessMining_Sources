@@ -1,0 +1,2760 @@
+*****************GSA started*******************
+Extracting Log Started... 11:43:17:108
+chunk_0.xes
+Loaded XES extension 'http://www.xes-standard.org/meta_3TU.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_completeness.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_concept.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_general.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_life.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_org.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_time.xesext' from cache
+initial--> 0.9468778004522201 0.2008587278606609 0.04444051733311467
+initial--> 0.7621145197976217 0.17354826650357658 0.032420651252480726
+initial--> 0.6640498311980435 0.6537988621363403 0.06922109684709649
+initial--> 0.11057913453059048 0.9680608156093932 0.05141322724404066
+initial--> 0.8311616157225696 0.8843453957040369 0.06027201981299043
+initial--> 0.9446136857615951 0.6514538371126956 0.018146789501606492
+initial--> 0.9668576295215441 0.3818847915124678 0.009221323085120789
+initial--> 0.8939867991785909 0.3494694004308678 0.029116937755438388
+initial--> 0.8517312761600077 0.2235611079929865 0.04946997589102956
+initial--> 0.13984225527005684 0.43521977167842474 0.04595924812875883
+initial--> 0.4407334278347682 0.5593288869132572 0.022064223721195667
+initial--> 0.39855763259344734 0.28252610871900574 0.07636376481878601
+initial--> 0.9701296274937944 0.9806548968863337 0.07620713703380326
+initial--> 0.6717865714349562 0.8124762532816666 0.06221111669225158
+initial--> 0.38469142365503484 0.9490615693548804 0.05203044491649363
+initial--> 0.47518199993874966 0.5637896668876998 0.029312148477644188
+initial--> 0.45277861388630924 0.24514772378676808 0.04934460779293981
+initial--> 0.6714708326924309 0.19149942453723137 0.023604265566794475
+initial--> 0.6249897640030059 0.9430003227486121 0.06179260669191056
+initial--> 0.641416778913389 0.6741758355402035 0.04195153179839682
+initial--> 0.8212020413459491 0.38704972807443105 0.040317381541601256
+initial--> 0.7334221962271233 0.9819081864826863 0.03221680458664072
+initial--> 0.9635154341336378 0.7103445780825229 0.041826491873633104
+initial--> 0.8355529616809848 0.8160374380235679 0.06768804890130997
+initial--> 0.785407627390113 0.16413104979293497 0.06351638153563516
+chunk_0.xes
+number of actions:18
+total traces: 451359
+number of unique traces: 3929
+maximum length of traces:217
+average length of trace:3.6141430657193054
+Extracting Models Started... 11:44:20:883
+4 round--->0
+4 round--->1
+4 round--->2
+4 round--->3
+4 round--->4
+4 round--->5
+4 round--->6
+4 round--->7
+4 round--->8
+4 round--->9
+4 round--->10
+4 round--->11
+4 round--->12
+4 round--->13
+4 round--->14
+4 round--->15
+4 round--->16
+4 round--->17
+4 round--->18
+4 round--->19
+4 round--->20
+4 round--->21
+4 round--->22
+4 round--->23
+4 round--->24
+4 round--->25
+4 round--->26
+4 round--->27
+4 round--->28
+4 round--->29
+4 round--->30
+4 round--->31
+4 round--->32
+4 round--->33
+4 round--->34
+4 round--->35
+4 round--->36
+4 round--->37
+4 round--->38
+4 round--->39
+4 round--->40
+4 round--->41
+4 round--->42
+4 round--->43
+4 round--->44
+4 round--->45
+4 round--->46
+4 round--->47
+4 round--->48
+4 round--->49
+4 round--->50
+4 round--->51
+4 round--->52
+4 round--->53
+4 round--->54
+4 round--->55
+4 round--->56
+4 round--->57
+4 round--->58
+4 round--->59
+4 round--->60
+4 round--->61
+4 round--->62
+4 round--->63
+4 round--->64
+4 round--->65
+4 round--->66
+4 round--->67
+4 round--->68
+4 round--->69
+4 round--->70
+4 round--->71
+4 round--->72
+4 round--->73
+4 round--->74
+4 round--->75
+4 round--->76
+4 round--->77
+4 round--->78
+4 round--->79
+4 round--->80
+4 round--->81
+4 round--->82
+4 round--->83
+4 round--->84
+4 round--->85
+4 round--->86
+4 round--->87
+4 round--->88
+4 round--->89
+4 round--->90
+4 round--->91
+4 round--->92
+4 round--->93
+4 round--->94
+4 round--->95
+4 round--->96
+4 round--->97
+4 round--->98
+4 round--->99
+4 round--->100
+4 round--->101
+4 round--->102
+4 round--->103
+4 round--->104
+4 round--->105
+4 round--->106
+4 round--->107
+4 round--->108
+4 round--->109
+4 round--->110
+4 round--->111
+4 round--->112
+4 round--->113
+4 round--->114
+4 round--->115
+4 round--->116
+4 round--->117
+4 round--->118
+4 round--->119
+4 round--->120
+4 round--->121
+4 round--->122
+4 round--->123
+4 round--->124
+4 round--->125
+4 round--->126
+4 round--->127
+4 round--->128
+4 round--->129
+4 round--->130
+4 round--->131
+4 round--->132
+4 round--->133
+4 round--->134
+4 round--->135
+4 round--->136
+4 round--->137
+4 round--->138
+4 round--->139
+4 round--->140
+4 round--->141
+4 round--->142
+4 round--->143
+4 round--->144
+4 round--->145
+4 round--->146
+4 round--->147
+4 round--->148
+4 round--->149
+4 round--->150
+4 round--->151
+4 round--->152
+4 round--->153
+4 round--->154
+4 round--->155
+4 round--->156
+4 round--->157
+4 round--->158
+4 round--->159
+4 round--->160
+4 round--->161
+4 round--->162
+4 round--->163
+4 round--->164
+4 round--->165
+4 round--->166
+4 round--->167
+4 round--->168
+4 round--->169
+4 round--->170
+4 round--->171
+4 round--->172
+4 round--->173
+4 round--->174
+4 round--->175
+4 round--->176
+4 round--->177
+4 round--->178
+4 round--->179
+4 round--->180
+4 round--->181
+4 round--->182
+4 round--->183
+4 round--->184
+4 round--->185
+4 round--->186
+4 round--->187
+4 round--->188
+4 round--->189
+4 round--->190
+4 round--->191
+4 round--->192
+4 round--->193
+4 round--->194
+4 round--->195
+4 round--->196
+4 round--->197
+4 round--->198
+4 round--->199
+4 round--->200
+4 round--->201
+4 round--->202
+4 round--->203
+4 round--->204
+4 round--->205
+4 round--->206
+4 round--->207
+4 round--->208
+4 round--->209
+4 round--->210
+4 round--->211
+4 round--->212
+4 round--->213
+4 round--->214
+4 round--->215
+4 round--->216
+4 round--->217
+4 round--->218
+4 round--->219
+4 round--->220
+4 round--->221
+4 round--->222
+4 round--->223
+4 round--->224
+4 round--->225
+4 round--->226
+4 round--->227
+4 round--->228
+4 round--->229
+4 round--->230
+4 round--->231
+4 round--->232
+4 round--->233
+4 round--->234
+4 round--->235
+4 round--->236
+4 round--->237
+4 round--->238
+4 round--->239
+4 round--->240
+4 round--->241
+4 round--->242
+4 round--->243
+4 round--->244
+4 round--->245
+4 round--->246
+4 round--->247
+4 round--->248
+4 round--->249
+4 round--->250
+4 round--->251
+4 round--->252
+4 round--->253
+4 round--->254
+4 round--->255
+4 round--->256
+4 round--->257
+4 round--->258
+4 round--->259
+4 round--->260
+4 round--->261
+4 round--->262
+4 round--->263
+4 round--->264
+4 round--->265
+4 round--->266
+4 round--->267
+4 round--->268
+4 round--->269
+4 round--->270
+4 round--->271
+4 round--->272
+4 round--->273
+4 round--->274
+4 round--->275
+4 round--->276
+4 round--->277
+4 round--->278
+4 round--->279
+4 round--->280
+4 round--->281
+4 round--->282
+4 round--->283
+4 round--->284
+4 round--->285
+4 round--->286
+4 round--->287
+4 round--->288
+4 round--->289
+4 round--->290
+4 round--->291
+4 round--->292
+4 round--->293
+4 round--->294
+4 round--->295
+4 round--->296
+4 round--->297
+4 round--->298
+4 round--->299
+4 round--->300
+4 round--->301
+4 round--->302
+4 round--->303
+4 round--->304
+4 round--->305
+4 round--->306
+4 round--->307
+4 round--->308
+4 round--->309
+4 round--->310
+4 round--->311
+4 round--->312
+4 round--->313
+4 round--->314
+4 round--->315
+4 round--->316
+4 round--->317
+4 round--->318
+4 round--->319
+4 round--->320
+4 round--->321
+4 round--->322
+4 round--->323
+4 round--->324
+4 round--->325
+4 round--->326
+4 round--->327
+4 round--->328
+4 round--->329
+4 round--->330
+4 round--->331
+4 round--->332
+4 round--->333
+4 round--->334
+4 round--->335
+4 round--->336
+4 round--->337
+4 round--->338
+4 round--->339
+4 round--->340
+4 round--->341
+4 round--->342
+4 round--->343
+4 round--->344
+4 round--->345
+4 round--->346
+4 round--->347
+4 round--->348
+4 round--->349
+4 round--->350
+4 round--->351
+4 round--->352
+4 round--->353
+4 round--->354
+4 round--->355
+4 round--->356
+4 round--->357
+4 round--->358
+4 round--->359
+4 round--->360
+4 round--->361
+4 round--->362
+4 round--->363
+4 round--->364
+4 round--->365
+4 round--->366
+4 round--->367
+4 round--->368
+4 round--->369
+4 round--->370
+4 round--->371
+4 round--->372
+4 round--->373
+4 round--->374
+4 round--->375
+4 round--->376
+4 round--->377
+4 round--->378
+4 round--->379
+4 round--->380
+4 round--->381
+4 round--->382
+4 round--->383
+4 round--->384
+4 round--->385
+4 round--->386
+4 round--->387
+4 round--->388
+4 round--->389
+4 round--->390
+4 round--->391
+4 round--->392
+4 round--->393
+4 round--->394
+4 round--->395
+4 round--->396
+4 round--->397
+4 round--->398
+4 round--->399
+4 round--->400
+4 round--->401
+4 round--->402
+4 round--->403
+4 round--->404
+4 round--->405
+4 round--->406
+4 round--->407
+4 round--->408
+4 round--->409
+4 round--->410
+4 round--->411
+4 round--->412
+4 round--->413
+4 round--->414
+4 round--->415
+4 round--->416
+4 round--->417
+4 round--->418
+4 round--->419
+4 round--->420
+4 round--->421
+4 round--->422
+4 round--->423
+4 round--->424
+4 round--->425
+4 round--->426
+4 round--->427
+4 round--->428
+4 round--->429
+4 round--->430
+4 round--->431
+4 round--->432
+4 round--->433
+4 round--->434
+4 round--->435
+4 round--->436
+4 round--->437
+4 round--->438
+4 round--->439
+4 round--->440
+4 round--->441
+4 round--->442
+4 round--->443
+4 round--->444
+4 round--->445
+4 round--->446
+4 round--->447
+4 round--->448
+4 round--->449
+4 round--->450
+4 round--->451
+4 round--->452
+4 round--->453
+4 round--->454
+4 round--->455
+4 round--->456
+4 round--->457
+4 round--->458
+4 round--->459
+4 round--->460
+4 round--->461
+4 round--->462
+4 round--->463
+4 round--->464
+4 round--->465
+4 round--->466
+4 round--->467
+4 round--->468
+4 round--->469
+4 round--->470
+4 round--->471
+4 round--->472
+4 round--->473
+4 round--->474
+4 round--->475
+4 round--->476
+4 round--->477
+4 round--->478
+4 round--->479
+4 round--->480
+4 round--->481
+4 round--->482
+4 round--->483
+4 round--->484
+4 round--->485
+4 round--->486
+4 round--->487
+4 round--->488
+4 round--->489
+4 round--->490
+4 round--->491
+4 round--->492
+4 round--->493
+4 round--->494
+4 round--->495
+4 round--->496
+4 round--->497
+4 round--->498
+4 round--->499
+Finished all threads
+Models Extracted... 12:48:25:837
+Performance Analysing Started... 12:48:25:838
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 262
+fitness1 is: 98.87096524052916
+ER is: 11.07602842650258
+Performance Analysing Started... 12:48:25:912
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 343
+fitness1 is: 98.79718804765164
+ER is: 11.011329944288677
+Performance Analysing Started... 12:48:25:964
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 360
+fitness1 is: 98.72584793922354
+ER is: 10.935820791236043
+Performance Analysing Started... 12:48:26:014
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 278
+fitness1 is: 98.84659439603509
+ER is: 11.051020416945658
+*****************GSA Ended*******************
+*****************PSO started*******************
+Extracting Log Started... 12:48:26:113
+chunk_0.xes
+Extracting Models Started... 12:49:11:143
+3 round--->0
+5 round--->1
+8 round--->2
+8 round--->3
+8 round--->4
+9 round--->5
+10 round--->6
+6 round--->7
+7 round--->8
+8 round--->9
+8 round--->10
+9 round--->11
+10 round--->12
+10 round--->13
+10 round--->14
+10 round--->15
+10 round--->16
+10 round--->17
+10 round--->18
+10 round--->19
+10 round--->20
+10 round--->21
+10 round--->22
+10 round--->23
+10 round--->24
+10 round--->25
+10 round--->26
+10 round--->27
+8 round--->28
+9 round--->29
+9 round--->30
+8 round--->31
+9 round--->32
+8 round--->33
+8 round--->34
+8 round--->35
+9 round--->36
+8 round--->37
+9 round--->38
+9 round--->39
+10 round--->40
+10 round--->41
+10 round--->42
+10 round--->43
+10 round--->44
+10 round--->45
+10 round--->46
+10 round--->47
+10 round--->48
+10 round--->49
+10 round--->50
+10 round--->51
+10 round--->52
+10 round--->53
+10 round--->54
+10 round--->55
+10 round--->56
+10 round--->57
+10 round--->58
+10 round--->59
+10 round--->60
+10 round--->61
+8 round--->62
+9 round--->63
+9 round--->64
+9 round--->65
+9 round--->66
+10 round--->67
+10 round--->68
+10 round--->69
+10 round--->70
+10 round--->71
+10 round--->72
+10 round--->73
+10 round--->74
+10 round--->75
+10 round--->76
+10 round--->77
+10 round--->78
+10 round--->79
+10 round--->80
+10 round--->81
+10 round--->82
+10 round--->83
+10 round--->84
+10 round--->85
+7 round--->86
+7 round--->87
+7 round--->88
+8 round--->89
+7 round--->90
+7 round--->91
+7 round--->92
+7 round--->93
+7 round--->94
+7 round--->95
+8 round--->96
+9 round--->97
+9 round--->98
+10 round--->99
+10 round--->100
+10 round--->101
+10 round--->102
+10 round--->103
+10 round--->104
+10 round--->105
+9 round--->106
+9 round--->107
+9 round--->108
+9 round--->109
+9 round--->110
+9 round--->111
+9 round--->112
+7 round--->113
+7 round--->114
+7 round--->115
+9 round--->116
+9 round--->117
+9 round--->118
+9 round--->119
+9 round--->120
+10 round--->121
+10 round--->122
+10 round--->123
+10 round--->124
+10 round--->125
+10 round--->126
+10 round--->127
+10 round--->128
+10 round--->129
+10 round--->130
+9 round--->131
+9 round--->132
+10 round--->133
+10 round--->134
+10 round--->135
+10 round--->136
+10 round--->137
+10 round--->138
+10 round--->139
+10 round--->140
+10 round--->141
+10 round--->142
+10 round--->143
+10 round--->144
+10 round--->145
+10 round--->146
+10 round--->147
+10 round--->148
+10 round--->149
+10 round--->150
+7 round--->151
+7 round--->152
+8 round--->153
+9 round--->154
+9 round--->155
+9 round--->156
+9 round--->157
+9 round--->158
+9 round--->159
+10 round--->160
+10 round--->161
+10 round--->162
+10 round--->163
+10 round--->164
+10 round--->165
+10 round--->166
+10 round--->167
+10 round--->168
+10 round--->169
+10 round--->170
+10 round--->171
+10 round--->172
+10 round--->173
+10 round--->174
+10 round--->175
+10 round--->176
+10 round--->177
+10 round--->178
+10 round--->179
+10 round--->180
+10 round--->181
+10 round--->182
+10 round--->183
+10 round--->184
+10 round--->185
+10 round--->186
+10 round--->187
+10 round--->188
+10 round--->189
+10 round--->190
+10 round--->191
+10 round--->192
+10 round--->193
+10 round--->194
+10 round--->195
+10 round--->196
+10 round--->197
+10 round--->198
+10 round--->199
+10 round--->200
+10 round--->201
+10 round--->202
+10 round--->203
+10 round--->204
+10 round--->205
+10 round--->206
+10 round--->207
+10 round--->208
+10 round--->209
+10 round--->210
+10 round--->211
+8 round--->212
+9 round--->213
+9 round--->214
+10 round--->215
+6 round--->216
+6 round--->217
+7 round--->218
+8 round--->219
+6 round--->220
+6 round--->221
+6 round--->222
+6 round--->223
+6 round--->224
+6 round--->225
+6 round--->226
+6 round--->227
+6 round--->228
+6 round--->229
+6 round--->230
+6 round--->231
+6 round--->232
+6 round--->233
+6 round--->234
+6 round--->235
+6 round--->236
+6 round--->237
+6 round--->238
+6 round--->239
+6 round--->240
+6 round--->241
+7 round--->242
+7 round--->243
+7 round--->244
+7 round--->245
+7 round--->246
+7 round--->247
+7 round--->248
+7 round--->249
+7 round--->250
+7 round--->251
+7 round--->252
+7 round--->253
+7 round--->254
+8 round--->255
+8 round--->256
+8 round--->257
+8 round--->258
+9 round--->259
+9 round--->260
+9 round--->261
+9 round--->262
+9 round--->263
+9 round--->264
+9 round--->265
+9 round--->266
+9 round--->267
+9 round--->268
+9 round--->269
+10 round--->270
+10 round--->271
+9 round--->272
+9 round--->273
+9 round--->274
+9 round--->275
+9 round--->276
+9 round--->277
+9 round--->278
+9 round--->279
+9 round--->280
+9 round--->281
+9 round--->282
+9 round--->283
+9 round--->284
+9 round--->285
+9 round--->286
+9 round--->287
+9 round--->288
+9 round--->289
+9 round--->290
+9 round--->291
+9 round--->292
+9 round--->293
+9 round--->294
+9 round--->295
+9 round--->296
+9 round--->297
+9 round--->298
+9 round--->299
+9 round--->300
+9 round--->301
+9 round--->302
+9 round--->303
+9 round--->304
+9 round--->305
+9 round--->306
+9 round--->307
+9 round--->308
+9 round--->309
+9 round--->310
+9 round--->311
+9 round--->312
+9 round--->313
+9 round--->314
+9 round--->315
+9 round--->316
+9 round--->317
+9 round--->318
+9 round--->319
+9 round--->320
+9 round--->321
+9 round--->322
+9 round--->323
+10 round--->324
+10 round--->325
+10 round--->326
+10 round--->327
+10 round--->328
+10 round--->329
+10 round--->330
+10 round--->331
+10 round--->332
+10 round--->333
+10 round--->334
+10 round--->335
+10 round--->336
+10 round--->337
+10 round--->338
+10 round--->339
+10 round--->340
+10 round--->341
+10 round--->342
+10 round--->343
+10 round--->344
+10 round--->345
+10 round--->346
+10 round--->347
+10 round--->348
+10 round--->349
+10 round--->350
+10 round--->351
+10 round--->352
+10 round--->353
+10 round--->354
+10 round--->355
+10 round--->356
+10 round--->357
+10 round--->358
+10 round--->359
+10 round--->360
+10 round--->361
+10 round--->362
+10 round--->363
+10 round--->364
+10 round--->365
+10 round--->366
+10 round--->367
+10 round--->368
+10 round--->369
+10 round--->370
+10 round--->371
+10 round--->372
+10 round--->373
+10 round--->374
+10 round--->375
+10 round--->376
+10 round--->377
+10 round--->378
+10 round--->379
+10 round--->380
+10 round--->381
+10 round--->382
+10 round--->383
+10 round--->384
+10 round--->385
+10 round--->386
+10 round--->387
+10 round--->388
+10 round--->389
+10 round--->390
+10 round--->391
+10 round--->392
+10 round--->393
+10 round--->394
+10 round--->395
+10 round--->396
+10 round--->397
+10 round--->398
+10 round--->399
+10 round--->400
+10 round--->401
+10 round--->402
+10 round--->403
+10 round--->404
+10 round--->405
+10 round--->406
+10 round--->407
+10 round--->408
+10 round--->409
+10 round--->410
+10 round--->411
+10 round--->412
+10 round--->413
+10 round--->414
+10 round--->415
+10 round--->416
+10 round--->417
+10 round--->418
+10 round--->419
+10 round--->420
+10 round--->421
+10 round--->422
+10 round--->423
+10 round--->424
+10 round--->425
+10 round--->426
+10 round--->427
+10 round--->428
+10 round--->429
+10 round--->430
+10 round--->431
+10 round--->432
+10 round--->433
+10 round--->434
+10 round--->435
+10 round--->436
+10 round--->437
+10 round--->438
+10 round--->439
+10 round--->440
+10 round--->441
+10 round--->442
+10 round--->443
+10 round--->444
+10 round--->445
+10 round--->446
+10 round--->447
+10 round--->448
+10 round--->449
+10 round--->450
+10 round--->451
+9 round--->452
+9 round--->453
+10 round--->454
+10 round--->455
+10 round--->456
+10 round--->457
+10 round--->458
+10 round--->459
+10 round--->460
+10 round--->461
+9 round--->462
+10 round--->463
+10 round--->464
+10 round--->465
+9 round--->466
+9 round--->467
+9 round--->468
+9 round--->469
+9 round--->470
+9 round--->471
+9 round--->472
+9 round--->473
+9 round--->474
+10 round--->475
+10 round--->476
+10 round--->477
+10 round--->478
+10 round--->479
+10 round--->480
+10 round--->481
+10 round--->482
+10 round--->483
+10 round--->484
+10 round--->485
+10 round--->486
+10 round--->487
+10 round--->488
+10 round--->489
+10 round--->490
+10 round--->491
+10 round--->492
+10 round--->493
+10 round--->494
+10 round--->495
+10 round--->496
+10 round--->497
+10 round--->498
+10 round--->499
+Finished all threads
+Models Extracted... 02:01:02:912
+Performance Analysing Started... 02:01:02:914
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 373
+fitness1 is: 98.8514685649339
+ER is: 11.071581084682315
+Performance Analysing Started... 02:01:02:938
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 236
+fitness1 is: 98.94540709280196
+ER is: 11.162804949637547
+Performance Analysing Started... 02:01:02:957
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 312
+fitness1 is: 98.88824638480678
+ER is: 11.114921604615253
+Performance Analysing Started... 02:01:02:976
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 14
+fitness1 is: 70.91140311813876
+ER is: 11.476393593387314
+Performance Analysing Started... 02:01:02:983
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 398
+fitness1 is: 98.78899058177637
+ER is: 11.007567468497719
+Performance Analysing Started... 02:01:03:050
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 309
+fitness1 is: 98.8948929787597
+ER is: 11.121533789438823
+Performance Analysing Started... 02:01:03:069
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 380
+fitness1 is: 98.79142766622577
+ER is: 11.009412101786967
+Performance Analysing Started... 02:01:03:087
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 351
+fitness1 is: 98.87030058113386
+ER is: 11.09049762871807
+Performance Analysing Started... 02:01:03:105
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 11
+fitness1 is: 56.38881688412106
+ER is: 13.588226764059966
+Performance Analysing Started... 02:01:03:111
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 13
+fitness1 is: 64.1912535254642
+ER is: 11.78937357945982
+*****************PSO Ended*******************
+*****************GEN started*******************
+Extracting Log Started... 02:01:03:119
+chunk_0.xes
+Extracting Models Started... 02:01:13:730
+started ... 
+round-->0
+4<----------------- size
+round-->1
+4<----------------- size
+round-->2
+4<----------------- size
+round-->3
+4<----------------- size
+round-->4
+5<----------------- size
+round-->5
+4<----------------- size
+round-->6
+4<----------------- size
+round-->7
+4<----------------- size
+round-->8
+4<----------------- size
+round-->9
+5<----------------- size
+round-->10
+5<----------------- size
+round-->11
+5<----------------- size
+round-->12
+5<----------------- size
+round-->13
+6<----------------- size
+round-->14
+6<----------------- size
+round-->15
+6<----------------- size
+round-->16
+6<----------------- size
+round-->17
+6<----------------- size
+round-->18
+6<----------------- size
+round-->19
+7<----------------- size
+round-->20
+7<----------------- size
+round-->21
+7<----------------- size
+round-->22
+8<----------------- size
+round-->23
+8<----------------- size
+round-->24
+9<----------------- size
+round-->25
+9<----------------- size
+round-->26
+9<----------------- size
+round-->27
+9<----------------- size
+round-->28
+9<----------------- size
+round-->29
+9<----------------- size
+round-->30
+9<----------------- size
+round-->31
+9<----------------- size
+round-->32
+4<----------------- size
+round-->33
+4<----------------- size
+round-->34
+6<----------------- size
+round-->35
+6<----------------- size
+round-->36
+6<----------------- size
+round-->37
+6<----------------- size
+round-->38
+6<----------------- size
+round-->39
+6<----------------- size
+round-->40
+6<----------------- size
+round-->41
+6<----------------- size
+round-->42
+7<----------------- size
+round-->43
+7<----------------- size
+round-->44
+8<----------------- size
+round-->45
+8<----------------- size
+round-->46
+9<----------------- size
+round-->47
+9<----------------- size
+round-->48
+8<----------------- size
+round-->49
+8<----------------- size
+round-->50
+9<----------------- size
+round-->51
+9<----------------- size
+round-->52
+8<----------------- size
+round-->53
+8<----------------- size
+round-->54
+8<----------------- size
+round-->55
+9<----------------- size
+round-->56
+9<----------------- size
+round-->57
+9<----------------- size
+round-->58
+10<----------------- size
+round-->59
+10<----------------- size
+round-->60
+10<----------------- size
+round-->61
+10<----------------- size
+round-->62
+10<----------------- size
+round-->63
+10<----------------- size
+round-->64
+8<----------------- size
+round-->65
+8<----------------- size
+round-->66
+8<----------------- size
+round-->67
+8<----------------- size
+round-->68
+8<----------------- size
+round-->69
+8<----------------- size
+round-->70
+8<----------------- size
+round-->71
+8<----------------- size
+round-->72
+8<----------------- size
+round-->73
+9<----------------- size
+round-->74
+10<----------------- size
+round-->75
+10<----------------- size
+round-->76
+10<----------------- size
+round-->77
+9<----------------- size
+round-->78
+9<----------------- size
+round-->79
+9<----------------- size
+round-->80
+9<----------------- size
+round-->81
+10<----------------- size
+round-->82
+10<----------------- size
+round-->83
+10<----------------- size
+round-->84
+9<----------------- size
+round-->85
+9<----------------- size
+round-->86
+9<----------------- size
+round-->87
+8<----------------- size
+round-->88
+6<----------------- size
+round-->89
+7<----------------- size
+round-->90
+8<----------------- size
+round-->91
+7<----------------- size
+round-->92
+9<----------------- size
+round-->93
+9<----------------- size
+round-->94
+9<----------------- size
+round-->95
+9<----------------- size
+round-->96
+9<----------------- size
+round-->97
+9<----------------- size
+round-->98
+9<----------------- size
+round-->99
+9<----------------- size
+round-->100
+9<----------------- size
+round-->101
+9<----------------- size
+round-->102
+8<----------------- size
+round-->103
+8<----------------- size
+round-->104
+8<----------------- size
+round-->105
+8<----------------- size
+round-->106
+9<----------------- size
+round-->107
+9<----------------- size
+round-->108
+9<----------------- size
+round-->109
+10<----------------- size
+round-->110
+10<----------------- size
+round-->111
+10<----------------- size
+round-->112
+10<----------------- size
+round-->113
+10<----------------- size
+round-->114
+10<----------------- size
+round-->115
+10<----------------- size
+round-->116
+10<----------------- size
+round-->117
+10<----------------- size
+round-->118
+10<----------------- size
+round-->119
+7<----------------- size
+round-->120
+7<----------------- size
+round-->121
+7<----------------- size
+round-->122
+7<----------------- size
+round-->123
+7<----------------- size
+round-->124
+7<----------------- size
+round-->125
+7<----------------- size
+round-->126
+7<----------------- size
+round-->127
+7<----------------- size
+round-->128
+8<----------------- size
+round-->129
+9<----------------- size
+round-->130
+9<----------------- size
+round-->131
+8<----------------- size
+round-->132
+8<----------------- size
+round-->133
+8<----------------- size
+round-->134
+8<----------------- size
+round-->135
+8<----------------- size
+round-->136
+7<----------------- size
+round-->137
+7<----------------- size
+round-->138
+7<----------------- size
+round-->139
+7<----------------- size
+round-->140
+7<----------------- size
+round-->141
+8<----------------- size
+round-->142
+8<----------------- size
+round-->143
+9<----------------- size
+round-->144
+7<----------------- size
+round-->145
+8<----------------- size
+round-->146
+9<----------------- size
+round-->147
+9<----------------- size
+round-->148
+9<----------------- size
+round-->149
+10<----------------- size
+round-->150
+10<----------------- size
+round-->151
+10<----------------- size
+round-->152
+10<----------------- size
+round-->153
+10<----------------- size
+round-->154
+10<----------------- size
+round-->155
+8<----------------- size
+round-->156
+9<----------------- size
+round-->157
+9<----------------- size
+round-->158
+9<----------------- size
+round-->159
+9<----------------- size
+round-->160
+9<----------------- size
+round-->161
+9<----------------- size
+round-->162
+10<----------------- size
+round-->163
+8<----------------- size
+round-->164
+9<----------------- size
+round-->165
+9<----------------- size
+round-->166
+9<----------------- size
+round-->167
+10<----------------- size
+round-->168
+10<----------------- size
+round-->169
+10<----------------- size
+round-->170
+10<----------------- size
+round-->171
+10<----------------- size
+round-->172
+9<----------------- size
+round-->173
+10<----------------- size
+round-->174
+10<----------------- size
+round-->175
+10<----------------- size
+round-->176
+10<----------------- size
+round-->177
+10<----------------- size
+round-->178
+10<----------------- size
+round-->179
+10<----------------- size
+round-->180
+10<----------------- size
+round-->181
+10<----------------- size
+round-->182
+10<----------------- size
+round-->183
+10<----------------- size
+round-->184
+10<----------------- size
+round-->185
+10<----------------- size
+round-->186
+10<----------------- size
+round-->187
+10<----------------- size
+round-->188
+9<----------------- size
+round-->189
+9<----------------- size
+round-->190
+10<----------------- size
+round-->191
+10<----------------- size
+round-->192
+10<----------------- size
+round-->193
+10<----------------- size
+round-->194
+10<----------------- size
+round-->195
+10<----------------- size
+round-->196
+10<----------------- size
+round-->197
+10<----------------- size
+round-->198
+10<----------------- size
+round-->199
+10<----------------- size
+round-->200
+10<----------------- size
+round-->201
+10<----------------- size
+round-->202
+10<----------------- size
+round-->203
+10<----------------- size
+round-->204
+10<----------------- size
+round-->205
+10<----------------- size
+round-->206
+10<----------------- size
+round-->207
+10<----------------- size
+round-->208
+10<----------------- size
+round-->209
+8<----------------- size
+round-->210
+8<----------------- size
+round-->211
+8<----------------- size
+round-->212
+8<----------------- size
+round-->213
+9<----------------- size
+round-->214
+9<----------------- size
+round-->215
+9<----------------- size
+round-->216
+9<----------------- size
+round-->217
+9<----------------- size
+round-->218
+9<----------------- size
+round-->219
+9<----------------- size
+round-->220
+9<----------------- size
+round-->221
+9<----------------- size
+round-->222
+10<----------------- size
+round-->223
+10<----------------- size
+round-->224
+9<----------------- size
+round-->225
+7<----------------- size
+round-->226
+7<----------------- size
+round-->227
+8<----------------- size
+round-->228
+8<----------------- size
+round-->229
+9<----------------- size
+round-->230
+8<----------------- size
+round-->231
+8<----------------- size
+round-->232
+9<----------------- size
+round-->233
+10<----------------- size
+round-->234
+10<----------------- size
+round-->235
+10<----------------- size
+round-->236
+10<----------------- size
+round-->237
+10<----------------- size
+round-->238
+10<----------------- size
+round-->239
+10<----------------- size
+round-->240
+10<----------------- size
+round-->241
+10<----------------- size
+round-->242
+10<----------------- size
+round-->243
+10<----------------- size
+round-->244
+10<----------------- size
+round-->245
+10<----------------- size
+round-->246
+10<----------------- size
+round-->247
+10<----------------- size
+round-->248
+10<----------------- size
+round-->249
+9<----------------- size
+round-->250
+9<----------------- size
+round-->251
+9<----------------- size
+round-->252
+9<----------------- size
+round-->253
+8<----------------- size
+round-->254
+8<----------------- size
+round-->255
+8<----------------- size
+round-->256
+8<----------------- size
+round-->257
+8<----------------- size
+round-->258
+8<----------------- size
+round-->259
+8<----------------- size
+round-->260
+8<----------------- size
+round-->261
+9<----------------- size
+round-->262
+9<----------------- size
+round-->263
+9<----------------- size
+round-->264
+10<----------------- size
+round-->265
+8<----------------- size
+round-->266
+8<----------------- size
+round-->267
+7<----------------- size
+round-->268
+7<----------------- size
+round-->269
+7<----------------- size
+round-->270
+7<----------------- size
+round-->271
+7<----------------- size
+round-->272
+7<----------------- size
+round-->273
+7<----------------- size
+round-->274
+5<----------------- size
+round-->275
+6<----------------- size
+round-->276
+7<----------------- size
+round-->277
+8<----------------- size
+round-->278
+8<----------------- size
+round-->279
+9<----------------- size
+round-->280
+9<----------------- size
+round-->281
+9<----------------- size
+round-->282
+9<----------------- size
+round-->283
+9<----------------- size
+round-->284
+9<----------------- size
+round-->285
+9<----------------- size
+round-->286
+9<----------------- size
+round-->287
+9<----------------- size
+round-->288
+9<----------------- size
+round-->289
+9<----------------- size
+round-->290
+9<----------------- size
+round-->291
+9<----------------- size
+round-->292
+7<----------------- size
+round-->293
+7<----------------- size
+round-->294
+7<----------------- size
+round-->295
+7<----------------- size
+round-->296
+7<----------------- size
+round-->297
+7<----------------- size
+round-->298
+8<----------------- size
+round-->299
+8<----------------- size
+round-->300
+7<----------------- size
+round-->301
+7<----------------- size
+round-->302
+7<----------------- size
+round-->303
+7<----------------- size
+round-->304
+8<----------------- size
+round-->305
+8<----------------- size
+round-->306
+8<----------------- size
+round-->307
+9<----------------- size
+round-->308
+9<----------------- size
+round-->309
+9<----------------- size
+round-->310
+9<----------------- size
+round-->311
+9<----------------- size
+round-->312
+9<----------------- size
+round-->313
+6<----------------- size
+round-->314
+7<----------------- size
+round-->315
+7<----------------- size
+round-->316
+6<----------------- size
+round-->317
+6<----------------- size
+round-->318
+6<----------------- size
+round-->319
+7<----------------- size
+round-->320
+7<----------------- size
+round-->321
+7<----------------- size
+round-->322
+7<----------------- size
+round-->323
+7<----------------- size
+round-->324
+7<----------------- size
+round-->325
+7<----------------- size
+round-->326
+7<----------------- size
+round-->327
+7<----------------- size
+round-->328
+7<----------------- size
+round-->329
+7<----------------- size
+round-->330
+8<----------------- size
+round-->331
+5<----------------- size
+round-->332
+5<----------------- size
+round-->333
+6<----------------- size
+round-->334
+6<----------------- size
+round-->335
+6<----------------- size
+round-->336
+6<----------------- size
+round-->337
+8<----------------- size
+round-->338
+8<----------------- size
+round-->339
+9<----------------- size
+round-->340
+9<----------------- size
+round-->341
+8<----------------- size
+round-->342
+8<----------------- size
+round-->343
+8<----------------- size
+round-->344
+9<----------------- size
+round-->345
+9<----------------- size
+round-->346
+9<----------------- size
+round-->347
+9<----------------- size
+round-->348
+9<----------------- size
+round-->349
+7<----------------- size
+round-->350
+7<----------------- size
+round-->351
+7<----------------- size
+round-->352
+7<----------------- size
+round-->353
+8<----------------- size
+round-->354
+7<----------------- size
+round-->355
+8<----------------- size
+round-->356
+8<----------------- size
+round-->357
+8<----------------- size
+round-->358
+9<----------------- size
+round-->359
+9<----------------- size
+round-->360
+9<----------------- size
+round-->361
+10<----------------- size
+round-->362
+10<----------------- size
+round-->363
+10<----------------- size
+round-->364
+8<----------------- size
+round-->365
+9<----------------- size
+round-->366
+9<----------------- size
+round-->367
+9<----------------- size
+round-->368
+9<----------------- size
+round-->369
+9<----------------- size
+round-->370
+9<----------------- size
+round-->371
+8<----------------- size
+round-->372
+8<----------------- size
+round-->373
+9<----------------- size
+round-->374
+9<----------------- size
+round-->375
+9<----------------- size
+round-->376
+9<----------------- size
+round-->377
+9<----------------- size
+round-->378
+9<----------------- size
+round-->379
+9<----------------- size
+round-->380
+9<----------------- size
+round-->381
+9<----------------- size
+round-->382
+9<----------------- size
+round-->383
+9<----------------- size
+round-->384
+9<----------------- size
+round-->385
+9<----------------- size
+round-->386
+9<----------------- size
+round-->387
+10<----------------- size
+round-->388
+10<----------------- size
+round-->389
+10<----------------- size
+round-->390
+10<----------------- size
+round-->391
+10<----------------- size
+round-->392
+10<----------------- size
+round-->393
+10<----------------- size
+round-->394
+10<----------------- size
+round-->395
+10<----------------- size
+round-->396
+10<----------------- size
+round-->397
+10<----------------- size
+round-->398
+10<----------------- size
+round-->399
+6<----------------- size
+round-->400
+8<----------------- size
+round-->401
+6<----------------- size
+round-->402
+7<----------------- size
+round-->403
+7<----------------- size
+round-->404
+8<----------------- size
+round-->405
+8<----------------- size
+round-->406
+8<----------------- size
+round-->407
+9<----------------- size
+round-->408
+10<----------------- size
+round-->409
+10<----------------- size
+round-->410
+10<----------------- size
+round-->411
+10<----------------- size
+round-->412
+10<----------------- size
+round-->413
+6<----------------- size
+round-->414
+6<----------------- size
+round-->415
+6<----------------- size
+round-->416
+6<----------------- size
+round-->417
+6<----------------- size
+round-->418
+6<----------------- size
+round-->419
+7<----------------- size
+round-->420
+7<----------------- size
+round-->421
+8<----------------- size
+round-->422
+8<----------------- size
+round-->423
+8<----------------- size
+round-->424
+9<----------------- size
+round-->425
+10<----------------- size
+round-->426
+9<----------------- size
+round-->427
+9<----------------- size
+round-->428
+9<----------------- size
+round-->429
+9<----------------- size
+round-->430
+9<----------------- size
+round-->431
+9<----------------- size
+round-->432
+9<----------------- size
+round-->433
+9<----------------- size
+round-->434
+9<----------------- size
+round-->435
+9<----------------- size
+round-->436
+9<----------------- size
+round-->437
+9<----------------- size
+round-->438
+9<----------------- size
+round-->439
+9<----------------- size
+round-->440
+8<----------------- size
+round-->441
+8<----------------- size
+round-->442
+8<----------------- size
+round-->443
+8<----------------- size
+round-->444
+8<----------------- size
+round-->445
+8<----------------- size
+round-->446
+8<----------------- size
+round-->447
+8<----------------- size
+round-->448
+9<----------------- size
+round-->449
+9<----------------- size
+round-->450
+9<----------------- size
+round-->451
+9<----------------- size
+round-->452
+9<----------------- size
+round-->453
+9<----------------- size
+round-->454
+9<----------------- size
+round-->455
+9<----------------- size
+round-->456
+9<----------------- size
+round-->457
+9<----------------- size
+round-->458
+9<----------------- size
+round-->459
+9<----------------- size
+round-->460
+9<----------------- size
+round-->461
+9<----------------- size
+round-->462
+9<----------------- size
+round-->463
+9<----------------- size
+round-->464
+9<----------------- size
+round-->465
+7<----------------- size
+round-->466
+7<----------------- size
+round-->467
+8<----------------- size
+round-->468
+8<----------------- size
+round-->469
+8<----------------- size
+round-->470
+8<----------------- size
+round-->471
+8<----------------- size
+round-->472
+8<----------------- size
+round-->473
+8<----------------- size
+round-->474
+9<----------------- size
+round-->475
+9<----------------- size
+round-->476
+9<----------------- size
+round-->477
+6<----------------- size
+round-->478
+8<----------------- size
+round-->479
+8<----------------- size
+round-->480
+9<----------------- size
+round-->481
+9<----------------- size
+round-->482
+9<----------------- size
+round-->483
+9<----------------- size
+round-->484
+9<----------------- size
+round-->485
+9<----------------- size
+round-->486
+8<----------------- size
+round-->487
+8<----------------- size
+round-->488
+9<----------------- size
+round-->489
+9<----------------- size
+round-->490
+10<----------------- size
+round-->491
+10<----------------- size
+round-->492
+8<----------------- size
+round-->493
+10<----------------- size
+round-->494
+10<----------------- size
+round-->495
+10<----------------- size
+round-->496
+10<----------------- size
+round-->497
+10<----------------- size
+round-->498
+10<----------------- size
+round-->499
+10<----------------- size
+10+-+-+-+-+-+-+-+-+- size
+Finished all threads
+Models Extracted... 02:25:29:265
+Performance Analysing Started... 02:25:29:265
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 305
+fitness1 is: 98.72230308911531
+ER is: 10.93057940782425
+Performance Analysing Started... 02:25:29:284
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 338
+fitness1 is: 98.8135829794022
+ER is: 11.021194160712788
+Performance Analysing Started... 02:25:29:302
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 311
+fitness1 is: 98.88226445024914
+ER is: 11.086364530234995
+Performance Analysing Started... 02:25:29:321
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 425
+fitness1 is: 98.75287742129879
+ER is: 10.971929901509135
+Performance Analysing Started... 02:25:29:340
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 282
+fitness1 is: 98.60399371675318
+ER is: 10.8296130871372
+Performance Analysing Started... 02:25:29:358
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 323
+fitness1 is: 98.75642227140702
+ER is: 10.965424567927254
+Performance Analysing Started... 02:25:29:376
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 363
+fitness1 is: 98.7963018351246
+ER is: 11.002265227048161
+Performance Analysing Started... 02:25:29:394
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 132
+fitness1 is: 97.78601955427942
+ER is: 10.741562650214401
+Performance Analysing Started... 02:25:29:405
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 411
+fitness1 is: 98.71942289840237
+ER is: 10.940332259821483
+Performance Analysing Started... 02:25:29:424
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 411
+fitness1 is: 98.71942289840237
+ER is: 10.940332259821483
+*****************GEN Ended*******************
+*****************BLH started*******************
+Extracting Log Started... 02:25:29:443
+chunk_0.xes
+Extracting Models Started... 02:25:53:363
+3 Round 0
+3 Round 1
+3 Round 2
+3 Round 3
+4 Round 4
+4 Round 5
+4 Round 6
+4 Round 7
+5 Round 8
+5 Round 9
+5 Round 10
+5 Round 11
+5 Round 12
+5 Round 13
+5 Round 14
+5 Round 15
+6 Round 16
+6 Round 17
+6 Round 18
+6 Round 19
+7 Round 20
+7 Round 21
+7 Round 22
+7 Round 23
+7 Round 24
+7 Round 25
+7 Round 26
+7 Round 27
+7 Round 28
+7 Round 29
+7 Round 30
+7 Round 31
+7 Round 32
+7 Round 33
+7 Round 34
+7 Round 35
+7 Round 36
+7 Round 37
+7 Round 38
+7 Round 39
+7 Round 40
+7 Round 41
+7 Round 42
+7 Round 43
+7 Round 44
+7 Round 45
+7 Round 46
+7 Round 47
+7 Round 48
+8 Round 49
+8 Round 50
+8 Round 51
+8 Round 52
+8 Round 53
+8 Round 54
+8 Round 55
+8 Round 56
+8 Round 57
+8 Round 58
+8 Round 59
+8 Round 60
+8 Round 61
+8 Round 62
+8 Round 63
+8 Round 64
+8 Round 65
+8 Round 66
+8 Round 67
+8 Round 68
+8 Round 69
+8 Round 70
+8 Round 71
+8 Round 72
+8 Round 73
+8 Round 74
+8 Round 75
+8 Round 76
+8 Round 77
+8 Round 78
+8 Round 79
+8 Round 80
+8 Round 81
+8 Round 82
+8 Round 83
+8 Round 84
+8 Round 85
+8 Round 86
+8 Round 87
+8 Round 88
+8 Round 89
+8 Round 90
+8 Round 91
+8 Round 92
+8 Round 93
+8 Round 94
+8 Round 95
+8 Round 96
+8 Round 97
+8 Round 98
+8 Round 99
+8 Round 100
+8 Round 101
+8 Round 102
+8 Round 103
+8 Round 104
+8 Round 105
+8 Round 106
+8 Round 107
+8 Round 108
+8 Round 109
+8 Round 110
+8 Round 111
+8 Round 112
+8 Round 113
+8 Round 114
+8 Round 115
+8 Round 116
+8 Round 117
+8 Round 118
+8 Round 119
+8 Round 120
+8 Round 121
+8 Round 122
+8 Round 123
+8 Round 124
+8 Round 125
+8 Round 126
+8 Round 127
+8 Round 128
+8 Round 129
+8 Round 130
+8 Round 131
+8 Round 132
+8 Round 133
+8 Round 134
+8 Round 135
+8 Round 136
+8 Round 137
+8 Round 138
+8 Round 139
+8 Round 140
+8 Round 141
+8 Round 142
+8 Round 143
+8 Round 144
+8 Round 145
+8 Round 146
+8 Round 147
+8 Round 148
+8 Round 149
+8 Round 150
+8 Round 151
+8 Round 152
+8 Round 153
+8 Round 154
+8 Round 155
+8 Round 156
+8 Round 157
+8 Round 158
+8 Round 159
+8 Round 160
+8 Round 161
+8 Round 162
+8 Round 163
+8 Round 164
+8 Round 165
+8 Round 166
+8 Round 167
+8 Round 168
+8 Round 169
+8 Round 170
+8 Round 171
+8 Round 172
+8 Round 173
+8 Round 174
+8 Round 175
+8 Round 176
+8 Round 177
+8 Round 178
+8 Round 179
+8 Round 180
+8 Round 181
+8 Round 182
+8 Round 183
+8 Round 184
+8 Round 185
+8 Round 186
+8 Round 187
+8 Round 188
+8 Round 189
+8 Round 190
+8 Round 191
+8 Round 192
+8 Round 193
+8 Round 194
+8 Round 195
+8 Round 196
+8 Round 197
+8 Round 198
+8 Round 199
+8 Round 200
+8 Round 201
+8 Round 202
+8 Round 203
+8 Round 204
+8 Round 205
+8 Round 206
+8 Round 207
+8 Round 208
+8 Round 209
+8 Round 210
+8 Round 211
+8 Round 212
+8 Round 213
+8 Round 214
+8 Round 215
+8 Round 216
+8 Round 217
+8 Round 218
+8 Round 219
+8 Round 220
+8 Round 221
+8 Round 222
+8 Round 223
+8 Round 224
+8 Round 225
+8 Round 226
+8 Round 227
+8 Round 228
+8 Round 229
+8 Round 230
+8 Round 231
+8 Round 232
+8 Round 233
+8 Round 234
+8 Round 235
+8 Round 236
+8 Round 237
+8 Round 238
+8 Round 239
+8 Round 240
+8 Round 241
+8 Round 242
+8 Round 243
+8 Round 244
+8 Round 245
+8 Round 246
+8 Round 247
+8 Round 248
+8 Round 249
+8 Round 250
+8 Round 251
+8 Round 252
+8 Round 253
+8 Round 254
+8 Round 255
+8 Round 256
+8 Round 257
+8 Round 258
+8 Round 259
+8 Round 260
+8 Round 261
+8 Round 262
+8 Round 263
+8 Round 264
+8 Round 265
+8 Round 266
+8 Round 267
+8 Round 268
+8 Round 269
+8 Round 270
+8 Round 271
+8 Round 272
+8 Round 273
+8 Round 274
+8 Round 275
+8 Round 276
+8 Round 277
+8 Round 278
+8 Round 279
+8 Round 280
+8 Round 281
+8 Round 282
+8 Round 283
+8 Round 284
+8 Round 285
+8 Round 286
+8 Round 287
+8 Round 288
+8 Round 289
+8 Round 290
+8 Round 291
+8 Round 292
+8 Round 293
+8 Round 294
+8 Round 295
+8 Round 296
+8 Round 297
+8 Round 298
+8 Round 299
+8 Round 300
+8 Round 301
+8 Round 302
+8 Round 303
+8 Round 304
+8 Round 305
+8 Round 306
+8 Round 307
+8 Round 308
+8 Round 309
+8 Round 310
+8 Round 311
+8 Round 312
+8 Round 313
+8 Round 314
+8 Round 315
+8 Round 316
+8 Round 317
+8 Round 318
+8 Round 319
+8 Round 320
+8 Round 321
+8 Round 322
+8 Round 323
+8 Round 324
+8 Round 325
+8 Round 326
+8 Round 327
+8 Round 328
+8 Round 329
+8 Round 330
+8 Round 331
+8 Round 332
+8 Round 333
+8 Round 334
+8 Round 335
+8 Round 336
+8 Round 337
+8 Round 338
+8 Round 339
+8 Round 340
+8 Round 341
+8 Round 342
+8 Round 343
+8 Round 344
+8 Round 345
+8 Round 346
+8 Round 347
+8 Round 348
+8 Round 349
+8 Round 350
+8 Round 351
+8 Round 352
+8 Round 353
+8 Round 354
+8 Round 355
+8 Round 356
+8 Round 357
+8 Round 358
+8 Round 359
+8 Round 360
+8 Round 361
+8 Round 362
+8 Round 363
+8 Round 364
+8 Round 365
+8 Round 366
+8 Round 367
+8 Round 368
+8 Round 369
+8 Round 370
+8 Round 371
+8 Round 372
+8 Round 373
+8 Round 374
+8 Round 375
+8 Round 376
+8 Round 377
+8 Round 378
+8 Round 379
+8 Round 380
+8 Round 381
+8 Round 382
+8 Round 383
+8 Round 384
+8 Round 385
+8 Round 386
+8 Round 387
+8 Round 388
+8 Round 389
+8 Round 390
+8 Round 391
+8 Round 392
+8 Round 393
+8 Round 394
+8 Round 395
+8 Round 396
+8 Round 397
+8 Round 398
+8 Round 399
+8 Round 400
+8 Round 401
+8 Round 402
+8 Round 403
+8 Round 404
+8 Round 405
+8 Round 406
+8 Round 407
+8 Round 408
+8 Round 409
+8 Round 410
+8 Round 411
+8 Round 412
+8 Round 413
+8 Round 414
+8 Round 415
+8 Round 416
+8 Round 417
+8 Round 418
+8 Round 419
+8 Round 420
+8 Round 421
+8 Round 422
+8 Round 423
+8 Round 424
+8 Round 425
+8 Round 426
+8 Round 427
+8 Round 428
+8 Round 429
+8 Round 430
+8 Round 431
+8 Round 432
+8 Round 433
+8 Round 434
+8 Round 435
+8 Round 436
+8 Round 437
+8 Round 438
+8 Round 439
+8 Round 440
+8 Round 441
+8 Round 442
+8 Round 443
+8 Round 444
+8 Round 445
+8 Round 446
+8 Round 447
+8 Round 448
+8 Round 449
+8 Round 450
+8 Round 451
+8 Round 452
+8 Round 453
+8 Round 454
+8 Round 455
+8 Round 456
+8 Round 457
+8 Round 458
+8 Round 459
+8 Round 460
+8 Round 461
+8 Round 462
+8 Round 463
+8 Round 464
+8 Round 465
+8 Round 466
+8 Round 467
+8 Round 468
+8 Round 469
+8 Round 470
+8 Round 471
+8 Round 472
+8 Round 473
+8 Round 474
+8 Round 475
+8 Round 476
+8 Round 477
+8 Round 478
+8 Round 479
+8 Round 480
+8 Round 481
+8 Round 482
+8 Round 483
+8 Round 484
+8 Round 485
+8 Round 486
+8 Round 487
+8 Round 488
+8 Round 489
+8 Round 490
+8 Round 491
+8 Round 492
+8 Round 493
+8 Round 494
+8 Round 495
+8 Round 496
+8 Round 497
+8 Round 498
+8 Round 499
+Finished all threads
+Models Extracted... 05:08:34:655
+Performance Analysing Started... 05:08:34:657
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 302
+fitness1 is: 98.89068346925617
+ER is: 11.116760378083754
+Performance Analysing Started... 05:08:34:684
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 397
+fitness1 is: 98.79674494138811
+ER is: 11.013616690360632
+Performance Analysing Started... 05:08:34:703
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 385
+fitness1 is: 98.81446919192926
+ER is: 11.032103361523532
+Performance Analysing Started... 05:08:34:722
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 9
+fitness1 is: 48.252721226340896
+ER is: 15.196482378547218
+Performance Analysing Started... 05:08:34:729
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 13
+fitness1 is: 64.1912535254642
+ER is: 11.78937357945982
+Performance Analysing Started... 05:08:34:736
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 407
+fitness1 is: 98.79430785693872
+ER is: 11.00922619443233
+Performance Analysing Started... 05:08:34:755
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 234
+fitness1 is: 98.92192246083495
+ER is: 11.134742991368334
+Performance Analysing Started... 05:08:34:775
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 327
+fitness1 is: 98.829756358021
+ER is: 11.053563801736011
+*****************BLH Ended*******************

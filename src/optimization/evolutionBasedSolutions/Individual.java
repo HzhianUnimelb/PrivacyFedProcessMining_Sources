@@ -16,8 +16,8 @@ class Individual extends BasicObject{
         edgeNode = new Optimizer(id,actionSize, eventLog,bkgt);
         
         // Initialize genes randomly
-        solution[0] = rand.nextDouble(0.1, 0.99);
-        solution[1] = rand.nextDouble(0.1, 1.0);
+        solution[0] = rand.nextDouble(0.0000000001, 0.002);
+        solution[1] = rand.nextDouble(1, 100);
         solution[2] = rand.nextDouble(lower,upper);
     }
 

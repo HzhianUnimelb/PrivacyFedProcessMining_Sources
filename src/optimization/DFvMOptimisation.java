@@ -7,15 +7,19 @@ import java.util.List;
 import model.DFvM;
 import model.FPTA;
 import performance.EntropicRelevanceCalculator.BackGroundType;
+import performance.PerformanceAnalyser;
 import performance.PerformanceEstimator;
 import utilities.FrequencyBasedFiltering;
+import utilities.SubgraphSolver;
 
 public class DFvMOptimisation extends Optimization {
 
-	public double totalOrginalLog;
+	public static double totalOrginalLog;
+	public static FPTA primaryDFvM;
 	public BackGroundType bkgt;
-	public DFvMOptimisation(double lower,double upper,String fileDirectory,int Frontier_List_Size,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizelimit) {
-        super(0, 0, 0, lower, upper, Frontier_List_Size,fileDirectory,actions,eventLog,actionSize,optModel,sizelimit);
+	public static int primaryDFvMSize;
+	public DFvMOptimisation(double lower,double upper,String fileDirectory,int Frontier_List_Size,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizelimit,double cof) {
+        super(0, 0, 0, lower, upper, Frontier_List_Size,fileDirectory,actions,eventLog,actionSize,optModel,sizelimit,cof);
         this.bkgt = bkgt;
 		// TODO Auto-generated constructor stub
 	}
@@ -28,8 +32,8 @@ public class DFvMOptimisation extends Optimization {
 		// TODO Auto-generated method stub
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-	public void setTotalOrginalLog(double totalOrginalLog) {
-		this.totalOrginalLog = totalOrginalLog;
+	public static void setTotalOrginalLog(double total) {
+		totalOrginalLog = total;
 	}
 	@Override
 	public void run() {
@@ -37,12 +41,12 @@ public class DFvMOptimisation extends Optimization {
 		optimize();
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-	public double returnEventPercentage(HashMap<String, Double> log) {
+	public static double returnEventPercentage(HashMap<String, Double> log) {
 		
 		return totalLog(log)/totalOrginalLog;
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-	public double totalLog(HashMap<String, Double> eventLog) {
+	public static double totalLog(HashMap<String, Double> eventLog) {
 		double tot=0;
 		for(String s:eventLog.keySet())
 			tot+=eventLog.get(s);
@@ -50,7 +54,7 @@ public class DFvMOptimisation extends Optimization {
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
-	public void prunnebranches(FPTA fpta,HashMap<String, Double> eventLog) {
+	public static void prunnebranches(FPTA fpta,HashMap<String, Double> eventLog) {
 		double x=Double.MAX_VALUE;
 		String prev="";
 		String next="";
@@ -86,7 +90,7 @@ public class DFvMOptimisation extends Optimization {
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
-	public double calculateDFGProbeblits(FPTA model,String trace) {
+	public static double calculateDFGProbeblits(FPTA model,String trace) {
 		String state="I",state1="I";
 		trace+="O";
 		for(char c:trace.toCharArray())
@@ -109,7 +113,7 @@ public class DFvMOptimisation extends Optimization {
 		return 1;
 	}
 	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-		public FPTA extractModel(double threshold,HashMap<String, Double> eventlog ) {
+		public static FPTA extractModel(double threshold,HashMap<String, Double> eventlog ) {
 	
 			HashMap<String, Double> filterEventLog = new HashMap<String, Double>();
 			FPTA fpta = null;
@@ -133,14 +137,37 @@ public class DFvMOptimisation extends Optimization {
 			fpta = df.run();
 			return fpta;
 		}
-	 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-		public FPTA extractSignleModel(HashMap<String, Double>  log)
+	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+		public static void extractSignleModel(HashMap<String, Double>  log)
 		{
 			HashMap<String, Double>  filterEventLog = new HashMap<String, Double>();
 			 filterEventLog.putAll(log);	
 			 setTotalOrginalLog(totalLog(log));
-			 FPTA fpta = extractModel(1.0, filterEventLog);
-			 return fpta;
+			 primaryDFvM = extractModel(1.0, filterEventLog);
+			 primaryDFvM.calculateTransitionPercentage(primaryDFvM);
+			 primaryDFvMSize = PerformanceAnalyser.calculateDFvMModelSize(primaryDFvM);
+
+		}
+	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+		public  static HashMap<String, Double> extractFilteredLog(int maxElements,HashMap<String, Double> orginalLog)
+		{	
+			
+			FPTA partialFPTA= SubgraphSolver.solveDFvMOptimization(primaryDFvM,maxElements);
+			HashMap<String, Double>  filterEventLog = new HashMap<String, Double>();
+			filterEventLog.putAll(orginalLog);	
+			List<String>rmlist=new ArrayList<String>();
+	
+			for(String s:filterEventLog.keySet())
+			{
+				double i =calculateDFGProbeblits(partialFPTA,s);
+				if(i==0)
+				{
+					rmlist.add(s);
+				}
+			}
+			for(String s:rmlist)
+				filterEventLog.remove(s);
+			return filterEventLog;
 		}
 	/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
@@ -151,7 +178,7 @@ public class DFvMOptimisation extends Optimization {
 		FrequencyBasedFiltering filtering = new FrequencyBasedFiltering();
 		PerformanceEstimator pe = new PerformanceEstimator(bkgt);
 		
-		for(double x=LOWER_;x<=UPPER_;x+=0.01)
+		for(double x=LOWER_;x<=UPPER_;x+=0.001)
 		{
 			 filterEventLog.putAll(eventLog);	
 			 setTotalOrginalLog(totalLog(eventLog));
@@ -165,6 +192,8 @@ public class DFvMOptimisation extends Optimization {
 		     double solution[]={0,0,x};
 		     double value[] ={metric1,metric2};
 		     Frontier f = new Frontier(fpta,solution,value,"DFvM") ;    	 
+		     System.out.println(value[0]+" "+value[1]);
+		     
 		     addFrontier(f);
 		}
 		// TODO Auto-generated method stub

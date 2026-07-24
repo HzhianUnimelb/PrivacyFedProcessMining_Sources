@@ -22,8 +22,8 @@ public class CS extends Optimization {
     private List<Frontier> paretoFront; // List to hold Pareto optimal solutions
     private double globalBestValue;
 
-    public CS(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit);
+    public CS(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.maxIter = maxIter;
         nests = new Cuckoo[populationSize];
         paretoFront = new ArrayList<>();

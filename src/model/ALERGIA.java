@@ -13,8 +13,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import performance.EntropicRelevanceCalculator.BackGroundType;
+import performance.PerformanceEstimator;
+
 public class ALERGIA extends BasicDiscoveryMethod{
 	private Set<String> visitedPatterns;
+	HashMap<String, Double> eventLog;
+	int actionSize;
     public ALERGIA(double alpha,HashMap<String, Double> eventLog) {
     	super(alpha, eventLog);
     	createFPTA(getEventLog());
@@ -27,8 +32,13 @@ public class ALERGIA extends BasicDiscoveryMethod{
     	
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    public ALERGIA(double alpha, double filteringThreshold,HashMap<String, Double> eventLog) {
-    	super(alpha, filteringThreshold,eventLog);
+
+    /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+    public ALERGIA(double alpha, double filteringThreshold,HashMap<String, Double> filteredlog,HashMap<String, Double>  wholeLog,int actionSize) {
+    	
+    	super(alpha, filteringThreshold,filteredlog);
+    	this.eventLog = wholeLog;
+    	this.actionSize=actionSize;
     	visitedPatterns = new HashSet<>();
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
@@ -41,10 +51,12 @@ public class ALERGIA extends BasicDiscoveryMethod{
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
     public boolean alergiaTest(double f1, double n1, double f2, double n2, double alpha) {
-        double gamma = (double)(Math.abs(f1 * n2  - f2 * n1))/(n1*n2);
+        double gamma = (double)(Math.abs(f1 /n1  - f2 /n2));
         double threshold = (Math.sqrt(1.0 / n1) + Math.sqrt(1.0 / n2)) * Math.sqrt(0.5 * Math.log(2/alpha));
       //s  System.out.println("gamma and threshold "+ gamma+" "+threshold);
-      if (gamma < threshold)  
+        //System.out.println(gamma+" "+threshold+" "+f1+" "+n1+" "+f2+" "+n2);
+        //System.out.println("("+f1+" "+n1+")--"+"--("+f2+" "+n2+") "+gamma+" "+threshold);
+        if (gamma < threshold)  
     	  return true;
       else 
     	  return false;
@@ -72,23 +84,29 @@ public class ALERGIA extends BasicDiscoveryMethod{
     public boolean alergiaCompatible(String qu, String qv, double alpha) {
         boolean correct = true;
         try {  	
-        	if (!alergiaTest(fptaModel.getFinalFrequencies().get(qu), fptaModel.getFrequency(qu), fptaModel.getFinalFrequencies().get(qv), fptaModel.getFrequency(qv), alpha)) {
+        //	System.out.println(qu+" "+qv+" in comp test");
+        	if (!alergiaTest(fptaModel.getFinalFrequency(qu), calculateIncomingArcs(fptaModel, qu), fptaModel.getFinalFrequency(qv), calculateIncomingArcs(fptaModel, qv), alpha)) {
+          //      System.out.println("1-->"+qu+" "+qv+" during comp test");
         		return false;
         	}
         }catch(Exception e)
         {
+           // System.out.println("exp "+ qu+" "+qv+" during comp test");
         	return false;
         }
         for (String a : getFpta().getAlphabet()) {
-            if (!alergiaTest(fptaModel.getTransitionFrequency(qu, a), fptaModel.getFrequency(qu), fptaModel.getTransitionFrequency(qv, a), fptaModel.getFrequency(qv), alpha)) {
-                return false;
+        	if(fptaModel.getTransitionFunction().get(qv+a)!=null)
+            if (!alergiaTest(fptaModel.getTransitionFrequency(qu, a), calculateIncomingArcs(fptaModel, qu), fptaModel.getTransitionFrequency(qv, a), calculateIncomingArcs(fptaModel, qv), alpha)) {
+             //   System.out.println("2-->"+qu+" "+qv+" during comp test "+fptaModel.getFrequency(qu)+" "+fptaModel.getTransitionFunction().get(qu+a)+" "+fptaModel.getTransitionFunction().get(qv+a));
+            	return false;
             }
         }
         return correct;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-    public static FPTA extractModel(FPTA model,double alpha) {
+    public static FPTA extractModel(FPTA model,double alpha,int t0) {
     	ALERGIA alergia = new ALERGIA(model, alpha);
+    	alergia.setFilterring(t0);
     	FPTA fpta = alergia.run();
     	return fpta;
     }
@@ -122,16 +140,12 @@ public class ALERGIA extends BasicDiscoveryMethod{
     		List<String> merged = new ArrayList<String>();
     		List<String> subvertexes = new ArrayList<String>();
     		getList(fpta1,c, subvertexes);
-    	//	System.out.println(c+"<----subroot");
     		for(String ver:subvertexes)
     		{
-    		//	System.out.println(ver);
-    			
     			fpta1.BLUE.add(ver);
     		}  
     		fpta1.BLUE=fpta1.sortList(fpta1.BLUE);
     		fpta1.RED.add(c);
-    		//System.out.println(c+" subtree started");
     		while (hasUnmarkedState(fpta1.BLUE, t0,fpta1)) {
     			  	String qb = chooseUnmarkedState(fpta1.BLUE, t0,fpta1);
     	            String qr = findCompatibleState(qb, getAlpha(),fpta1);
@@ -167,24 +181,40 @@ public class ALERGIA extends BasicDiscoveryMethod{
         		fptaModel.BLUE.add(s);
         }
         fptaModel.BLUE.remove("");
+     
         while (hasUnmarkedState(fptaModel.BLUE, t0)) {
-        	
-            String qb = chooseUnmarkedState(fptaModel.BLUE, t0);
+        
+           String qb = chooseUnmarkedState(fptaModel.BLUE, t0);
+        
+      
+   	    if(fptaModel.getFinalFrequencies().get(qb)==null)
+        	   fptaModel.setFinalFrequency(qb, 0);
+   	  
             String qr = findCompatibleState(qb, getAlpha());
+   
+           // fptaModel.show(fptaModel, qr);
+           
             fptaModel.BLUE.remove(qb);
-            if (qr!=null) {           
+            if (qr!=null) {      
+            //	System.out.println(qr);
+            
             	fptaModel.merge(qr, qb);
+            	//System.out.println("5 "+fptaModel.transitionFrequencies.get("").get("C").get("AAC")+"*****************");
+           // 	System.out.println(qb+"-->"+qr);
             	fptaModel.setFinalFrequency(qb, (long)0);
             	fptaModel.mergeState.put(qb,qr);
-            	
                //fpta.removeSuspendedStates();
             } else {
-            	fptaModel.statePromote(qb);      
+            	fptaModel.statePromote(qb);
+           
 
             }            
             fptaModel.changeColor();
             fptaModel.removeSuspendedStates();
+        	//System.out.println("6 "+fptaModel.transitionFrequencies.get("").get("C").get("AAC")+"*****************");
+
         }     
+    //    fptaModel.show(fptaModel, "after");
         return fptaModel;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
@@ -219,21 +249,41 @@ public class ALERGIA extends BasicDiscoveryMethod{
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
     public String chooseUnmarkedState(Set<String> blue, int t0) {
+    	String res=null;
+    	double max=0;
+    
         for (String state : blue) {
-            if (fptaModel.getFrequency(state) >= t0) {
+        /*  if (fptaModel.getFrequency(state) >= t0) {
                 return state;
-            }
+            }*/
+         
+         
+        	double temp= calculateIncomingArcs(fptaModel, state);
+        	if(max<temp) {
+        		max= temp;
+        		res=state;
+        	};
+        	
+       
         }
-        return null;
+        return res;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
     public String chooseUnmarkedState(Set<String> blue, int t0,FPTA fpta) {
+    	String res=null;
+    	double max=0;
+    	
         for (String state : blue) {
-            if (fpta.getFrequency(state) >= t0) {
-                return state;
-            }
+        	double temp= calculateIncomingArcs(fpta, state);
+        	if(max<temp) {
+        		max= temp;
+        		res=state;
+        	}
+         //   if (fpta.getFrequency(state) >= t0) {
+          //      return state;
+           // }
         }
-        return null;
+        return res;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
     public String chooseUnmarkedState1(Set<String> blue, int t0,FPTA fpta,List<String> merged) {
@@ -246,12 +296,48 @@ public class ALERGIA extends BasicDiscoveryMethod{
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
     private String findCompatibleState(String qb, double alpha) {
+     
+       
+     /*  PerformanceEstimator PE = new PerformanceEstimator(BackGroundType.U);
+       HashMap<String,Double> pe =PE.calculatePerformanceMetrics(fptaModel, eventLog,actionSize);
+	   double fit[]= {pe.get("Entropic Relevance"),pe.get("Size")};
        for(String red :getFpta().RED)
        {
-    	   if(alergiaCompatible(red,qb,alpha)==true)
+    	   if(red.compareTo("")!=0)
     	   {
-    		   return red;
+    		   FPTA temp = new FPTA();
+    		   fptaModel.copy(temp);
+    		   temp.merge(red, qb);
+    		   pe =PE.calculatePerformanceMetrics(temp, eventLog,actionSize);
+    		   double fit1[]= {pe.get("Entropic Relevance"),pe.get("Size")};
+    	//   System.out.println(red+") ("+qb+") "+fit1[0]+" "+fit[0]+" "+eventLog.size());
+    		   if(fit1[0]<=fit[0])
+    			   return red;
+    	 //  if(alergiaCompatible(red,qb,alpha)==true)
+    	 //  {
+    	//	   return red;
+    	 //  }
     	   }
+       }*/
+        for(String red :getFpta().RED)
+       {
+       	
+       	 if(alergiaCompatible(red,qb,alpha)==true)
+    	  {
+       		
+       	//	 boolean x = false;
+       //		 System.out.println(red+" first passed "+qb);
+       //		 for(String s:fptaModel.alphabet)
+       //			 if(fptaModel.getTransitionFunction().get(red+s)!=null)
+       //			 {
+       //				 x=true;
+       //				 break;
+       //			 }
+       //		 
+       		// 	if(!x) 
+       		 		return red;
+    	//   }
+    	}
        }
         return null;
     }
@@ -349,7 +435,12 @@ public class ALERGIA extends BasicDiscoveryMethod{
     		for(String prevState:dffa1.states)
     		if( dffa1.getTransitionFunction().get(prevState + a) != null && dffa1.getTransitionFunction().get(prevState + a).compareTo(state)==0)
     		{
+    			try {
     			result += dffa1.getTransitionFrequencies().get(prevState).get(a).get(state);
+    			}catch(Exception e)
+    			{
+    				dffa1.getTransitionFunction().remove(prevState + a);
+    			}
     		}
     	}
     	result += dffa1.getInitialFrequencies().get(state)!=null? dffa1.getInitialFrequencies().get(state):0;
@@ -364,7 +455,6 @@ public class ALERGIA extends BasicDiscoveryMethod{
     		for(String prevState:dffa1.states)
     		if( dffa1.getTransitionFunction().get(prevState + a) != null && dffa1.getTransitionFunction().get(prevState + a).compareTo(state)==0)
     		{
-				System.out.println(prevState+" + "+a+" --> "+state+" ("+dffa1.getTransitionFrequencies().get(prevState).get(a).get(state)+")");
     		}
     	}
     	
@@ -394,8 +484,6 @@ public class ALERGIA extends BasicDiscoveryMethod{
     	{
     		for(String nextstate:dffa1.states)
     		{
-    			if(dffa1.getTransitionFunction().get(state + a)!=null&&dffa1.getTransitionFunction().get(state + a).compareTo(nextstate)==0)
-    				System.out.println(state+" + "+a+" --> "+nextstate+" ("+dffa1.getTransitionFrequency(state , a)+")");
     		}
     	}
     	
@@ -534,7 +622,7 @@ public class ALERGIA extends BasicDiscoveryMethod{
 						String nextAlias=st+"~"+visitedCount;	
 						path.put(nextAlias,newPath);
 						QAliasName.put(nextAlias, st);	
-						if(((transitionQFreq*incoming)/FREQ)>0.9)
+						if(((transitionQFreq*incoming)/FREQ)>0.01)
 						{
 							result.states.add(nextAlias);
 							list.add(nextAlias);
@@ -691,7 +779,6 @@ public class ALERGIA extends BasicDiscoveryMethod{
 						}
 						else
 						{
-							System.out.println(incoming+" "+path.get(q));
 						}
 					}
 				}
@@ -875,7 +962,7 @@ public class ALERGIA extends BasicDiscoveryMethod{
 	public void mergeThirdModel(FPTA fpta1,FPTA fpta2)
 	{    	
 		fpta1.setInitialFrequency("", fpta1.getInitialFrequencies().get("")+fpta2.getInitialFrequencies().get(""));	
-		thirdStochasticFold(fpta1,"",ALERGIA.unFold(fpta2, 3),"");
+		thirdStochasticFold(fpta1,"",ALERGIA.unFold(fpta2, 2),"");
 		if(fpta1.states.size()+fpta2.states.size()==2)
 		{
 			fpta1.setFinalFrequency("", fpta1.getFinalFrequency("")+fpta2.getFinalFrequency(""));	
@@ -911,11 +998,13 @@ public class ALERGIA extends BasicDiscoveryMethod{
 		//System.out.println("getSubRoots Started");
 		List<String> removed= new ArrayList<String>();
 		List<String> subroot = new ArrayList<String>();
+		
 		Collections.sort(vertexes, new Comparator<String>() {
             public int compare(String s1, String s2) {
                 return Integer.compare(s1.length(), s2.length());
             }
         });
+        
 		//System.out.println(vertexes.size());
 		for(String S:vertexes)
 		{
@@ -933,6 +1022,7 @@ public class ALERGIA extends BasicDiscoveryMethod{
 				
 			}
 		}
+	
 		vertexes.removeAll(removed);
 		subroot.addAll(vertexes);
 		//System.out.println("getSubRoots finished");
@@ -1005,12 +1095,39 @@ public class ALERGIA extends BasicDiscoveryMethod{
         for (String s : dffa.alphabet) {
         	if (dffa.getTransitionFunction().containsKey(state+s))
         	{
+        	
         		isInCycle(dffa,dffa.getTransitionFunction().get(state+s),root,visited,loopPossible);
         	}
         }
         return ;
     }
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+	public static List<String> getNodes(DFFA dffa, List<String>roots) {
+		List<String> allNodes = new ArrayList<String>();
+		for(String s:roots)
+		{
+	
+		//	System.out.println(s);
+			getchilds(dffa, allNodes, s);
+		}
+		return allNodes;
+	}
+    /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+	public static void getchilds(DFFA dffa, List<String>nodes,String current) {
+		
+			nodes.add(current);
+			for(String symbol : dffa.alphabet)
+			{	
+				if(dffa.getTransitionFunction().get(current+symbol)!=null)
+				{
+				
+					getchilds(dffa,nodes,dffa.getTransitionFunction().get(current+symbol));
+				}
+			}
+		
+	}
+    /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+
 	 public static List<String> listNonCycle1(DFFA dffa) {
 	        List<String> result = new ArrayList<>();
 	        Set<String> visited = new HashSet<>();

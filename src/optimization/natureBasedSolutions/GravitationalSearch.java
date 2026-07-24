@@ -21,8 +21,8 @@ public class GravitationalSearch extends Optimization {
     private double globalBestValue;
     private double gravitationalConstant;
     private BackGroundType bkgt;
-    public GravitationalSearch(int id, int maxIter, String fileDirectory, int populationSize,double gravitationalConstant,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit);
+    public GravitationalSearch(int id, int maxIter, String fileDirectory, int populationSize,double gravitationalConstant,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.masses = new ArrayList<Mass>();
         this.globalBestValue = 0;
         this.gravitationalConstant = gravitationalConstant; // Initial gravitational constant

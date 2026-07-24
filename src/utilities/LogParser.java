@@ -70,12 +70,13 @@ public class LogParser {
 		
 	}
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-	public static void equallyDivideXesFile(String filePath, int numberOfChunks) {
+	public static void equallyDivideXesFile(String filePath, int numberOfChunks)    {
 	    try {
 	        // Step 1: Create a parser for XES files
 	        XesXmlParser parser = new XesXmlParser();
 
 	        // Step 2: Parse the XES log file
+	        
 	        FileInputStream logFileInputStream = new FileInputStream(filePath);
 	        List<XLog> logs = parser.parse(logFileInputStream);
 
@@ -113,7 +114,6 @@ public class LogParser {
 
 	        System.out.println("XES file divided successfully.");
 	    } catch (Exception e) {
-	        e.printStackTrace();
 	    }
 	}
     /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
@@ -176,7 +176,8 @@ public class LogParser {
          			{
          				//System.out.println(e.getAttributes().get("concept:name"));
          				try {
-         				actionList.put(e.getAttributes().get("concept:name"), Alphabet[index++]);
+         				
+         					actionList.put(e.getAttributes().get("concept:name"), Alphabet[index++]);
          				}catch(Exception e1)
          				{
          					System.out.println(e.getAttributes().get("concept:name"));
@@ -202,6 +203,7 @@ public class LogParser {
            int totalTrace=0;
            int maxTraceLength=0;
            double averageLength=0;
+           int minTraceLength=Integer.MAX_VALUE;
            String min="";
           
            for(String s:traceList.keySet())
@@ -212,13 +214,17 @@ public class LogParser {
         	   if(s.length()>maxTraceLength)
         		   maxTraceLength=s.length();
         	   averageLength+=s.length()*traceList.get(s);
+        	   if(minTraceLength>s.length())
+        		   minTraceLength=s.length();
            }
            averageLength = averageLength/(totalTrace);
-           System.out.println("number of actions:"+actionList.size());
+     /*      System.out.println("number of actions:"+actionList.size());
            System.out.println("total traces: "+totalTrace);
            System.out.println("number of unique traces: "+traceList.keySet().size());
            System.out.println("maximum length of traces:"+maxTraceLength);
-           System.out.println("average length of trace:"+averageLength);
+           System.out.println("minimum length of traces:"+minTraceLength);
+
+           System.out.println("average length of trace:"+averageLength);*/
            MapActiontoChar(actionList,readMapList);
           
        //    System.out.println("Successfully wrote to the file.");
@@ -319,7 +325,8 @@ public class LogParser {
         
         // Create a file object
       //  logParser.extractEvent();
-        logParser.equallyDivideXesFile(filePath,1);
+        
+       // logParser.equallyDivideXesFile(filePath,1);
        
 
             // Process the log or perform other operations

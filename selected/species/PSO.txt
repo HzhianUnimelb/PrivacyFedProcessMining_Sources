@@ -1,0 +1,559 @@
+Extracting Log Started... 01:31:14:808
+chunk_0.xes
+Loaded XES extension 'http://www.xes-standard.org/meta_3TU.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_completeness.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_concept.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_general.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_life.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_org.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_time.xesext' from cache
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 01:31:22:967
+0 round--->0
+best solution 0 best result-->0.38286233096200817 solution(0.6278208136013061,0.5385106224863598,0.01855659694331089)
+best solution 0 best result-->0.3966900487220899 solution(0.3724368392425353,0.7492493684548596,0.03832033206247609)
+best solution 0 best result-->0.4060331438831011 solution(0.7648780612690416,0.4000235265483054,0.0480461551772087)
+best solution 0 best result-->0.41379568038235315 solution(0.3890006041069186,0.548038104860123,0.06850190563136895)
+0 round--->1
+0 round--->2
+0 round--->3
+0 round--->4
+best solution 0 best result-->0.4185046909520934 solution(0.6059240509347164,0.1562359101928562,0.04920840373762221)
+0 round--->5
+0 round--->6
+0 round--->7
+best solution 0 best result-->0.43090388618222364 solution(0.4841741683273163,0.1218972740146383,0.06499104327827)
+0 round--->8
+0 round--->9
+0 round--->10
+0 round--->11
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 01:54:09:134
+
+Cluster number->0
+Performance Analysing Started... 01:54:09:137
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 354
+fitness1 is: 63.19836992243986
+ER is: 43.52640033630479
+*****************ROUND number*******************
+Extracting Log Started... 01:54:09:206
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 01:54:17:655
+0 round--->0
+best solution 0 best result-->0.34060962083587426 solution(0.42399385421383523,0.6469681594089108,0.002590364385432653)
+best solution 0 best result-->0.3509783936221997 solution(0.5157535822747884,0.29261974989420936,0.0038638313408097084)
+best solution 0 best result-->0.3558714183859204 solution(0.6012337956558899,0.7746502986755155,0.005211724205319684)
+best solution 0 best result-->0.3725940654321866 solution(0.52914396949577,0.42955428698085796,0.012050375775892477)
+best solution 0 best result-->0.38395575279737537 solution(0.5812440679575511,0.663335843199417,0.019105499947827127)
+best solution 0 best result-->0.3938578992609713 solution(0.5744247454432421,0.3686057175990177,0.033240215277931716)
+best solution 0 best result-->0.4034365758699674 solution(0.6593460150946185,0.4019509568525941,0.04310016606684817)
+best solution 0 best result-->0.40952650342476854 solution(0.36359913233863644,0.5402562599173591,0.052228488433817624)
+best solution 0 best result-->0.4098026358037211 solution(0.5728007168278508,0.2530693793737016,0.058228190356279)
+best solution 0 best result-->0.4101373040418725 solution(0.5645333878576471,0.24337491746513001,0.05793160608223853)
+best solution 0 best result-->0.4154003132738845 solution(0.6562742102196835,0.21378498077982405,0.07183888719756182)
+0 round--->1
+0 round--->2
+0 round--->3
+0 round--->4
+best solution 0 best result-->0.41921773022759956 solution(0.5729922175168519,0.15955488468401002,0.049290994295870805)
+0 round--->5
+0 round--->6
+0 round--->7
+0 round--->8
+0 round--->9
+0 round--->10
+0 round--->11
+best solution 0 best result-->0.4205734632556043 solution(0.680534492977307,0.16949441779021762,0.05066783179749497)
+0 round--->12
+0 round--->13
+0 round--->14
+best solution 0 best result-->0.42148438034680435 solution(0.5961328581750379,0.18468746400751807,0.04338154830579583)
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 02:18:10:330
+
+Cluster number->0
+Performance Analysing Started... 02:18:10:331
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 211
+fitness1 is: 58.93913500723018
+ER is: 44.50787840970486
+*****************ROUND number*******************
+Extracting Log Started... 02:18:10:363
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 02:18:20:477
+0 round--->0
+best solution 0 best result-->0.33748484677390156 solution(0.8045999226388387,0.4546494057662379,0.002137403197584701)
+best solution 0 best result-->0.34406771265992653 solution(0.9235208331330858,0.584782725044987,0.00306362153538572)
+best solution 0 best result-->0.3758896536501297 solution(0.8216616460665109,0.7329163562723359,0.012712801799478986)
+best solution 0 best result-->0.3855104134282132 solution(0.5299762723970995,0.34451542168055005,0.018939898174968967)
+best solution 0 best result-->0.3892479270209711 solution(0.9460826779433971,0.721473691797937,0.02921743852979958)
+best solution 0 best result-->0.3986497920824507 solution(0.8492161033679084,0.9384019402158867,0.050970293999435735)
+best solution 0 best result-->0.403746693398337 solution(0.8361396244188426,0.3697217106032883,0.05916867413211908)
+best solution 0 best result-->0.4048419349885453 solution(0.7754785507932455,0.3641416534480548,0.04455456702173623)
+best solution 0 best result-->0.4064192228907326 solution(0.7488119487482888,0.20035647793293868,0.04692826207386161)
+best solution 0 best result-->0.40795561829200233 solution(0.8484222772297652,0.3826709301017388,0.06842007862569029)
+best solution 0 best result-->0.4087355313207831 solution(0.8363723921062333,0.24556528753643425,0.07512562283127693)
+best solution 0 best result-->0.40889313252091836 solution(0.15250376941808882,0.721352926348382,0.05647973000274585)
+best solution 0 best result-->0.40936607967140737 solution(0.45031169508213614,0.17350404975886435,0.0780961321087123)
+best solution 0 best result-->0.4097442609570478 solution(0.33710910237632075,0.650225005641235,0.06420999256090158)
+best solution 0 best result-->0.41293840950365346 solution(0.3271246925490583,0.2868565195892351,0.0656020828843078)
+0 round--->1
+best solution 0 best result-->0.41322360189238183 solution(0.37219705568694067,0.39009570263885607,0.06617849579571662)
+0 round--->2
+best solution 0 best result-->0.41582942022227753 solution(0.36356678427065864,0.009448727041318439,0.05071337560395118)
+0 round--->3
+0 round--->4
+best solution 0 best result-->0.4216123970740364 solution(0.3515936636966278,0.020779543459681638,0.06172260303289681)
+0 round--->5
+0 round--->6
+0 round--->7
+0 round--->8
+0 round--->9
+0 round--->10
+0 round--->11
+best solution 0 best result-->0.42179728685306866 solution(0.4024945196380565,0.17495598147451688,0.04996615068929091)
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 02:38:50:556
+
+Cluster number->0
+Performance Analysing Started... 02:38:50:557
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 248
+fitness1 is: 59.688444853424485
+ER is: 44.41872107356558
+*****************ROUND number*******************
+Extracting Log Started... 02:38:50:577
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 02:39:01:508
+0 round--->0
+best solution 0 best result-->0.39209858814548876 solution(0.5758194078194501,0.37212485184602384,0.03040278840616639)
+best solution 0 best result-->0.3990075417811258 solution(0.2826156570754793,0.4672660086706999,0.037048619465914416)
+best solution 0 best result-->0.4091364338659781 solution(0.37352681551340616,0.3780426404241798,0.05125773939659781)
+best solution 0 best result-->0.40990302014685354 solution(0.24350328351018813,0.2421867213926051,0.06114427830513899)
+best solution 0 best result-->0.4133344975896052 solution(0.4174405984202605,0.3939958330545622,0.06682431173265947)
+0 round--->1
+0 round--->2
+best solution 0 best result-->0.4139531550510278 solution(0.5081471162891388,0.15861696583572288,0.06514765682620306)
+0 round--->3
+best solution 0 best result-->0.41531240852578555 solution(0.49379165529032765,0.006708083236643098,0.0706806027414539)
+0 round--->4
+best solution 0 best result-->0.4158817502343752 solution(0.35609632884316483,0.143264574149445,0.04956645074447416)
+best solution 0 best result-->0.41858565507817164 solution(0.6411953968073358,0.17887033719614837,0.06721534648767326)
+0 round--->5
+0 round--->6
+0 round--->7
+best solution 0 best result-->0.4193937042900965 solution(0.6317978026046766,0.11688967627355942,0.07154368842701835)
+0 round--->8
+best solution 0 best result-->0.4211541305223325 solution(0.5737662511166832,0.15057394317412376,0.048328312806941075)
+0 round--->9
+best solution 0 best result-->0.422001179582038 solution(0.6179198598679861,0.16719889501495722,0.04863505577490707)
+0 round--->10
+0 round--->11
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 03:08:51:239
+
+Cluster number->0
+Performance Analysing Started... 03:08:51:241
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 235
+fitness1 is: 59.64900749309846
+ER is: 44.42570128868315
+*****************ROUND number*******************
+Extracting Log Started... 03:08:51:291
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 03:09:02:969
+0 round--->0
+best solution 0 best result-->0.3385669566030014 solution(0.6041936729103309,0.4472632948702078,0.0023587177621942983)
+best solution 0 best result-->0.36759737347505594 solution(0.5668294040738054,0.47202119757117217,0.008996245676769047)
+best solution 0 best result-->0.38395920026298647 solution(0.46966144891828976,0.22122343065858927,0.016740970499667066)
+best solution 0 best result-->0.38498642432409896 solution(0.741439699126967,0.48388138772872447,0.01991151067980373)
+best solution 0 best result-->0.39068456479366054 solution(0.25123741605212424,0.33242539520607056,0.02716086181340942)
+best solution 0 best result-->0.3983590296302161 solution(0.7658979098420037,0.32208331238709653,0.037318436144790794)
+best solution 0 best result-->0.4069057312788008 solution(0.7149529778066601,0.22562669709278704,0.05552210168821517)
+best solution 0 best result-->0.40944691164033264 solution(0.2891097949487958,0.2280609747769878,0.05786529627486182)
+best solution 0 best result-->0.4100521897919313 solution(0.8177920496044547,0.3240962727249783,0.07383494969559203)
+0 round--->1
+best solution 0 best result-->0.4129442269866203 solution(0.4541299886489217,0.11835669060160355,0.07087990607712581)
+best solution 0 best result-->0.4134582993491016 solution(0.37852048400246024,0.4758498465481587,0.06705148577429958)
+0 round--->2
+0 round--->3
+best solution 0 best result-->0.4138809334598698 solution(0.32455554920032714,0.1680509806363299,0.06430658680892526)
+best solution 0 best result-->0.41433725859970005 solution(0.7869986151315287,0.14319804732486605,0.07736435898120503)
+0 round--->4
+best solution 0 best result-->0.41519017362820065 solution(0.3729111190590079,0.4101544680784935,0.0694209944320377)
+best solution 0 best result-->0.4186290336134242 solution(0.6377777978043857,0.17094415203393207,0.04419878348980763)
+0 round--->5
+best solution 0 best result-->0.4198557138175647 solution(0.3785900748222074,0.1735680418124118,0.06292789438302789)
+0 round--->6
+0 round--->7
+0 round--->8
+0 round--->9
+0 round--->10
+best solution 0 best result-->0.4207423832065096 solution(0.37558703520654146,0.04766940570541056,0.052726663080259514)
+0 round--->11
+0 round--->12
+best solution 0 best result-->0.42781217259355386 solution(0.47441609921782596,0.16883724544172385,0.05436789797327367)
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 03:36:40:131
+
+Cluster number->0
+Performance Analysing Started... 03:36:40:132
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.29223084001577
+ER is: 43.94861383227583
+*****************ROUND number*******************
+Extracting Log Started... 03:36:40:175
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 03:36:51:102
+0 round--->0
+best solution 0 best result-->0.36134151275913606 solution(0.7419291320049505,0.35630171527122106,0.006869287423432246)
+best solution 0 best result-->0.36174279281182625 solution(0.5757915803418723,0.49867423306560554,0.007223313010614847)
+best solution 0 best result-->0.38176716856979437 solution(0.8662564956142706,0.6704372939967633,0.017325382949129955)
+best solution 0 best result-->0.38605317679449924 solution(0.7530525538082624,0.3257728327547548,0.022680388515239767)
+best solution 0 best result-->0.3869108524691053 solution(0.8822991319082187,0.985234411891673,0.025974102775871064)
+best solution 0 best result-->0.40281560633881325 solution(0.36887629185158544,0.4691586690166146,0.04551769914422077)
+best solution 0 best result-->0.41414840991752694 solution(0.47420629944892945,0.14890172588171974,0.06120477068187098)
+0 round--->1
+0 round--->2
+best solution 0 best result-->0.423311304106461 solution(0.11832971445835966,0.014831956916385558,0.03554835758386041)
+0 round--->3
+0 round--->4
+0 round--->5
+0 round--->6
+0 round--->7
+0 round--->8
+0 round--->9
+best solution 0 best result-->0.42940367617458575 solution(0.12935491991297288,0.00802721169482059,0.0572903194511729)
+0 round--->10
+0 round--->11
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 04:03:05:084
+
+Cluster number->0
+Performance Analysing Started... 04:03:05:085
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 308
+fitness1 is: 67.18154331536742
+ER is: 43.72344436366251
+*****************ROUND number*******************
+Extracting Log Started... 04:03:05:129
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 04:03:19:030
+0 round--->0
+best solution 0 best result-->0.38894382374802877 solution(0.5555345018947868,0.3088688526477439,0.02712870692303958)
+best solution 0 best result-->0.40111229965916206 solution(0.5724047683823554,0.45931891205062136,0.04304621972292749)
+best solution 0 best result-->0.4041232254607794 solution(0.49838758858466414,0.5494149790884513,0.04721178548223737)
+best solution 0 best result-->0.4079209948059519 solution(0.7528292016817205,0.14656143307658243,0.057452787244251555)
+best solution 0 best result-->0.40824546251190114 solution(0.5610767470197067,0.5169010392467485,0.05810602789923608)
+best solution 0 best result-->0.408402678026616 solution(0.47134778367521357,0.3469933943932788,0.056172124748721235)
+best solution 0 best result-->0.41250140636254384 solution(0.22775486124892436,0.15693214853974316,0.07067634027087732)
+0 round--->1
+0 round--->2
+best solution 0 best result-->0.4162708331224287 solution(0.34627066555738106,0.15518194579366784,0.04987074718180011)
+0 round--->3
+0 round--->4
+best solution 0 best result-->0.41738309570254556 solution(0.5262651778713274,0.04213116441504247,0.05308742028990738)
+best solution 0 best result-->0.41930102937839164 solution(0.4426844407446168,0.07825443140631805,0.059391137001981384)
+0 round--->5
+best solution 0 best result-->0.42230819416105814 solution(0.5441721439129859,0.025289869907637277,0.05573023176931481)
+0 round--->6
+0 round--->7
+0 round--->8
+0 round--->9
+0 round--->10
+0 round--->11
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 04:33:39:606
+
+Cluster number->0
+Performance Analysing Started... 04:33:39:607
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 285
+fitness1 is: 61.949520178782706
+ER is: 44.3142039817853
+*****************ROUND number*******************
+Extracting Log Started... 04:33:39:652
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 04:33:53:229
+0 round--->0
+best solution 0 best result-->0.3701779001999959 solution(0.5504448739791297,0.5479210552216099,0.010398584229011264)
+best solution 0 best result-->0.37952335827293127 solution(0.7392877814230459,0.9651975736117264,0.016721899657434793)
+best solution 0 best result-->0.395128694454778 solution(0.5120002939325892,0.25677035518971103,0.032082738847322184)
+best solution 0 best result-->0.4084831404630373 solution(0.4943404184918222,0.38225158041336105,0.06308792302994098)
+best solution 0 best result-->0.40893787760502986 solution(0.18850364741366188,0.8540443394599775,0.059167459686282314)
+best solution 0 best result-->0.4124644482767216 solution(0.3349742578271246,0.8207045769582562,0.0694371374835498)
+0 round--->1
+best solution 0 best result-->0.4126582188495371 solution(0.34641515523169625,0.5857214125448407,0.06806758305834679)
+0 round--->2
+best solution 0 best result-->0.41541689550753713 solution(0.0013485068837584824,0.44365908288030187,0.04349314610056643)
+0 round--->3
+0 round--->4
+0 round--->5
+0 round--->6
+0 round--->7
+best solution 0 best result-->0.41594744679729095 solution(0.46538898297353126,0.018173999322068812,0.04994697533185817)
+best solution 0 best result-->0.4162149728902934 solution(0.36801163431156647,0.17869120562187596,0.06321863224088746)
+0 round--->8
+0 round--->9
+best solution 0 best result-->0.4178476004387298 solution(0.3444006909114313,0.02113128101006905,0.07476709595655703)
+0 round--->10
+0 round--->11
+best solution 0 best result-->0.4198975933567683 solution(0.11017679281846773,0.04792174528337434,0.04030473965347421)
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+best solution 0 best result-->0.4199592820180122 solution(0.65489224278702,0.1698802089054004,0.04936278683145592)
+0 round--->18
+0 round--->19
+0 round--->20
+best solution 0 best result-->0.4278113065572632 solution(0.5247544026329063,0.1655916105706925,0.05416187715638946)
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 05:02:36:584
+
+Cluster number->0
+Performance Analysing Started... 05:02:36:585
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.29223084001577
+ER is: 43.94868101435634
+*****************ROUND number*******************
+Extracting Log Started... 05:02:36:626
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 05:02:50:518
+0 round--->0
+best solution 0 best result-->0.3820947734423567 solution(0.5992148847063613,0.3871484351499159,0.015692623699383967)
+best solution 0 best result-->0.38378788602805436 solution(0.4952064917504111,0.33464915678465473,0.018510933111120842)
+best solution 0 best result-->0.384717203446018 solution(0.5803375288901895,0.31197327826222976,0.018174275141250088)
+best solution 0 best result-->0.38772623032507836 solution(0.23649174224260394,0.3447268186331078,0.01932497452106058)
+best solution 0 best result-->0.38854768080115143 solution(0.6118653518349566,0.40651586558595765,0.02730537604175356)
+best solution 0 best result-->0.4001349778895962 solution(0.2660467328081957,0.3649898729562554,0.038588922154119895)
+best solution 0 best result-->0.4074545825341353 solution(0.5217151119364146,0.44266090297893684,0.05214082646699787)
+best solution 0 best result-->0.409259315483127 solution(0.3449885221619229,0.3973759444669591,0.05205646257531368)
+0 round--->1
+best solution 0 best result-->0.4096821862274115 solution(0.39206847960342717,0.7652347368223952,0.06499926567572775)
+0 round--->2
+best solution 0 best result-->0.4098806543066692 solution(0.2004131839019948,0.6370218330767569,0.058876021012497795)
+0 round--->3
+best solution 0 best result-->0.41053448962171424 solution(0.1728660339667676,0.6234646143913849,0.060310591073354854)
+best solution 0 best result-->0.412460623322293 solution(0.34076331206795657,0.7591999993946444,0.06919601451755011)
+0 round--->4
+0 round--->5
+0 round--->6
+0 round--->7
+0 round--->8
+best solution 0 best result-->0.4145639984990195 solution(0.46303228418865017,0.18640710737420857,0.05049630852865484)
+0 round--->9
+best solution 0 best result-->0.4150474420887833 solution(0.7414087564300492,0.0436644572800787,0.07397923258097489)
+0 round--->10
+best solution 0 best result-->0.4153967022206686 solution(0.6307964389927492,0.04116928079934851,0.061014576279580214)
+best solution 0 best result-->0.41624404569826023 solution(0.719132978995018,0.18766452244659765,0.0498508153457106)
+0 round--->11
+best solution 0 best result-->0.4178837309213159 solution(0.6884509836447084,0.14049167469168594,0.060650404086637154)
+best solution 0 best result-->0.42175409739729397 solution(0.6972079142131326,0.16320846131600866,0.04903427671589736)
+0 round--->12
+0 round--->13
+0 round--->14
+0 round--->15
+0 round--->16
+0 round--->17
+0 round--->18
+0 round--->19
+0 round--->20
+best solution 0 best result-->0.42881433933501245 solution(0.652546159166038,0.1627365959232699,0.053972582782670135)
+0 round--->21
+0 round--->22
+0 round--->23
+0 round--->24
+Finished all threads
+Models Extracted... 05:33:33:378
+
+Cluster number->0
+Performance Analysing Started... 05:33:33:379
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.338241093729465
+ER is: 43.87087153968799
+*****************ROUND number*******************
+Extracting Log Started... 05:33:33:423
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 05:33:51:662
+0 round--->0
+best solution 0 best result-->0.3772822416189281 solution(0.4895166343540712,0.38256983263621425,0.014042330548138492)
+best solution 0 best result-->0.3775512744690643 solution(0.5599778474111047,0.8721651293181868,0.014908439575751695)
+best solution 0 best result-->0.39885942255714507 solution(0.5915577226030723,0.5950416823519142,0.040157377074646214)
+best solution 0 best result-->0.4007810062357683 solution(0.6493863845421094,0.6926588235823572,0.049439035277408054)
+best solution 0 best result-->0.4042173069034739 solution(0.2778182141020528,0.27681705950211066,0.044361431793080545)
+best solution 0 best result-->0.41160872381506497 solution(0.21380659486791442,0.1902671662074939,0.05827772193703107)
+best solution 0 best result-->0.415694635252131 solution(0.3178646158183728,0.22091017754711836,0.06877625033239834)
+0 round--->1
+0 round--->2
+best solution 0 best result-->0.4197835897167607 solution(0.7181804663115824,0.18054192284553128,0.05181087915298666)
+0 round--->3
+0 round--->4
+best solution 0 best result-->0.42069126301135573 solution(0.6317740408114716,0.1751226340846613,0.05052045102760425)
+0 round--->5
+0 round--->6

@@ -26,8 +26,8 @@ public class Genetic extends Optimization {
     private BackGroundType bkgt;
     FileWriter populationFWiter, frontierWriter;
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-    public Genetic(int id, int maxGenerations,String fileDirectory, int size , double crossoverRate, double mutationRate,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id,size, fileDirectory,maxGenerations,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit);
+    public Genetic(int id, int maxGenerations,String fileDirectory, int size , double crossoverRate, double mutationRate,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id,size, fileDirectory,maxGenerations,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.bkgt=bkgt;
         this.crossoverRate = crossoverRate;
         this.mutationRate = mutationRate;

@@ -26,8 +26,8 @@ public class ACB extends Optimization {
     private double[]bestsource;
     double bestFitness;
     private BackGroundType bkgt;
-    public ACB(int id, int maxIter,String fileDirectory,int populationSize , double limit,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit);
+    public ACB(int id, int maxIter,String fileDirectory,int populationSize , double limit,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actionSize,optModel,sizeLimit,cof);
         this.limit = limit;
         this.foodSources = new ArrayList<>();
         this.fitnessValues = new double[populationSize];

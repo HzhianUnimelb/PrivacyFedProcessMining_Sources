@@ -18,14 +18,15 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-
 import model.DFFA;
 import model.FPTA;
 import model.SDAG;
+import nodes.ClientOptimiser;
 import optimization.DFvMOptimisation;
 import optimization.Frontier;
 import optimization.Optimization;
 import optimization.evolutionBasedSolutions.DifferentialEvolution;
+import optimization.evolutionBasedSolutions.GASPD;
 import optimization.evolutionBasedSolutions.Genetic;
 import optimization.natureBasedSolutions.BlackHole;
 import optimization.natureBasedSolutions.GravitationalSearch;
@@ -85,13 +86,13 @@ public class MetaheuristicStochasticProcessDiscovery {
 		if(parms.get("TIME_LIMITATION")==null)
 			parms.put("TIME_LIMITATION", "1000");
 		if(parms.get("POPULATION")==null)
-			parms.put("POPULATION", "20");
-		
+			parms.put("POPULATION", "20");		
 		if(parms.get("PARETO_LIST_SIZE")==null)
 			parms.put("PARETO_LIST_SIZE", "100");
-		
-		
-		String fileDirectory = parms.get("LOG_DIRECTORY");   
+		if(parms.get("cof")==null)
+			parms.put("cof", "0.5");
+		String fileDirectory = parms.get("LOG_DIRECTORY");  
+		double cof = Double.parseDouble(parms.get("cof"));  
 		HashMap<String,Double> Algorithms = new HashMap<String,Double>();
 		int time_limit = Integer.parseInt(parms.get("TIME_LIMITATION"));
 		LateXReportGenerator lateXReportGenerator = new LateXReportGenerator();
@@ -120,14 +121,14 @@ public class MetaheuristicStochasticProcessDiscovery {
 				bkgt=BackGroundType.Z;
 	    	if(alg.compareTo("DFvM")==0)
 	    	{
-	    		fspd = new MetaheuristicStochasticProcessDiscovery(1,1,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),time_limit,bkgt,parms.get("Optimal Model"),sizeLimit);
+	    		fspd = new MetaheuristicStochasticProcessDiscovery(1,1,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),time_limit,bkgt,parms.get("Optimal Model"),sizeLimit,cof);
 	    	}
 	    	else {
 	    		int maxItr = Integer.parseInt(parms.get("MAX_GENERATION"));
 	    		int popSize = Integer.parseInt(parms.get("POPULATION"));
 	    		int timeLimit = Integer.parseInt(parms.get("TIME_LIMITATION"));
 	    		
-	    		fspd = new MetaheuristicStochasticProcessDiscovery(maxItr,popSize,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),timeLimit,bkgt,parms.get("Optimal Model"),sizeLimit);
+	    		fspd = new MetaheuristicStochasticProcessDiscovery(maxItr,popSize,alg,fileDirectory,true,true,lower_f,upper_f,pareto_size,"d", LocalDateTime.now(),timeLimit,bkgt,parms.get("Optimal Model"),sizeLimit,cof);
 	    		
 	    	}
 	    	
@@ -169,6 +170,7 @@ public class MetaheuristicStochasticProcessDiscovery {
 			List<Frontier> DFFAList = new ArrayList<Frontier>();
 			List<Frontier> SDAGList = new ArrayList<Frontier>();
 			List<Frontier> DFGList = new ArrayList<Frontier>();
+			System.out.println("SDAG LIST");
 			for(Frontier frontier:fspd.optimiser.getFrontiers())
 				if(frontier!=null)
 				{
@@ -189,6 +191,7 @@ public class MetaheuristicStochasticProcessDiscovery {
 						double DFGfitness[]= {pe.get("Entropic Relevance"),pe.get("Size")};
 						Frontier DFGfrontier = new Frontier(ff, frontier.getSolution(), DFGfitness, frontier.getName());
 						DFGList.add(DFGfrontier);
+
 					}
 					else {
 						HashMap<String,Double> pe =PE.calculatePerformanceMetrics(frontier.getFpta(), fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());
@@ -198,22 +201,72 @@ public class MetaheuristicStochasticProcessDiscovery {
 						DFFAList.add(DFFAfrontier);
 						FPTA fpta = SDAG.DFFAtoSDAG(frontier.getFpta());			
 						PE.calculatePerformanceDFGMetrics(fpta, fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());				
+					
 						FPTA ff = DFFA.getDFG(fpta);
 						ff.calculateTransitionPercentage(ff);
 						double fitness[]= frontier.getFitness();
+						
 						if(parms.get("Optimal Model").compareTo("SDAG")==0)
 						{	
+							//frontier.getFpta().show(frontier.getFpta(), "sss");
+
 							Frontier SDAGfrontier = new Frontier(fpta, frontier.getSolution(), fitness, frontier.getName());
+						//	SDAGfrontier.getFpta().showDFG(SDAGfrontier.getFpta(),"DFFA "+ SDAGfrontier.getFitness()[0]+" "+SDAGfrontier.getFitness()[1]);
+
 							SDAGList.add(SDAGfrontier);
+						//	SDAGfrontier.getFpta().showDFG(SDAGfrontier.getFpta(),"SDAG "+ SDAGfrontier.getFitness()[0]+" "+SDAGfrontier.getFitness()[1]);
+							
 							pe =PE.calculatePerformanceDFGMetrics(ff, fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());
 							double DFGfitness[]= {pe.get("Entropic Relevance"),pe.get("Size")};
 							Frontier DFGfrontier = new Frontier(ff, frontier.getSolution(), DFGfitness, frontier.getName());
 							DFGList.add(DFGfrontier);
+							double bestfit[]= new double[2];
+							bestfit[0]=Double.MAX_VALUE;
+							FPTA bestFPTA = new FPTA();
+							frontier.getFpta().copy(bestFPTA);
+							 for(double threshold=0.001;threshold<=0.995;threshold+=0.5)
+							 {
+								 try {
+								 FPTA opt =SubgraphSolver.solveDFFAOptimization(frontier.getFpta(),(int)(threshold*frontier.getFitness()[1])+1);
+								 FPTA stemp = SDAG.DFFAtoSDAG(opt);	
+								 FPTA dtemp = DFFA.getDFG(stemp);
+								 SolutionScanner.removeUnvisited(dtemp, fspd.optimiser.getEventLog());
+							
+							     PerformanceEstimator PE2 = new PerformanceEstimator(BackGroundType.U);
+								 pe =PE2.calculatePerformanceDFGMetrics(dtemp, fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());								
+								 double fit[]= {pe.get("Entropic Relevance"),pe.get("Size")};
+								
+								 if(fit[0]<DFGfitness[0]&&fit[1]>=1)
+								 {
+									bestfit[0]=fit[0];
+									bestfit[1]=fit[1];
+									opt.copy(bestFPTA);
+									System.out.println("("+bestfit[0]+" "+bestfit[1]+")");
+								 }
+								 }
+								 catch(Exception e)
+								 {
+									 
+								 }
+							 }
+					
+							 FPTA sopt = SDAG.DFFAtoSDAG(bestFPTA);	
+							 FPTA dopt = DFFA.getDFG(sopt);
+							 PerformanceEstimator PE1 = new PerformanceEstimator(BackGroundType.U);
+							 pe =PE1.calculatePerformanceDFGMetrics(dopt, fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());
+							 double optfit[]= {pe.get("Entropic Relevance"),pe.get("Size")};
+							System.out.println(DFGfrontier.getFitness()[0]+","+DFGfrontier.getFitness()[1]+") ("+bestfit[0]+","+bestfit[1]+")");
+
+							// dopt.showDFG(dopt," opt "+optfit[0]+" "+optfit[1]);
+							// DFGfrontier.getFpta().showDFG(DFGfrontier.getFpta(),"DFG "+ DFGfrontier.getFitness()[0]+" "+DFGfrontier.getFitness()[1]);
+							 //	DFGfrontier.getFpta().showDFG(DFGfrontier.getFpta(), "");
+
 						}
 						else if(parms.get("Optimal Model").compareTo("DFG")==0)
 						{
 							Frontier DFGfrontier = new Frontier(ff, frontier.getSolution(), fitness, frontier.getName());
 							DFGList.add(DFGfrontier);
+
 							pe =PE.calculatePerformanceDFGMetrics(ff, fspd.optimiser.getEventLog(),fspd.optimiser.getActionSize());
 							double SDAGfitness[]= {pe.get("Entropic Relevance"),pe.get("Size")};
 							Frontier SDAGfrontier = new Frontier(fpta, frontier.getSolution(), SDAGfitness, frontier.getName());
@@ -223,9 +276,9 @@ public class MetaheuristicStochasticProcessDiscovery {
 				 //  System.out.println(frontier.getSolution()[0]+" "+frontier.getSolution()[1]+" "+frontier.getName());
 				}
 		
-			lateXReportGenerator.addDFFAlist(DFFAList);
-			lateXReportGenerator.addSDAGlist(SDAGList);	
-			lateXReportGenerator.addDFGlist(DFGList);
+		//	lateXReportGenerator.addDFFAlist(DFFAList);
+		//	lateXReportGenerator.addSDAGlist(SDAGList);	
+		//	lateXReportGenerator.addDFGlist(DFGList);
 
     		
     	
@@ -234,55 +287,90 @@ public class MetaheuristicStochasticProcessDiscovery {
 		}
 		File f = new File(parms.get("LOG_DIRECTORY"));
 		
-		MetaheuristicStochasticProcessDiscovery fspd = new MetaheuristicStochasticProcessDiscovery(1,1,"DFvM",fileDirectory,true,true,0.01,0.99,pareto_size,"d", LocalDateTime.now(),time_limit,bkgt,parms.get("Optimal Model"),sizeLimit);
+		MetaheuristicStochasticProcessDiscovery fspd = new MetaheuristicStochasticProcessDiscovery(1,1,"DFvM",fileDirectory,true,true,0.0001,1.0,pareto_size,"d", LocalDateTime.now(),time_limit,BackGroundType.U,"DFG",sizeLimit,cof);
 		List<Frontier> DFGList = new ArrayList<Frontier>();
 		System.out.println("DFvM algorithm started "+sdf.format(new Date()));
 
+		System.out.println("DFVM LIST");
 		for(Frontier frontier:fspd.ExtractParetoList())
 		{
 			
 			Frontier DFGfrontier = new Frontier(frontier.getFpta(), frontier.getSolution(), frontier.getFitness(), "DFvM");
+		    System.out.println(DFGfrontier.getFitness()[0]+" "+DFGfrontier.getFitness()[1]);
 			DFGList.add(DFGfrontier);
+		// DFGfrontier.getFpta().showDFG(DFGfrontier.getFpta(),"DFG "+ DFGfrontier.getFitness()[0]+" "+DFGfrontier.getFitness()[1]);
+
+			//DFGfrontier.getFpta().showDFvM(DFGfrontier.getFpta(), "DFVM");
 		}
-		lateXReportGenerator.addDFvMlist(DFGList);
-		lateXReportGenerator.generateReports(f.getName(),Algorithms,parms);
+	//	lateXReportGenerator.addDFvMlist(DFGList);
+	//	lateXReportGenerator.generateReports(f.getName(),Algorithms,parms);
 		System.out.println("Program finished ... "+sdf.format(new Date()));
 
     }
+    
+    
+    
+    public static void removeUnvisited(FPTA dtemp, HashMap<String, Double> eventLog) {
+        PerformanceAnalyser PA = new PerformanceAnalyser();
+        HashMap<String,String> unv2 =PA.calculateUnvisited(dtemp, eventLog);
+    	dtemp.calculateTransitionPercentage(dtemp);
+    	for(String s:unv2.keySet())
+    	{
+    		
+    		if(s.length()==1)
+    		{
+    			double x2 =dtemp.transitionPercentage.get("I").get(s).remove(unv2.get(s));
+    			dtemp.setFinalProbability("I",x2+dtemp.getFinalProbability("I"));
+
+    		}
+    		else 
+    		{
+    		//	System.out.println(s.substring(0,s.length()-1)+" "+s.charAt(s.length()-1)+" -->"+s+" "+unv2.get(s));
+    			//dtemp.transitionPercentage.get(s.substring(0,s.length()-2)).get(s.charAt(s.length()-1)+"").remove(unv2.get(s));
+    			double x2 =dtemp.transitionPercentage.get(s.substring(0,s.length()-1)).get(s.charAt(s.length()-1)+"").remove(unv2.get(s));
+    			dtemp.setFinalProbability(s.substring(0,s.length()-1),dtemp.getFinalProbability(s.substring(0,s.length()-1)+x2));
+    		}
+    		//System.out.println(dtemp.transitionPercentage.get(s.sub));
+    		dtemp.transitionFunction.remove(s);
+    	}
+        }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
-    public MetaheuristicStochasticProcessDiscovery(int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit) {
+    public MetaheuristicStochasticProcessDiscovery(int iteration,int population,String optName,String fileDirectory,boolean ParetoFront,boolean OPTFlag,double lower,double upper,int Frontier_List_Size,String symbol,LocalDateTime time,int seconds,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
     	sdf = new SimpleDateFormat("hh:mm:ss:SSS");
     	this.OPTFlag = OPTFlag;
     	performanceAnalyser = new PerformanceAnalyser();
         logParser = new LogParser(fileDirectory);
+       
         HashMap<String, Character> actions = new HashMap<String, Character>();
         HashMap<String, Double> eventLog = logParser.extractEvent(actions);
         System.out.println("Extracting Log Started... "+ sdf.format(new Date()));
         if (OPTFlag) {
         	if (optName.compareTo("DFvM") == 0)
-            	optimiser = new DFvMOptimisation(lower,upper,fileDirectory,Frontier_List_Size,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+            	optimiser = new DFvMOptimisation(lower,upper,fileDirectory,Frontier_List_Size,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             if (optName.compareTo("PSO") == 0)
-                optimiser = new PSO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                optimiser = new PSO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("GEN") == 0)
-                optimiser = new Genetic(0, iteration, fileDirectory, population, 0.8, 0.0,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                optimiser = new Genetic(0, iteration, fileDirectory, population, 0.8, 0.0,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
+            else if (optName.compareTo("GASPD") == 0)
+                optimiser = new GASPD(0, iteration, fileDirectory, population, 0.8, 0.0,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("BEE") == 0) 
-                 optimiser = new ACB(0, iteration, fileDirectory, population, 5,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new ACB(0, iteration, fileDirectory, population, 5,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("DE") == 0)
-                 optimiser = new DifferentialEvolution(0, iteration, fileDirectory, population, 0.5, 0.9,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new DifferentialEvolution(0, iteration, fileDirectory, population, 0.5, 0.9,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("GSA") == 0)
-                 optimiser = new GravitationalSearch(0, iteration, fileDirectory, population, 100,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new GravitationalSearch(0, iteration, fileDirectory, population, 100,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("ACO") == 0)
-                 optimiser = new ACO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new ACO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("CS") == 0)
-                 optimiser = new CS(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new CS(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("WO") == 0)
-                 optimiser = new  WO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new  WO(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("BLH") == 0)
-                 optimiser = new  BlackHole(0, iteration, fileDirectory, population, 0.1,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new  BlackHole(0, iteration, fileDirectory, population, 0.1,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("SOS") == 0)
-                 optimiser = new  SOS(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);
+                 optimiser = new  SOS(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);
             else if (optName.compareTo("FA") == 0)
-                 optimiser = new  FA(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit);         
+                 optimiser = new  FA(0, iteration, fileDirectory, population,lower,upper,Frontier_List_Size,time,seconds,actions,eventLog,actions.size(),bkgt,optModel,sizeLimit,cof);         
         } 
     }
     /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/

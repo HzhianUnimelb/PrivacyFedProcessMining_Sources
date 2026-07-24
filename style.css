@@ -1,0 +1,26 @@
+graph {
+	fill-color:gray; /*rgb(225,225,225); */
+	/* A bit of gray!*/
+}
+edge {
+	size:2px;
+	arrow-size:2;
+	fill-color: black;
+	text-size:16px;
+	text-color: white;
+ 	arrow-size: 4px; 
+}
+
+node.red{
+    size:15px;
+    fill-color: red;
+    text-size:20px;
+}
+
+node{
+
+	size:15px;
+	fill-color: black;
+	text-size:16px;
+	text-color: blue;
+	}

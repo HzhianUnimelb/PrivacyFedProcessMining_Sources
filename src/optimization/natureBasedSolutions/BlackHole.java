@@ -22,8 +22,8 @@ public class BlackHole extends Optimization {
 	private double totalFitness=0;
 	private double moveFactor;
 	private BackGroundType bkgt;
-	public BlackHole(int id, int maxIter,String fileDirectory, int populationSize,double moveFactor,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions, eventLog,actionSize,optModel,sizeLimit);
+	public BlackHole(int id, int maxIter,String fileDirectory, int populationSize,double moveFactor,double lower,double upper,int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter,lower,upper,Frontier_List_Size,time,seconds,actions, eventLog,actionSize,optModel,sizeLimit,cof);
         this.stars = new ArrayList<Star>();
         this.globalBestValue = 0;
         this.setMoveFactor(moveFactor);

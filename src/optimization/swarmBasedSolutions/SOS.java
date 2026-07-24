@@ -22,8 +22,8 @@ public class SOS extends Optimization {
     private double globalBestValue; // Global best value found
     private boolean flag;
 
-    public SOS(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds, actions,eventLog, actionSize,optModel,sizeLimit);
+    public SOS(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds, actions,eventLog, actionSize,optModel,sizeLimit,cof);
         this.maxIter = maxIter;
         organisms = new Organism[populationSize];
         globalBestPosition = new double[3]; // Assuming 3 dimensions

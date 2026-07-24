@@ -23,8 +23,8 @@ public class WO extends Optimization {
     private double globalBestValue; // Best value found
     private int iteration = 0;
 
-    public WO(int id, int maxIter, String fileDirectory,int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions, eventLog, actionSize,optModel,sizeLimit);
+    public WO(int id, int maxIter, String fileDirectory,int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions, eventLog, actionSize,optModel,sizeLimit,cof);
         this.maxIter = maxIter;
         whales = new Whale[populationSize];
         
@@ -39,8 +39,8 @@ public class WO extends Optimization {
         }
     }
 
-    public WO(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,List<Frontier>f,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit) {
-        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions, eventLog, actionSize,optModel,sizeLimit);
+    public WO(int id, int maxIter, String fileDirectory, int populationSize, double lower, double upper, int Frontier_List_Size,LocalDateTime time,int seconds,List<Frontier>f,HashMap<String, Character> actions,HashMap<String, Double> eventLog,int actionSize,BackGroundType bkgt,String optModel,int sizeLimit,double cof) {
+        super(id, populationSize, fileDirectory, maxIter, lower, upper, Frontier_List_Size,time,seconds,actions, eventLog, actionSize,optModel,sizeLimit,cof);
         this.maxIter = maxIter;
         whales = new Whale[populationSize];
         

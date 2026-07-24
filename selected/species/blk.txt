@@ -1,0 +1,2473 @@
+Extracting Log Started... 09:44:23:069
+chunk_0.xes
+Loaded XES extension 'http://www.xes-standard.org/meta_3TU.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_completeness.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_concept.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_general.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_life.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_org.xesext' from cache
+Loaded XES extension 'http://www.xes-standard.org/meta_time.xesext' from cache
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 09:44:40:219
+Round 0
+round() stars (2)0 best result-->0.34060962083587426 (0.28114316358205516 0.3024887572133614)
+round() stars (9)0 best result-->0.34576254658953887 (0.25164403187732587 0.9534584468574241)
+round() stars (1)0 best result-->0.3558406768976927 (0.3536950828159584 0.9384822106787428)
+round() stars (0)0 best result-->0.36363086629268554 (0.3457223448758163 0.8979334785085445)
+round() stars (11)0 best result-->0.36675792412237407 (0.5277399718096909 0.8357610139285022)
+round() stars (4)0 best result-->0.3694923890316608 (0.30769239405214144 0.7846160219454681)
+round() stars (8)0 best result-->0.3749609056140292 (0.24016328499967052 0.4322682815505212)
+round() stars (14)0 best result-->0.39365388799873546 (0.4973638478171084 0.47657035191940567)
+round() stars (16)0 best result-->0.3997285155220992 (0.5125917737020308 0.13571842678373544)
+round() stars (15)0 best result-->0.4093782432682571 (0.5050176613861673 0.230697133211352)
+ssssssssssss
+2
+3
+round() stars (16)0 best result-->0.40952095128788324 (0.5048087060267211 0.23331741515511822)
+round() stars (41)0 best result-->0.4097151407634908 (0.6574508898060825 0.3766282373674805)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (25)0 best result-->0.41114344020221777 (0.6658677797723254 0.3701608044511117)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+round() stars (20)0 best result-->0.4122196834782745 (0.659917000633478 0.3696304359774997)
+round() stars (81)0 best result-->0.41237318945594487 (0.6685334982456074 0.36722176781032817)
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+round() stars (72)0 best result-->0.41275702783156965 (0.6706961653871706 0.3554632992700532)
+round() stars (79)0 best result-->0.41278487721479806 (0.6548379387670035 0.35443192856265127)
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (34)0 best result-->0.41278878503917216 (0.6997226995692579 0.30252285133007834)
+round() stars (38)0 best result-->0.4128002582080721 (0.6538391818273113 0.3503236110465035)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 12:04:01:143
+
+Cluster number->0
+Performance Analysing Started... 12:04:01:150
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 489
+fitness1 is: 59.39266465097936
+ER is: 44.69403654951942
+*****************ROUND number*******************
+Extracting Log Started... 12:04:01:255
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 12:04:09:180
+Round 0
+round() stars (9)0 best result-->0.3713681150013222 (0.22288714841708215 0.266952257262845)
+round() stars (3)0 best result-->0.3846206191463074 (0.8178958181077567 0.5466491934895732)
+round() stars (0)0 best result-->0.3869741407708862 (0.8427707652553321 0.6375612426349241)
+round() stars (4)0 best result-->0.39229200394908764 (0.8103217190539267 0.6416278999171898)
+round() stars (15)0 best result-->0.40034659007756895 (0.17600745410337848 0.8829257168764107)
+round() stars (19)0 best result-->0.4069344753512826 (0.12761293202168877 0.8058949230803133)
+round() stars (10)0 best result-->0.40901222723421465 (0.23373008633867157 0.21529853407527738)
+round() stars (34)0 best result-->0.4095468170760525 (0.6182235094152521 0.2566126081464112)
+round() stars (55)0 best result-->0.41018576624156083 (0.4842814934540176 0.109393915644299)
+ssssssssssss
+2
+3
+round() stars (37)0 best result-->0.4120589492036967 (0.5506602670037867 0.17097816021651813)
+round() stars (44)0 best result-->0.41252722405933895 (0.5183740494595249 0.14423373491220226)
+round() stars (57)0 best result-->0.41360802551384324 (0.48665080676001243 0.1407967714873392)
+round() stars (71)0 best result-->0.4147892780166959 (0.6380064016706122 0.16926945133953408)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (39)0 best result-->0.4288185016619262 (0.6269239728317848 0.16329007343967603)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+round() stars (26)0 best result-->0.42881946458877973 (0.6329063493780442 0.1667162689306807)
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 01:00:16:788
+
+Cluster number->0
+Performance Analysing Started... 01:00:16:789
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.338241093729465
+ER is: 43.87047395217937
+*****************ROUND number*******************
+Extracting Log Started... 01:00:16:819
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 01:00:26:683
+Round 0
+round() stars (11)0 best result-->0.4010358667432172 (0.47840181901656786 0.13531672654470359)
+round() stars (8)0 best result-->0.41168246433844274 (0.5145980442252404 0.15920795229579784)
+round() stars (1)0 best result-->0.41207342114304146 (0.2437641110681286 0.10786756145384353)
+round() stars (33)0 best result-->0.4135975076539561 (0.45185576091300583 0.2086345706843803)
+round() stars (37)0 best result-->0.4181441180497723 (0.47114979017627845 0.18216249272235546)
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+round() stars (28)0 best result-->0.42206316421740614 (0.5158789531766149 0.15576336452891495)
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (75)0 best result-->0.42781217259355386 (0.5388530840410731 0.16738707972733408)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 01:48:54:530
+
+Cluster number->0
+Performance Analysing Started... 01:48:54:532
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.29223084001577
+ER is: 43.94861383227583
+*****************ROUND number*******************
+Extracting Log Started... 01:48:54:562
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 01:49:05:779
+Round 0
+round() stars (3)0 best result-->0.3357039355422592 (0.34349376808244647 0.25979407604756233)
+round() stars (5)0 best result-->0.36960244593686253 (0.3507489427651933 0.7683934320037273)
+round() stars (7)0 best result-->0.37168770846937765 (0.30251388950006186 0.38957360038472233)
+round() stars (9)0 best result-->0.3905666951499374 (0.3352021190332547 0.8228234062611455)
+round() stars (1)0 best result-->0.3944881938592198 (0.40033939476785285 0.36200652833123614)
+round() stars (6)0 best result-->0.40114452659970506 (0.3643823263669007 0.7754317524767973)
+round() stars (4)0 best result-->0.404064056934784 (0.33934793692683385 0.9863087411543539)
+round() stars (13)0 best result-->0.4119071173343905 (0.8127374072659476 0.10024115836704732)
+round() stars (64)0 best result-->0.41313069954852505 (0.35836784704045077 0.6426238565616551)
+round() stars (73)0 best result-->0.41539383233561683 (0.3153150595112766 0.2456607001901774)
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+round() stars (83)0 best result-->0.41577104861107134 (0.3254255125374835 0.2003332185541005)
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+round() stars (3)0 best result-->0.41671416280271356 (0.32359529661718056 0.1969393553194297)
+round() stars (29)0 best result-->0.41773162915384654 (0.31328000409067375 0.16558207579262615)
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+round() stars (97)0 best result-->0.4185974556976212 (0.34015658250889935 0.14974872189655777)
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+round() stars (57)0 best result-->0.4194631465218628 (0.3196101197618313 0.14854470378146536)
+round() stars (55)0 best result-->0.4200539959709184 (0.321761698258702 0.15130978108077914)
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 03:07:37:226
+
+Cluster number->0
+Performance Analysing Started... 03:07:37:227
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 453
+fitness1 is: 61.90350992506901
+ER is: 44.19446382130962
+*****************ROUND number*******************
+Extracting Log Started... 03:07:37:252
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 03:07:44:343
+Round 0
+round() stars (5)0 best result-->0.3558714183859204 (0.18770019697941068 0.8054302606274646)
+round() stars (4)0 best result-->0.3697563459436596 (0.17119663992032297 0.890594382250127)
+round() stars (8)0 best result-->0.3706096246800252 (0.19216492598203955 0.3653375463989249)
+round() stars (13)0 best result-->0.3877799029235448 (0.14265422828070934 0.6208299245289456)
+round() stars (12)0 best result-->0.40057893705808595 (0.12710739128673723 0.6752598987863638)
+round() stars (6)0 best result-->0.4080262563165044 (0.18243820346619102 0.9744680976603743)
+round() stars (2)0 best result-->0.4102802373716389 (0.2486916548204297 0.18112806106638019)
+round() stars (53)0 best result-->0.4104931197584075 (0.5962233383670574 0.14194725352895798)
+ssssssssssss
+2
+3
+round() stars (3)0 best result-->0.4120718998869822 (0.297274373484526 0.5582717738215625)
+round() stars (2)0 best result-->0.41419838584284047 (0.3477651798611872 0.16995848746934414)
+round() stars (30)0 best result-->0.42780709265482847 (0.47844598710375413 0.1699467906287463)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (11)0 best result-->0.4278113065572632 (0.47995370223547407 0.16833198321775095)
+round() stars (48)0 best result-->0.43036956406187155 (0.4806926815559876 0.16179735214911636)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 03:53:43:352
+
+Cluster number->0
+Performance Analysing Started... 03:53:43:353
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 240
+fitness1 is: 61.95609307217037
+ER is: 43.76776238990312
+*****************ROUND number*******************
+Extracting Log Started... 03:53:43:380
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 03:53:52:300
+Round 0
+round() stars (1)0 best result-->0.3558714183859204 (0.5294782472641258 0.611567723245828)
+round() stars (12)0 best result-->0.3698141020424898 (0.6337616494420393 0.8215451432149102)
+round() stars (4)0 best result-->0.3744224925843513 (0.4346823842702735 0.24514330211864072)
+round() stars (5)0 best result-->0.3893666219899076 (0.4521426746565105 0.12924503313073418)
+round() stars (2)0 best result-->0.39687328060730914 (0.4876213498698211 0.621186882667795)
+round() stars (18)0 best result-->0.400648622467915 (0.5930209674534755 0.49864111744872575)
+round() stars (8)0 best result-->0.40135667828804816 (0.42009225407938366 0.2688391422728482)
+round() stars (13)0 best result-->0.4082465174971883 (0.6574406931927119 0.5058748633047829)
+round() stars (23)0 best result-->0.4103788306745181 (0.6251511025458312 0.20815249602617467)
+ssssssssssss
+2
+3
+round() stars (0)0 best result-->0.41094058736367534 (0.6094399232549254 0.21104621488168768)
+round() stars (21)0 best result-->0.4109819183290458 (0.6258882294831944 0.2179223663965332)
+round() stars (46)0 best result-->0.41985419238925903 (0.6809838547160704 0.16904757234741868)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (37)0 best result-->0.422004373670432 (0.6838363735140002 0.16971295505812692)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+round() stars (88)0 best result-->0.4220400913792499 (0.5490445238344802 0.1856506160684826)
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 04:29:43:777
+
+Cluster number->0
+Performance Analysing Started... 04:29:43:778
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 215
+fitness1 is: 59.083738661758915
+ER is: 44.457755094251475
+*****************ROUND number*******************
+Extracting Log Started... 04:29:43:805
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 04:29:55:100
+Round 0
+round() stars (11)0 best result-->0.32938756537806335 (0.6720474710270464 0.6140080734093825)
+round() stars (1)0 best result-->0.38300384807276705 (0.5153034301270596 0.9026200124705571)
+round() stars (12)0 best result-->0.3971475262696283 (0.5164227913752579 0.2355419626782558)
+round() stars (13)0 best result-->0.40234752028043475 (0.5327669061418542 0.45216686561646735)
+round() stars (0)0 best result-->0.40636284290006824 (0.502945690961551 0.2612694822484614)
+round() stars (18)0 best result-->0.4128457987192318 (0.4327887641500112 0.10388576924175287)
+round() stars (33)0 best result-->0.413264690698935 (0.6203873089681885 0.15909741850705275)
+ssssssssssss
+2
+3
+round() stars (64)0 best result-->0.4168077489321584 (0.6478338200075593 0.1497224052468112)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (71)0 best result-->0.4173775067387995 (0.3322031192549397 0.12224165250654138)
+round() stars (87)0 best result-->0.41888993864811447 (0.6857580932139282 0.14887519156872325)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+round() stars (26)0 best result-->0.4192060747118614 (0.6878083752617575 0.14215140872498178)
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (73)0 best result-->0.41988576370099473 (0.7124958788765373 0.16735096821129042)
+round() stars (88)0 best result-->0.4205116812026719 (0.6240446103266133 0.1812929773238754)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+round() stars (3)0 best result-->0.4220055269244024 (0.6127655172017255 0.1746612603637431)
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+round() stars (40)0 best result-->0.4220367071766888 (0.5908286966504892 0.18699832656491383)
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+round() stars (19)0 best result-->0.42881946458877973 (0.6466628098928482 0.16215091052815878)
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 05:15:11:791
+
+Cluster number->0
+Performance Analysing Started... 05:15:11:791
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 250
+fitness1 is: 61.338241093729465
+ER is: 43.87047395217937
+*****************ROUND number*******************
+Extracting Log Started... 05:15:11:811
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 05:15:18:718
+Round 0
+round() stars (3)0 best result-->0.36071278580457605 (0.45929129389395806 0.36811090375443556)
+round() stars (0)0 best result-->0.36940446063143456 (0.2108607467892865 0.635412429489346)
+round() stars (1)0 best result-->0.3748011112608337 (0.2051203866124923 0.8198173534669112)
+round() stars (10)0 best result-->0.3781647531711531 (0.41775333413276994 0.6641520140546544)
+round() stars (16)0 best result-->0.3808914795457977 (0.4483686414571396 0.57065913922244)
+round() stars (13)0 best result-->0.38440426760261415 (0.443186362459149 0.5888024639749129)
+round() stars (20)0 best result-->0.3998037414233505 (0.3879352780569576 0.13869976608249882)
+round() stars (9)0 best result-->0.4022719033855213 (0.4222977909126612 0.9631647875456779)
+round() stars (15)0 best result-->0.40249459992140163 (0.45363064823239274 0.4016213021895303)
+round() stars (25)0 best result-->0.41432250564642226 (0.3361922025922795 0.1692385013267893)
+ssssssssssss
+2
+3
+round() stars (68)0 best result-->0.4157030816541269 (0.33180665294768386 0.1638660364387124)
+round() stars (94)0 best result-->0.41581867560886193 (0.36515901688522634 0.15349532700544352)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+round() stars (15)0 best result-->0.4173775067387995 (0.3565083383261197 0.12186317008896505)
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+round() stars (35)0 best result-->0.41824962353264294 (0.377337884298004 0.1)
+round() stars (5)0 best result-->0.4196755249131443 (0.40130864552435347 0.1576667445672425)
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (63)0 best result-->0.4286657419113269 (0.4028395078435293 0.15434171458347962)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+round() stars (1)0 best result-->0.4286736400618804 (0.40227323068438997 0.15576275875734297)
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 06:39:03:065
+
+Cluster number->0
+Performance Analysing Started... 06:39:03:066
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 350
+fitness1 is: 63.08005784146181
+ER is: 43.706424387201146
+*****************ROUND number*******************
+Extracting Log Started... 06:39:03:141
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 06:39:14:936
+Round 0
+round() stars (5)0 best result-->0.34060962083587426 (0.38331086218476895 0.2962527474354757)
+round() stars (7)0 best result-->0.3911198613216868 (0.2449073028494634 0.25457187803368664)
+round() stars (14)0 best result-->0.3912705524681013 (0.1621502546500365 0.24307606277440996)
+round() stars (4)0 best result-->0.4027335747771249 (0.3611466462020825 0.41492726749323294)
+round() stars (8)0 best result-->0.40777811038092976 (0.26149060094784704 0.9085132441305871)
+round() stars (9)0 best result-->0.40944008095661844 (0.2568664031286598 0.7603949961820343)
+round() stars (36)0 best result-->0.4112269363102389 (0.5561630201481228 0.342394357025607)
+round() stars (68)0 best result-->0.4165491056419513 (0.49541391800541545 0.17945815514123062)
+round() stars (85)0 best result-->0.4171813799124659 (0.33978605272506895 0.13554690901425365)
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (0)0 best result-->0.4198530168624696 (0.3519139923259907 0.16643115764705152)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+round() stars (2)0 best result-->0.4198557138175647 (0.35415995556000834 0.17522906434405666)
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+round() stars (39)0 best result-->0.4198688352368815 (0.35368936243453686 0.1731973413288584)
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+round() stars (9)0 best result-->0.4213203104342289 (0.3715027249809527 0.17430895575956332)
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 07:37:50:143
+
+Cluster number->0
+Performance Analysing Started... 07:37:50:144
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 303
+fitness1 is: 60.69409754173787
+ER is: 44.35927315908272
+*****************ROUND number*******************
+Extracting Log Started... 07:37:50:171
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 07:38:01:465
+Round 0
+round() stars (2)0 best result-->0.3778045653300608 (0.3899305986059517 0.30581841430803786)
+round() stars (3)0 best result-->0.3810298619396941 (0.3825159551066466 0.989008082912747)
+round() stars (6)0 best result-->0.38653497620271404 (0.6120511118343576 0.8837060737376762)
+round() stars (4)0 best result-->0.4051534839533421 (0.6395570623695596 0.44509919110453877)
+round() stars (7)0 best result-->0.4060996721991067 (0.6258439377285563 0.5889553696498723)
+round() stars (12)0 best result-->0.4070043140358321 (0.547950297204171 0.27289427875987093)
+round() stars (1)0 best result-->0.40953824926529964 (0.3790876872084292 0.35747213749560547)
+round() stars (34)0 best result-->0.4141668266724678 (0.4824175416877514 0.2636288137017153)
+ssssssssssss
+2
+3
+round() stars (18)0 best result-->0.41960465915493983 (0.7061902458407231 0.16563366491125892)
+round() stars (50)0 best result-->0.4199038077259426 (0.5773884581460962 0.1731703722125397)
+round() stars (60)0 best result-->0.4220367071766888 (0.5489655474116174 0.18556247740906362)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (42)0 best result-->0.4220400913792499 (0.5500224067457536 0.18647831773653997)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+round() stars (83)0 best result-->0.4221404875148397 (0.5471593047130475 0.1791545739905986)
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 13
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 14
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 15
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 16
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 17
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 18
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 19
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 20
+ssssssssssss
+2
+3
+round() stars (43)0 best result-->0.42781217259355386 (0.48964181383862704 0.16752824836844404)
+ssssssssssss
+4
+5
+6
+Round 21
+ssssssssssss
+2
+3
+round() stars (72)0 best result-->0.43036956406187155 (0.49257307367327 0.16885419410040525)
+ssssssssssss
+4
+5
+6
+Round 22
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 23
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 24
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Finished all threads
+Models Extracted... 08:13:49:200
+
+Cluster number->0
+Performance Analysing Started... 08:13:49:201
+*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Percision is: 100.0
+Size is 240
+fitness1 is: 61.95609307217037
+ER is: 43.76776238990312
+*****************ROUND number*******************
+Extracting Log Started... 08:13:49:228
+chunk_0.xes
+chunk_0.xes
+number of actions:16
+total traces: 15214
+number of unique traces: 6635
+maximum length of traces:185
+average length of trace:12.28500065728934
+Extracting Models Started... 08:13:59:517
+Round 0
+round() stars (6)0 best result-->0.3475794181575735 (0.2788104673795391 0.41004324937322945)
+round() stars (3)0 best result-->0.38751296270785734 (0.3369317385011443 0.7679435051699111)
+round() stars (14)0 best result-->0.3880432649192662 (0.2150285638584021 0.9756534052736762)
+round() stars (5)0 best result-->0.4029313048723723 (0.28335492415943037 0.7090560228642527)
+round() stars (0)0 best result-->0.40557992984018143 (0.33422100733625526 0.5583569359668028)
+round() stars (23)0 best result-->0.4118969815963807 (0.41626049227828676 0.147903375012046)
+round() stars (26)0 best result-->0.4149196933707526 (0.36356068348645953 0.2091762576215807)
+ssssssssssss
+2
+3
+round() stars (19)0 best result-->0.4156468012035468 (0.3727233678501982 0.20376844737050986)
+ssssssssssss
+4
+5
+6
+Round 1
+ssssssssssss
+2
+3
+round() stars (21)0 best result-->0.4165898326366878 (0.3498344481885237 0.1647357399070732)
+round() stars (51)0 best result-->0.41717269312690713 (0.5817488116890368 0.1894971549156872)
+round() stars (89)0 best result-->0.4173122991860278 (0.32732358154518987 0.16396805967779393)
+ssssssssssss
+4
+5
+6
+Round 2
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 3
+ssssssssssss
+2
+3
+round() stars (0)0 best result-->0.41732223479881686 (0.32729084607662084 0.16372962676189906)
+round() stars (15)0 best result-->0.4186552851151991 (0.31138662467897193 0.13640791065191835)
+ssssssssssss
+4
+5
+6
+Round 4
+ssssssssssss
+2
+3
+round() stars (41)0 best result-->0.42092943510194825 (0.3042799344444663 0.12432751097255496)
+ssssssssssss
+4
+5
+6
+Round 5
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 6
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 7
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 8
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 9
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 10
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 11
+ssssssssssss
+2
+3
+ssssssssssss
+4
+5
+6
+Round 12
+ROUND number
